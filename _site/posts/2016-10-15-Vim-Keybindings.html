@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Its Computer Science Time! - Vim Keybinding and Options</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                <a href="../">My Hakyll Blog</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Vim Keybinding and Options</h1>
+
+            <div class="info">
+    Posted on October 15, 2016
+    
+        by Noah Ryan
+    
+</div>
+
+<p>If you are interested in improving your productivty with Vim, its worth checking out other people’s .vimrc files. There are many github repositories with personal dot files, including my own <a href="https://github.com/nsmryan/ConfigFiles">config files</a>.</p>
+<p>One that has helped me a lot is begriff’s <a href="https://github.com/begriffs/haskell-vim-now/blob/master/.vimrc">haskell-vim-now</a> and blaenk’s <a href="https://github.com/blaenk/dots">dot files</a>. Incidentally, their blogs <a href="https://begriffs.com/">begriffs</a> and <a href="http://www.blaenkdenum.com/about/">blaenkdenum</a> are worth checking out.</p>
+<p>I thought I would go over some of my configuration, covering both old and new features that I find useful.</p>
+<hr />
+<h1 id="comma-as-leader">Comma as Leader</h1>
+<p><strong>nnoremap ,, ,</strong> <strong>let mapleader=“,”</strong></p>
+<p>I used ** as the leader key for several years before moving to <strong>,</strong>. I find that <strong>,</strong> is easier to type because it is closer to the home row. This is a minor change, but making custom key bindings behind leader easier to type makes you use them more, so its important to find a key that works well for you.</p>
+<h1 id="relative-line-numbers">Relative Line Numbers</h1>
+<p><strong>set invrelativenumber</strong></p>
+<p>First of all, <strong>set number</strong> puts line numbers on the left side of a window. I thought this was what I wanted, but it turns out that absolute line numbers are less useful than relative line number: <strong>set invrelativenumber</strong>.</p>
+<p>This took some getting used to, and I almost went back to absolute numbers. However, after a while something clicked for me and I almost never use absolute line numbers anymore. Relative line numbers are much better for navigation- vim motion commands that take line numbers often need relative numbers. Now I can look at a line and see the number I need to type to get there with <strong>j</strong> or <strong>k</strong>. This is also useful in line selection mode.</p>
+<p>I did map ,er to toggle relative line numbers for when I do care about absolute line numbers, like during a code review.</p>
+<h1 id="highlight-search">Highlight Search</h1>
+<p><strong>set hlsearch</strong></p>
+<p>The option <strong>set hlsearch</strong> highlights the current search term. This is useful for finding occurrances of a pattern, like highlighting tabs with **/* or uses of a variable name that is under the cursor with __*__. You can remove the highlighting of the last search with <strong>:noh</strong>, or map it to something like <strong>,h</strong>.</p>
+<h1 id="leave-insert-mode">Leave Insert Mode</h1>
+<p><strong>inoremap jj <ESC></strong></p>
+<p>I found a nice trick for quickly leaving insert mode without typing <strong>ctrl-esc</strong>. I’ve been using <strong>ctrl-[</strong> for almost as long as I’ve been using vim to avoid having to move up to the esc key, but recently I’ve also added <strong>jj</strong> as an option. This key combination almost never comes up, and it is easy to type. This cuts down on using my pinky fingers which reduces the strain on my hands.</p>
+<h1 id="saving-current-file">Saving Current File</h1>
+<p><strong>nmap <Leader>m :w<CR></strong></p>
+<p>Typing <strong>:w<esc></strong> is another key combination that can strain my hands, especially since I’m a compulsive saver. I have conciously reduced the number of times I save, but I’ve also added the key binding <strong>,m</strong> as a quick and easy alternate to <strong>:w</strong>. This works well with the previous binding <strong>jj</strong> so I can type <strong>jj,m</strong> to leave insert mode and save my changes.</p>
+<h1 id="select-last-paste">Select Last Paste</h1>
+<p><strong>nmap <Leader>v V`]</strong></p>
+<p>I find that I frequently need to edit text that I’ve just pasted- either to realign it or reformat in some way. There is already <strong>V`]</strong> for this, but I find it easier to remember <strong>,v</strong>.</p>
+<h1 id="buffers">Buffers</h1>
+<p><strong>set hidden</strong> <strong>map <C-j> :bnext<CR></strong> <strong>map <C-k> :bprev<CR></strong> <strong>nmap <Tab> :b#<CR></strong> <strong>nmap <Leader>et :e %:p:s,.h<span class="math">, .<em>X</em>123<em>X</em>,  : <em>s</em>, .<em>c</em><em>p</em><em>p</em></span>,.h,:s,.X123X$,.cpp,<CR></strong></p>
+<p>I used tabs for years before understanding the advantages of buffers. If you still use tabs, or use neither, I highly recommend trying out buffers for a while. This has been one of the biggest changes in my workflow- I can’t stress it enough. My workflow with tabs was clunky and didn’t scale well. With buffers, once you are used to moving between them, you can have a huge number of open files and still navigate. The speedup using buffers in vim compared to tabs in vim or in an IDE (I use eclipse at work) is huge.</p>
+<p>To facilitate using buffers, I recommend the <strong>set hidden</strong> option to allow buffers to be open with unsaved changes. Without this, buffers would be a huge pain to use. I also recommend addding key bindings to cycle through buffers. You will usually use <strong>:b</strong> and either the buffer number (use <strong>:ls</strong> to get a list of buffers and their numbers) or part of the file name to switch better buffers. However, if you have two files open, or you need to look through all open files, its nice to have a quick cycling keybinding.</p>
+<p>I use <strong>ctrl-j</strong> and <strong>ctrl-k</strong> for cycling, and <strong>tab</strong> for switching with the last buffer viewed. I also have a map I found online for <strong>,et</strong> to toggle between .h and .cpp files since I use C++ at work. This finds the file with the same name but the opposite extension and switches to that buffer, if it is already open.</p>
+<h1 id="dont-redraw">Don’t Redraw</h1>
+<p><strong>set lazyredraw</strong></p>
+<p>This option prevents redrawing the screen while vim is executing macros. I often use macros to reformat huge text files (often datasets) at work, and I’ve found that redrawing the screen slows these down a huge amount. I used to just minimize the vim window, but this option makes this easier by preventing the redraws in the first place.</p>
+<p>If this is a problem for you, I also recommend using the <strong>:g</strong> command and <strong>:s</strong> when possible- they are much faster even on files with millions of lines.</p>
+<h1 id="dont-show-hit-enter-prompts">Don’t Show “Hit Enter” Prompts</h1>
+<p><strong>set shortmess=a</strong></p>
+<p>If you find the “Hit Enter” prompt that comes up when there are messages to confirm, then set this option. It will supress these prompts. You can always use <strong>:messages</strong> if you want to review the messages anyway.</p>
+<h1 id="hex-editor">Hex Editor</h1>
+<p><strong>nnoremap <C-H> :call ToggleHex()<CR></strong></p>
+<p>You can find a definition for a function ToggleHex on the <a href="http://vim.wikia.com/wiki/Improved_Hex_editing">vim wiki</a></p>
+<p>This keybinding toggles between viewing a file as hex and viewing it as text. I’ve been using this for years, and although its not the best hex editor in the world, I do like having the power of vim when viewing and editing hex.</p>
+<p>This binding is mostly useful if you deal with binary formats frequently- I do embedded systems programming at work so this comes up all the time. These are better editors out these, including some quite expensive ones, but this one command gives me most of what I want without a separate program.</p>
+<hr />
+<p>Thats some of the bindings and options I use often. There are many others, some much more sophisticated then mine. A .vimrc file accumulates features over the years, and every so often its worth looking them over and deciding what you need to automate to write better code, what you spend the most time doing, and what small tweaks make your editing experience better.</p>
+
+        </div>
+        <div id="footer">
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+        </div>
+    </body>
+</html>
