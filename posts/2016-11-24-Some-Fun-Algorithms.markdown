@@ -16,7 +16,7 @@ There are many interesting algorithms and data structures out there, but here ar
     There is also a [Haskell implementation](https://hackage.haskell.org/package/hyperloglog).
 
   * Jump Flooding Algorithm- This is an algorithm for creating a discrete voronoi diagram on the GPU in log(n) time where n is the larger of the
-    width and height of the grid. This also works just as well in 3D, its just easier to talk about a grid then a 3d space.
+    width and height of the grid. This also works just as well in 3D, its just easier to talk about a grid then a 3D space.
 
     The main idea is to propogate information about the nearest neighbor of a cell around the grid by having each cell look not at its
     immediate neighbors, but at the cells n/2 cells away, then n/4, then n/8, etc. This halving is what gives this algorithm its log time complexity.
