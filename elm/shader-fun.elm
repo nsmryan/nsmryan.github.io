@@ -2,6 +2,7 @@ module Main exposing (..)
 
 import Mouse
 import WebGL as GL
+import WebGL.Texture as GLTex
 import Math.Vector3 exposing (..)
 import Math.Vector2 exposing (..)
 import Math.Matrix4 as Mat4
@@ -25,7 +26,7 @@ type alias Model =
 type Msg
   = DeltaTime Time
   | MousePos Position
-  | LoadTexture GL.Texture
+  | LoadTexture GLTex.Texture
   
 type alias Uniforms = 
   { mousePos : Vec2
@@ -50,13 +51,17 @@ update msg model =
   case msg of
     DeltaTime diff ->
       (updateTime model diff, Cmd.none)
+
     MousePos position ->
       (updateMousePos model position, Cmd.none)
+
+    LoadTexture tex ->
+      (model, Cmd.none)
 
 main : Program Never Model Msg
 main =
     Html.program
-        { init = ( initModel, GL.load texUrl LoadTexture)
+        { init = ( initModel, Cmd.none) -- GLTex.load texUrl LoadTexture)
         , view = view
         , subscriptions = (\_ -> Sub.batch [AnimationFrame.diffs DeltaTime, Mouse.moves MousePos])
         , update = update
@@ -67,9 +72,9 @@ type alias Vertex =
     { position : Vec2, color : Vec3 }
 
 
-mesh : GL.Drawable Vertex
+mesh : GL.Mesh Vertex
 mesh =
-    GL.Triangle <|
+    GL.triangles <|
         [ ( Vertex (vec2 0 0) (vec3 1 0 0)
           , Vertex (vec2 1 1) (vec3 0 1 0)
           , Vertex (vec2 1 0) (vec3 0 0 1)
@@ -91,7 +96,7 @@ view : Model -> Html Msg
 view model =
     GL.toHtml
         [ width winWidth, height winHeight ]
-        [ GL.render vertexShader fragmentShader mesh { mat = ortho2D 1 1 , dims = vec2 winWidth winHeight, time = model.currentTime, mousePos = mouseToVec2 model.mousePos, radius = 60.0 } ]
+        [ GL.entity vertexShader circleFragmentShader mesh { mat = ortho2D 1 1 , dims = vec2 winWidth winHeight, time = model.currentTime, mousePos = mouseToVec2 model.mousePos, radius = 60.0 } ]
 
 
 
@@ -115,8 +120,8 @@ void main () {
 |]
 
 
-fragmentShader : GL.Shader {} { u | mousePos : Vec2, dims : Vec2, time : Float, radius : Float } { vcolor : Vec3 }
-fragmentShader =
+circleFragmentShader : GL.Shader {} { u | mousePos : Vec2, dims : Vec2, time : Float, radius : Float } { vcolor : Vec3 }
+circleFragmentShader =
     [glsl|
 
 precision mediump float;
@@ -146,20 +151,22 @@ float noise(vec3 p) //Thx to Las^Mercury
 }
 
 void main () {
+  vec2 coord = gl_FragCoord.xy;
+
   vec2 pos = dims/2.0; // mousePos;
-  float dist = distance(gl_FragCoord.xy, pos);
-  vec2 toMouse = gl_FragCoord.xy - pos;
+  float dist = distance(coord, pos);
+  vec2 toMouse = coord - pos;
   float rads = atan2(toMouse.y, toMouse.x);
   float radiusLocal = radius + 10.0*noise(vec3(time/ 1000.0 + sin(rads), time / 1000.0 + sin(rads), 0));//sin(time/500.0 + 35.0 * atan2(toMouse.y, toMouse.x));
+
+
   if (dist < radiusLocal)
   {
-    //gl_FragColor = vec4(0.0, 0.5, 0.0, 1.0 - (dist/radius));
-    //gl_FragColor = vec4(0.0, 0.5, 0.0, (dist / radius) + ((1.0 + sin(time / 1000.0)) / 2.0));
-    gl_FragColor = vec4(0.0, 0.5, 0.0, 1);
+    gl_FragColor = vec4(0.0, noise(vec3(coord.x / 10.0, coord.y / 10.0, time/1000.0)), 0.0, 1.0);
   }
   else
   {
-    gl_FragColor = vec4(0.0, 0.0, 0.5, 0.5);
+    gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
   }
 }
 
