@@ -38,10 +38,10 @@ type alias Point =
 
 type alias Follower = Position
 
-
+{- Behavior Trees -}
 type BTResult =  BTFailure | BTSuccess
 
-type BTState = BTReturn BTResult | BTWait
+type BTState a = BTReturn BTResult | BTContinue a
 
 type alias BTChildren s = List (BT s)
 
