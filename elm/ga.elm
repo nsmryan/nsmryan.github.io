@@ -16,6 +16,7 @@ import Random.Array as RA
 import Array as A
 import Array.Extra as A
 import Platform.Cmd as C
+import Tuple as T
 
 import Color exposing (..)
 
@@ -75,7 +76,7 @@ gaParams =
   }
 
 animationSpeed = 1.0
-updateTime = 0.1
+updateTime = 0.02
 
 defaultSize = 50
 defaultPoint = zeroPoint
@@ -89,7 +90,7 @@ heightW = 1000
 viewBoxDims = L.foldl (++) "" <| L.map toString [xW, yW, widthW, heightW]
 maxDim = widthW
 
-populationSize = 35 ^ 2
+populationSize = 20 ^ 2
 individualSize = 3
 
 
@@ -149,6 +150,27 @@ mutateLocus locus r = clamp 0 1 <| locus + r
 clamp low high v = min high <| max low v
 
 toSeconds ms = ms / second
+
+crossoverPopulation : Int -> Int -> Float -> RealPop -> R.Generator RealPop
+crossoverPopulation popLen indLen crossP realPop = 
+  let halfLen = popLen / 2
+      firstHalf  = A.slice 0        halfLen realPop
+      secondHalf = A.slice halfLen  popLen  realPop
+      paired = A.map2 (,) firstHalf secondHalf
+      crosses =  RA.array halfLen <| R.map2 (,) (R.int 0 indLen) (R.float 0.0 1.0) 
+      crossedPairs = A.map2 crossPair crosses paired
+  in A.append (A.map T.first crossedPairs) (A.map T.second crossedPairs)
+
+crossPair : (Int, Float) -> (RealInd, RealInd) -> (RealInd, RealInd)
+crossPair (point, p) (ind1, ind2) = 
+  if p < (ind1, ind2)
+  then (crossOnce point ind1 ind2, crossOnce point ind2 ind1)
+  else (ind1, ind2)
+
+crossOnce : Int -> RealInd -> RealInd -> RealInd
+crossOnce n ind1 ind2 = 
+  let len = A.length ind1
+  in A.append (A.slice 0 n len) (A.slice n len)
 
 toPoint : Position -> Point
 toPoint { x, y } = { x = toFloat x - (widthW / 2), y = (heightW / 2) - toFloat y }
@@ -257,7 +279,7 @@ view { lastTime, mousePoint, population } =
           [ grade "grade1" "orange"  "white"   0 0 100 100
           , grade "grade2" "green" "white" 100 0   0 100
           ]
-      , g [ transform [Translate 10  10] ] [gridPopulation geneSize population]
+      -- , g [ transform [Translate 10  10] ] [gridPopulation geneSize population]
       , g [ transform [Translate 100 10] ] [colorPopulation geneSize population]
             {-
       , sample "grade1" 350 200 op
