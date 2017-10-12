@@ -1,15 +1,26 @@
 Timer  = require "hump.timer"
 Rot    = require "rotLove.src.rot"
 vector = require "hump.vector"
+lume   = require "lume.lume"
 
 function love.load()
   height = 640
   width = 820
 
-  startingDots = 10
   maxVel = 40
-  maxRot = 0.01
+  maxRot = 0.005
   maxDots = 10000
+  startingDots = 10
+  maxCollected = 100
+  freezeRadius = 100
+
+  timeMult = 1.0
+
+  currentVel = maxVel
+
+  cursorMult = 10
+
+  time = 0
 
   canvas = love.graphics.newCanvas(width, height)
 
@@ -24,18 +35,26 @@ function love.load()
   cursorTimer = Timer.new()
   cursorEffectTime = 0.15
   cursorSizeIncrements = 5
-  cursorSizeMax = 5
+  cursorSizeMax = 12
   cursorSize = cursorSizeMax
   cursorSizeHandle = nil
 
+  supressCollectionTimer = Timer.new()
+  isCollecting = true
+
+  vortex = { active = false, pos = vector(0, 0) }
+
+  freeze = { active = false, pos = vector(0, 0) }
+  freezeTimer = Timer.new()
+
+  numCollected = maxCollected
+
+  vortexTimer = Timer.new()
+
+  velocityTimer = Timer.new()
+
   dotTimer = Timer.new()
   dotTimer:every(1.0, splitDots)
-
-  points = {}
-  points.numItems = 0
-
-  polygons = {}
-  polygons.numItems = 0
 
   dots = {}
   numDots = 0
@@ -49,7 +68,16 @@ function love.load()
 end
 
 function randomNormalized()
-    return vector(love.math.random(), love.math.random()):normalized()
+  randX = love.math.random(-1, 1)
+  randY = love.math.random(-1, 1)
+
+  randVect = vector(randX, randX)
+
+  if randVect:len() == 0 then
+    randVect.x = 1
+  end
+
+  return randVect:normalized()
 end
 
 function splitDots()
@@ -84,6 +112,14 @@ function cursorSizeFunc(wait)
   end
 end
 
+function stopVortex()
+  vortex.active = false
+end
+
+function deactivateFreeze()
+  freeze.active = false
+end
+
 function love.mousepressed(x, y, button, isTouch)
   if button == 1 then
     if cursorSizeHandle ~= nil then
@@ -92,23 +128,68 @@ function love.mousepressed(x, y, button, isTouch)
     cursorSizeHandle = cursorTimer:script(cursorSizeFunc)
 
   elseif button == 2 then
-    points.numItems = points.numItems + 1
-    points[points.numItems] = {x,y}
-
-    polygons.numItems = polygons.numItems + 1
-    polygons[polygons.numItems] = points
-    points = {}
-    points.numItems = 0
-
+    if numCollected >= maxCollected then
+      vortex.pos = vector(x, y)
+      vortex.active = true
+      numCollected = 0
+      vortexTimer:clear()
+      vortexTimer:after(2, stopVortex)
+    end
   end
 end
 
 function love.mousereleased(x, y, button, isTouch)
+  local newDots = {}
+  mX, mY = love.mouse.getPosition()
+
   if button == 1 then
-    points.numItems = points.numItems + 1
-    points[points.numItems] = {x,y}
     cursorSize = cursorSizeMax
+
+    cursorTimer:clear()
+
+    if numCollected >= maxCollected then
+      for pos, dot in pairs(dots) do
+        distFromCursor = (vector(pos[1], pos[2]) - vector(mX, mY)):len()
+        if distFromCursor > cursorSize * cursorMult then
+          newDots[pos] = dot
+        end
+      end
+
+      dots = newDots
+      numCollected = 0
+    end
   end
+end
+
+function love.keypressed(key, scanCode, isRepeat)
+  mX, mY = love.mouse.getPosition()
+
+  if key == "space" and not isRepeat then
+    splitDots()
+  elseif key == "r" and not isRepeat then
+    isCollecting = false
+    supressCollectionTimer:after(1, function() isCollecting = true end)
+
+    for ix = 1, numCollected do
+      randX = mX + love.math.random(-cursorSize, cursorSize)
+      randY = mY + love.math.random(-cursorSize, cursorSize)
+      dots[{randX, randY}] = { vel = randomNormalized() }
+    end
+    numDots = numDots + numCollected
+
+    numCollected = 0
+  elseif key == "v" and not isRepeat then
+    velocityTimer:script(velocityTween)
+  end
+end
+
+function velocityTween(wait)
+  for iter = 1, 30 do
+    timeMult = timeMult * 0.9
+    wait(0.05)
+  end
+  wait(0.5)
+  timeMult = 1.0
 end
 
 function love.update(dt)
@@ -118,8 +199,26 @@ function love.update(dt)
   local newPos
   local numItems = 0
 
+  velocityTimer:update(dt)
+  dt = dt * timeMult
+
+  time = time + dt
+
+  mX, mY = love.mouse.getPosition()
+
+  vortex.pos = vector(mX, mY)
+
+  if love.keyboard.isDown("f") then
+    freeze.active = true
+    freezeTimer:after(5, deactivateFreeze)
+    freeze.pos = vector(mX, mY)
+  end
+
   cursorTimer:update(dt)
   dotTimer:update(dt)
+  vortexTimer:update(dt)
+  freezeTimer:update(dt)
+  supressCollectionTimer:update(dt)
 
   for pos, dot in pairs(dots) do
     rot = love.math.random(-maxRot, maxRot)
@@ -128,10 +227,43 @@ function love.update(dt)
 
   numDots = 0
   for pos, dot in pairs(dots) do
-    newPos = {pos[1] + dot.vel.x*dt * maxVel, pos[2] + dot.vel.y*dt * maxVel}
-    if newPos[1] > 0 and newPos[2] > 0 and newPos[1] < width and newPos[2] < height then
-      newDots[newPos] = dot
-      numDots = numDots + 1
+    -- check within cursor
+    distFromCursor = (vector(pos[1], pos[2]) - vector(mX, mY)):len()
+    if isCollecting and distFromCursor < cursorSize then
+      numCollected = numCollected + 1
+    else -- not within cursor, or not collecting
+      oldPosVect = vector(pos[1], pos[2])
+
+      if freeze.active and (oldPosVect - freeze.pos):len() < freezeRadius then
+        newPos = pos
+      else
+        newPos = {pos[1] + dot.vel.x*dt * currentVel, pos[2] + dot.vel.y*dt * currentVel}
+      end
+
+      posVect = vector(newPos[1], newPos[2])
+
+      -- check if vortex is active
+      if vortex.active then
+        distToVortex = (vortex.pos - posVect):len()
+        vortexStrength = 15000.0 / (distToVortex ^ 2)
+
+        -- only apply if vortex has certain strength
+        if vortexStrength > 0.01 then
+          newPos = { lume.lerp(newPos[1], vortex.pos.x, dt*vortexStrength) , lume.lerp(newPos[2], vortex.pos.y, dt*vortexStrength) }
+
+          -- if close to vortex, set movement direction
+          if distToVortex < 20 and distToVortex > 0 and dot.vel:len() > 0 then
+            newAngle = posVect.angleTo(vortex.pos)
+            dot.vel = vector.fromPolar(newAngle, dot.vel:len())
+          end
+        end
+      end
+
+      -- update dot only if within screen boundary
+      if newPos[1] > 0 and newPos[2] > 0 and newPos[1] < width and newPos[2] < height then
+        newDots[newPos] = dot
+        numDots = numDots + 1
+      end
     end
   end
   dots = newDots
@@ -144,26 +276,8 @@ function love.draw()
   love.graphics.setCanvas(canvas)
   love.graphics.clear(clearColor)
 
-  -- draw line to mouse
-  love.graphics.setColor(polyColor)
-  if points.numItems > 0 then
-    love.graphics.line(points[points.numItems][1], points[points.numItems][2], mX, mY)
-  end
-
-  -- draw lines
-  if points.numItems > 1 then
-    lineCoords = toLine(points)
-    love.graphics.line(lineCoords)
-  end
-
-  -- draw polygons
-  if polygons.numItems > 0 then
-    for ix, poly in ipairs(polygons) do
-      love.graphics.polygon("fill", toLine(poly))
-    end
-  end
-
   -- draw dots
+  love.graphics.setColor(white)
   for pos, dot in pairs(dots) do
     love.graphics.points(pos[1], pos[2])
   end
@@ -172,6 +286,15 @@ function love.draw()
 
   love.graphics.clear(clearColor)
   love.graphics.draw(canvas)
-  love.graphics.setColor(polyColor)
-  love.graphics.circle("line", mX, mY, cursorSize, 100)
+  love.graphics.setColor(white)
+  love.graphics.circle("fill", mX, mY, cursorSize, 100)
+  love.graphics.setColor(black)
+  love.graphics.circle("fill", mX, mY, math.max(0, (cursorSize-1) - cursorSize * (numCollected/maxCollected)), 100)
+
+  if numCollected >= maxCollected then
+    for ix = 1, 1 + 7 * math.abs(math.sin(3*time)) do
+      love.graphics.setColor(255, 255, 255, 255/ix)
+      love.graphics.circle("fill", mX, mY, cursorSize + ix, 100)
+    end
+  end
 end
