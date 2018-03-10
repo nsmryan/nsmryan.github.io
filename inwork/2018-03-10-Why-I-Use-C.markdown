@@ -1,0 +1,62 @@
+---
+title: Why I use C
+author: Noah Ryan
+---
+This post is about why I use C for my work, and why I chose to use C in 2018. 
+
+
+Language choice is a very important- you inherit your ecosystem, tools, and the mentailty and capabilities of your
+language as your framework for expressing yourself, and its important to think carefully about language when starting a project.
+
+
+In my particular situation, for the problems I need to solve, and for the systems I build, I choose C when possible.
+
+
+The particular domain I will talk about is embedded systems work for the flight software systems I have worked on at
+NASA. These are not the resource contrained systems that you might imagine- I haven't done microcontrollers for this work,
+I've only done processor boards with hundreds of megabytes of RAM and flash, and processors in the hundreds of megahertz
+range. They are fairly powerful for what they are- you need to be aware of resources, and careful about timing and latency, 
+but they don't have the scarcity of resources that some systems have.
+
+
+The Options
+===
+The main options for flight software systems are C and C++. There are examples of other language like Rust or Python being
+used, or assembly for some things. However, I've never seen any language but C and C++ in high assurance system, so these
+are the ones I will talk the most about.
+
+
+If I could use something like Haskell I would. If I could express at least some of my code in a safer system, use more modern
+programming concepts, and have more algorithms and structures available, I would be more productive. Something like 
+[ivory](https://ivorylang.org/ivory-introduction.html) might be doable one day, and I would love to incorporate it into
+a smaller project and see if it helps. However, we have to be pessimistic in our evaluation and only use languages and code
+that we trust in this domain. No research or untested code can be used in the large projects. We can't afford costly bugs or
+code that we don't understand fully, and we already have so much infrastructure and so many practices built around the
+C/C++ paradigm that its very hard to make any other choice.
+
+
+Powerful Languages
+===
+Again, I would love to use a safer language like Rust to express my thoughts more directly, more safely, and with more restrictions
+to help me not make mistakes. I would like to have multiple languages even- low level languages for when I need them and higher
+level languages for when I don't.
+
+
+The problem I have is that flight software is better when it is simple. I use C because it is a relatively small language, and even
+so I only use a subset. This means I use as few syntactic forms as possible, and I use an re-use the same concepts when I write software
+so there is as little as possible to learn.
+
+
+This is a case where additional power is often not helpful- its a principal of least power sort of situation. C++ has a lot of power,
+but as a tradeoff it is absurdly complex in my opinion. When I have used C++ I have restricted myself to a very small subset of the
+language, not using templates, inheritance, operator overloading, lambdas- in fact we use it as an expanded C.
+
+
+Type Safety
+===
+C is not the most type safe language. It is not dynamic, but we can cast pointers freely, and the language does not help us avoid
+issues with memory use. We can cast incorrectly, index off of arrays, and overwrite memory almost anywhere.
+
+
+One argument for C++ would be the ability to express more in its type system, and the ability to more clearly express and check casts.
+I don't disagree with this, but I prefer to limit the number of possible programs and limit the types of casts I do.
