@@ -9,21 +9,24 @@ what implications its design decisions have when using this software.
 
 I will go over some possible architectures one could use for flight software,
 and then go a little bit into CFE/CFS's architecture in terms of static and
-dynamics dependancies between software components.
+dynamics dependancies between software components. Part of the point here is
+to provide more detail on how CFE/CFS is organized beyond saying that it is
+a publish-subscribe system with a software bus- the reality is more complex then
+that.
 
 
 # Possible Flight Software Architectures
 When developing a flight software system, there are a large number of
 possible designs and tradeoffs that can be made. In this way it is just like
 any other type of software even though it has its own unique set of
-challenges and pressures which influences the decisions we make when writing this
-software.
+challenges and pressures. Architectures seem to have evolved over the years,
+each with its own advantages and disadvantages.
 
 
 Lets go over some possible architectures and their tradeoffs. There could very well
-be other architectures out there, and it is interesting to imagine what flight software
-might look like with other designs, but these are the basic designs that I can
+be other architectures out there, but these are the basic designs that I can
 think of.
+
 
 ## Monolithic
 In this architecture, we write one monolithic system which controls the entire
@@ -32,32 +35,44 @@ portable between projects, operating systems, or hardware.
 
 
 In this architecture, we might have a single task/thread/process which recieves commands,
-produces telemetry, and does all the hardware control in one place.
+produces telemetry, and does all the hardware control in one place. This provides
+the greatest degree of control, potentially the least overhead, and the fewest
+mental overhead as it has no mechanisms to learn or decoupling to reason about.
+
+
+This architecture would be the quickest to get up and running if starting from
+scratch and creating a system with a limit set of functionality as it does not
+require developing additional infrastructure beyond the needs of the specific
+application.
 
 
 Of course, there are some significant disadvantages as a project gets bigger, as it
 is ported between projects and has to be largely rewritten, and as its architecture
-requires large changes to accomidate new requirements or functionality.
+requires large changes to accomidate new requirements or functionality. It is the least
+flexible and provides no abstractions to use when reasoning about the codebase.
 
 
 ## Modules
-All embedded software systems that I've ever seen split off functionality into modules.
-A module contains internal state, and communicates with other modules through shared memory,
-message queues, and function called- whatever is appropriate for the specific need.
+All embedded software systems that I've ever seen split off functionality into
+modules.  A module contains internal state, and communicates with other modules
+through shared memory, message queues and other synchronization primitives, and
+function called- whatever is appropriate for the specific need.
 
 
-Each hardware interface will get a module, each complex algorithm, each piece of identifiable
-functionality like task scheduling or health monitoring. The decomposition of the system into
-modules is usually done early in the project to organize and schedule software development.
-Having an architecture like this assists in reasoning about the software, understanding
-execution and dependancies between its pieces, helps scheduling which functionality should
-be developed at what time, and manages complexity by sectioning off software into islands
-which can be developed, reviewed and understood mostly in isolation.
+Each hardware interface will get a module, each complex algorithm, each piece
+of identifiable functionality like task scheduling or health monitoring. The
+decomposition of the system into modules is usually done early in the project
+to organize and schedule software development.  Having an architecture like
+this assists in reasoning about the software, understanding execution and
+dependancies between its pieces, helps scheduling which functionality should be
+developed at what time, and manages complexity by sectioning off software into
+islands which can be developed, reviewed and understood mostly in isolation.
 
 
-Modules can vary in size enormously, and there is no limit to how complex a module can be, 
+Modules can vary in size enormously There is no limit to how complex a module can be, 
 but the ones I see are usually between 1K and 10K lines of code. In the systems I have 
-worked in there have been ~20 modules, and somewhere between 20 to 40K lines of code in total.
+worked in there have been ~20 modules, and somewhere between 20K to 40K lines of code in total
+(logical lines of code counted by cloc).
 
 
 Some modules provide a library of functions to use by other modules, some provide core services
