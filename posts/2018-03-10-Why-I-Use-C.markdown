@@ -7,8 +7,8 @@ choose to use C again even if starting from stratch on a new project.  I am
 hoping to cover where this choice comes from and what advantages and
 disadvantages it has, specifically for the sort of work that I do. Its not
 intended to be a rant or to put down other languages or processes- I just want
-this blog to provide some insight into my experiences with flight software is
-like at NASA.
+this blog to provide some insight into my experiences with what flight software 
+is like at NASA Langley Research Center.
 
 
 This choice is certainly not motivated by something as simple as performance-
@@ -34,7 +34,7 @@ tools, where my estimate of costs and benefits are from the perspective of the
 tools and practices that I have already chosen to use. I've certainly used
 other languages at work- Haskell, Ruby, Python, Perl, R, MatLab- and outside of
 work- C#, Lua, Rust, Java, and more. However, my serious development has all be
-in C/C++ and I can't help but see things in the light of my tools.
+in C/C++ and I can't help but see things in the light of my tools. 
 
 
 Most of these topics deserve posts of their own, but I wanted
@@ -42,7 +42,8 @@ to at least get the ideas down first. It could also use more examples, but
 its become too long and just needs to be posted.
 
 
-## The Domain The particular domain I am talking about here is embedded systems
+## The Domain
+The particular domain I am talking about here is embedded systems
 work for the flight software systems I have worked on at NASA. These are not
 the resource contrained systems that some embedded software inhabits- I haven't
 done microcontrollers for this work, I've only done processor boards with
@@ -88,7 +89,9 @@ In flight software, simplicity is vital. C is a relatively small
 language, and I prefer to only use a subset of the language.  This means I use
 as few syntactic forms as possible, and enforce consistency in as many aspects
 of the code as possible. C could certainly be simplier, but it is at least 
-possible to write very explicit C with enough displine.
+possible to write very explicit C with enough displine. There are certainly
+dark corners of C, but compared to any other language I know, it has to be
+considered very simple.
 
 
 Simplicity is required here because every language construct and every new
