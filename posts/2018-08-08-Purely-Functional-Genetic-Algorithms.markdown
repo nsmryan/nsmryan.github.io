@@ -15,7 +15,7 @@ Genetic Algorithms.
 
 Why is this Interesting?
 ========================
-I believe that by making use of some unconventional thinking in the implementation of a Generic Algorithm we can get some
+I believe that by making use of some unconventional thinking in the implementation of a Genetic Algorithm we can get some
 performance improvements that you would not normally see. It seems like the GA literature generally considers
 performance a secondary concern with these algorthms- the conventional wisdom is that fitness evaluation for your particular
 problem is *so expensive* that the GA performance doesn't make much or any impact. This is predicated on an unstated premise,
@@ -47,7 +47,7 @@ and a number of very good an interesting, but fairly traditional libraries.
 I may be wrong about this, but this is what I have been able to find.
 
 
-Lets Look at Generic Operations
+Lets Look at Genetic Operations
 ===============================
 
 Mutation

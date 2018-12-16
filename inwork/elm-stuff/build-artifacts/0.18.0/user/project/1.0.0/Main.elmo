@@ -1,0 +1,158 @@
+var _user$project$Main$fragmentShader = {'src': '\n\nprecision mediump float;\nvarying vec3 vcolor;\nuniform vec2 mousePos;\nuniform vec2 dims;\nuniform float radius;\nuniform float time;\n\nfloat atan2(float x, float y){\n\tif(x>0.0)return atan(y/x);\n\tif(x<0.0&& y>=0.0)return atan(y/x)+3.14;\n\tif(y<0.0&&x<0.0)return atan(y/x)-3.14;\n\tif(y>0.0&&x==0.0)return 3.14/2.0;\n\tif(y<0.0&& x==0.0)return -3.14/2.0;\n\treturn 0.0;\n}\n\nfloat noise(vec3 p) //Thx to Las^Mercury\n{\n\tvec3 i = floor(p);\n\tvec4 a = dot(i, vec3(1., 57., 21.)) + vec4(0., 57., 21., 78.);\n\tvec3 f = cos((p-i)*acos(-1.))*(-.5)+.5;\n\ta = mix(sin(cos(a)*a),sin(cos(1.+a)*(1.+a)), f.x);\n\ta.xy = mix(a.xz, a.yw, f.y);\n\treturn mix(a.x, a.y, f.z);\n}\n\nvoid main () {\n  vec2 coord = gl_FragCoord.xy;\n\n  vec2 pos = dims/2.0; // mousePos;\n  float dist = distance(coord, pos);\n  vec2 toMouse = coord - pos;\n  float rads = atan2(toMouse.y, toMouse.x);\n  float radiusLocal = radius + 10.0*noise(vec3(time/ 1000.0 + sin(rads), time / 1000.0 + sin(rads), 0));//sin(time/500.0 + 35.0 * atan2(toMouse.y, toMouse.x));\n\n\n  if (dist < radiusLocal)\n  {\n    gl_FragColor = vec4(0.0, noise(vec3(coord.x / 10.0, coord.y / 10.0, time/1000.0)), 0.0, 1.0);\n  }\n  else\n  {\n    gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);\n  }\n}\n\n'};
+var _user$project$Main$vertexShader = {'src': '\n\nattribute vec2 position;\nattribute vec3 color;\nuniform mat4 mat;\nvarying vec3 vcolor;\n\nvoid main () {\n    gl_Position = mat * vec4(position, 0.0, 1.0);\n    vcolor = color;\n}\n\n'};
+var _user$project$Main$ortho2D = F2(
+	function (w, h) {
+		return A4(_elm_community$linear_algebra$Math_Matrix4$makeOrtho2D, 0, w, h, 0);
+	});
+var _user$project$Main$updateMousePos = F2(
+	function (model, position) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{mousePos: position});
+	});
+var _user$project$Main$updateTime = F2(
+	function (model, diff) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{deltaTime: diff, currentTime: model.currentTime + diff});
+	});
+var _user$project$Main$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'DeltaTime':
+				return {
+					ctor: '_Tuple2',
+					_0: A2(_user$project$Main$updateTime, model, _p0._0),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'MousePos':
+				return {
+					ctor: '_Tuple2',
+					_0: A2(_user$project$Main$updateMousePos, model, _p0._0),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	});
+var _user$project$Main$initModel = {
+	mousePos: {x: 0, y: 0},
+	currentTime: _elm_lang$core$Time$inSeconds(0.0),
+	deltaTime: _elm_lang$core$Time$inSeconds(0.0)
+};
+var _user$project$Main$texUrl = 'http://3.bp.blogspot.com/-A24gZlZtY-E/UhzK12cBgzI/AAAAAAAAA5o/pPPCFiDj9xQ/s1600/p7shaded.png';
+var _user$project$Main$winWidth = 1000;
+var _user$project$Main$winHeight = 600;
+var _user$project$Main$mouseToVec2 = function (pos) {
+	return A2(
+		_elm_community$linear_algebra$Math_Vector2$vec2,
+		_elm_lang$core$Basics$toFloat(pos.x),
+		_user$project$Main$winHeight - _elm_lang$core$Basics$toFloat(pos.y));
+};
+var _user$project$Main$Model = F3(
+	function (a, b, c) {
+		return {mousePos: a, currentTime: b, deltaTime: c};
+	});
+var _user$project$Main$Uniforms = F4(
+	function (a, b, c, d) {
+		return {mousePos: a, radius: b, time: c, dims: d};
+	});
+var _user$project$Main$Vertex = F2(
+	function (a, b) {
+		return {position: a, color: b};
+	});
+var _user$project$Main$mesh = _elm_community$webgl$WebGL$triangles(
+	{
+		ctor: '::',
+		_0: {
+			ctor: '_Tuple3',
+			_0: A2(
+				_user$project$Main$Vertex,
+				A2(_elm_community$linear_algebra$Math_Vector2$vec2, 0, 0),
+				A3(_elm_community$linear_algebra$Math_Vector3$vec3, 1, 0, 0)),
+			_1: A2(
+				_user$project$Main$Vertex,
+				A2(_elm_community$linear_algebra$Math_Vector2$vec2, 1, 1),
+				A3(_elm_community$linear_algebra$Math_Vector3$vec3, 0, 1, 0)),
+			_2: A2(
+				_user$project$Main$Vertex,
+				A2(_elm_community$linear_algebra$Math_Vector2$vec2, 1, 0),
+				A3(_elm_community$linear_algebra$Math_Vector3$vec3, 0, 0, 1))
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple3',
+				_0: A2(
+					_user$project$Main$Vertex,
+					A2(_elm_community$linear_algebra$Math_Vector2$vec2, 0, 0),
+					A3(_elm_community$linear_algebra$Math_Vector3$vec3, 1, 0, 0)),
+				_1: A2(
+					_user$project$Main$Vertex,
+					A2(_elm_community$linear_algebra$Math_Vector2$vec2, 0, 1),
+					A3(_elm_community$linear_algebra$Math_Vector3$vec3, 0, 0, 1)),
+				_2: A2(
+					_user$project$Main$Vertex,
+					A2(_elm_community$linear_algebra$Math_Vector2$vec2, 1, 1),
+					A3(_elm_community$linear_algebra$Math_Vector3$vec3, 0, 1, 0))
+			},
+			_1: {ctor: '[]'}
+		}
+	});
+var _user$project$Main$view = function (model) {
+	return A2(
+		_elm_community$webgl$WebGL$toHtml,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$width(_user$project$Main$winWidth),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$height(_user$project$Main$winHeight),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A4(
+				_elm_community$webgl$WebGL$entity,
+				_user$project$Main$vertexShader,
+				_user$project$Main$fragmentShader,
+				_user$project$Main$mesh,
+				{
+					mat: A2(_user$project$Main$ortho2D, 1, 1),
+					dims: A2(_elm_community$linear_algebra$Math_Vector2$vec2, _user$project$Main$winWidth, _user$project$Main$winHeight),
+					time: model.currentTime,
+					mousePos: _user$project$Main$mouseToVec2(model.mousePos),
+					radius: 60.0
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Main$LoadTexture = function (a) {
+	return {ctor: 'LoadTexture', _0: a};
+};
+var _user$project$Main$MousePos = function (a) {
+	return {ctor: 'MousePos', _0: a};
+};
+var _user$project$Main$DeltaTime = function (a) {
+	return {ctor: 'DeltaTime', _0: a};
+};
+var _user$project$Main$main = _elm_lang$html$Html$program(
+	{
+		init: {ctor: '_Tuple2', _0: _user$project$Main$initModel, _1: _elm_lang$core$Platform_Cmd$none},
+		view: _user$project$Main$view,
+		subscriptions: function (_p1) {
+			return _elm_lang$core$Platform_Sub$batch(
+				{
+					ctor: '::',
+					_0: _elm_lang$animation_frame$AnimationFrame$diffs(_user$project$Main$DeltaTime),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$mouse$Mouse$moves(_user$project$Main$MousePos),
+						_1: {ctor: '[]'}
+					}
+				});
+		},
+		update: _user$project$Main$update
+	})();
