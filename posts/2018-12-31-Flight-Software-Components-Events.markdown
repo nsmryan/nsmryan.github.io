@@ -90,6 +90,13 @@ way to turn its contents into a string. I've done this with an AWK script before
 its too much work to truely decode each event, and we don't end up with good reporting on events.
 
 
+Whether your events are going to be binary or strings you have to consider the problem of multiple arguments. There are several variations here- for strings you
+might want to implement printf style formatting system so that your text strings can contain parameters relevant to the event, or for binary data you might want
+to provide a variable number of integer arguments. You could also just provide a pointer to a buffer contain the event data for event systems with binary data,
+but its much easy to just provide a couple parameters then to create a struct when calling the function to create an event. If you are using C++ the binary event
+data case becomes simplier because you can provide default arguments of 0.
+
+
 If at all possible, use __LINE__ when producing events to get the exact location in the code that the event occurred. In principal __FILE__ could be used, 
 perhaps by mapping files to integers, or just by transferring the whole file name in the event message, but in my experience the line number and module ID
 is enough to find the exact location within the codebase that generated a particular event.
