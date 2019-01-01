@@ -3,23 +3,24 @@ title: Flight Software Components - Events
 author: Noah Ryan
 ---
 This is the first in a series of posts on different software components that I've seen in flight software systems.
-This continues the theme of this blog as a place to talk about what flight software is like (for NASA drone a space systems,
-mostly in earth observation instruments and research systems).
+This continues the theme of this blog as a place to talk about what flight software is like for me at NASA Langley,
+where I work on science instruments for space, and some drone work on the ground.
 
 
-It seems like programs in a particular domain have certain components that are expected when you produce a production program. I
+It seems like programs in a particular programming domain there are certain software components that are in just about every production program. I
 see this in games where there is always some kind rendering engine, often a physics engine, perhaps logging, events, user input
 handling, configuration management, and all sorts of things. Its the same in flight software- most large flight software systems
 seem to have certain components, and it is useful to understand what they are and what they look like.
 
 
 I will go over as many of these systems as I can, and give some experience with uses and problems involves, different design choices,
-and anything else I can think of. 
+and anything else I can think of. The discussion will be colored by my experience in class C and class B software for science applications,
+which I know is different from human spaceflight, different from purely research code, and different from how many are doing things in industry.
+In other words, understand what I say here in context- I have 7 years of experience in flight software at NASA, but that doesn't make me an expert
+on space or even NASA software.
 
 
-To be clear, the systems I've looked at are a handful of systems for scientific instruments, and of course [cFE/CFS](https://github.com/nasa/cFE).
-There are many flight software systems out there, and I'm sure more variations of these themes then I'm aware of. Hopefully my
-experiences are still useful.
+The discussion will focus on Langley software p have worked on, as well as of course the NASA flight software system [cFE/CFS](https://github.com/nasa/cFE).
 
 
 # Events
