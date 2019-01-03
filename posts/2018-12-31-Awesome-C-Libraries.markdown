@@ -37,6 +37,12 @@ some of them into a project some day.
   is all achieved with fat pointers. I think this library is more of an experiement than a method for writing 
   production C code, but it is at least interesting to look over and understand.
 
+  * [Cedux](https://github.com/JSchaenzle/cedux) is an implementation of a React-like system in C. The idea
+  is to have an application state that is not modified directly, but only through messages which contain information
+  used to modify the state through a set of registered functions. Its another example of a place where we have a concept
+  not usually seen in C. I don't know how it would place out in practice, but I could imagine certain situations where it
+  could be useful.
+
   * [COS](https://github.com/CObjectSystem/COS), the C Object System. This is another library for adding features to
   C that seem out of its reach, like polymorphism and an OOP system like CLOS (from Common Lisp). This one is actually
   intended to be used for real programming, and in particular it was developed for some style of scientific computing.
@@ -68,6 +74,8 @@ some of them into a project some day.
   add to a program, provides the usual testing features, and has room for more advanced usage. This is one that I have used for real code and
   it has served me well.
 
+  * [Talloc](https://ccodearchive.net/info/talloc.html) provides a tree of memory allocations where freeing memory takes care of freeing
+  children in the tree. It also has a way to register destructor callbacks to call when an allocation is freed.
 
 # Conclusion
 I hope some of these are interesting to someone. I know there is overlap with [Awesome C](https://notabug.org/koz.ross/awesome-c)
