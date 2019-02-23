@@ -1,5 +1,5 @@
 ---
-title: Decodig with Session Types
+title: Decoding with Session Types
 author: Noah Ryan
 ---
 This post is a thought I had a while back about data decoding, but which I will likely not pursue. I just wanted to 
