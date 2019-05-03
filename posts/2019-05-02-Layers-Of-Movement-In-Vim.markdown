@@ -23,10 +23,12 @@ there is a lot of sublety in movement in Vim, multiple sets of commands, and opt
 
 
 # Move Between Source Locations in 4 Easy Steps
-Vim, like many well-used tools, provides a series of differernt levels of precision depending on the task at handle.
-To prevent unnecessary suspense, the levels of movement as
-I see them are: movement between files/buffers, movement within a file, movement within the screen, and movement
-within a line of text.
+Vim, like many well-used tools, provides a series of differerent levels of precision depending on the task at handle.
+To prevent unnecessary suspense, I will just list the levels of movement as I see them:
+  * Movement between files/buffers
+  * Movement within a file
+  * Movement within the screen
+  * Movement within a line of text.
 
 
 Not all levels are necessarily used- more that the levels exist and are useful in different situations. Its also worth
@@ -156,9 +158,12 @@ The next stage of our journey is to the line of text we want to edit.
 ### Absolute and Relative Line Numbers
 There is always a way to get to the exact line of text you want to see, as long as you have line numbers enabled (":set number") or relative line numbers
 ("set relativenumber"). If you are on line 10, and you want to go to line number 55, either type:
+
+
   * ':55<CR>' which jumps to the absolute line number 55.
   * '55G' which does the same thing- jumps to the absolute line number 55. I tend to use the command mode method, but I may retrain myself as the 'G' method
   is fewer keystrokes.
+
 
 To move a relative number, like down 40 lines, simply type '40j'. This repeats the movement 'j' 40 times, and works with other movements and commands as well.
 
@@ -196,6 +201,8 @@ these two types of movement.
 
 ### Within a Line
 The following commands move within a line. Note that many can be repeated by prefixing them with a number.
+
+
   * 'W' to move a *W*ord forward.
   * 'B' to move a word 'B'ackward.
   * 'f' to move 'f'orward to a character, such as typing 'f(' to move the cursor to the next open parenthesis.
@@ -204,6 +211,7 @@ The following commands move within a line. Note that many can be repeated by pre
   * 'T' to move 'T' backwards to a character, such as typing 'T(' to move the cursor to just before the previous open parenthesis.
   * 'h' to move one character to the left.
   * 'l' to move one character to the right.
+
 
 There is also a plugin ['vim-sneak'](https://github.com/justinmk/vim-sneak) that I never got used to but seems like a good augmentation to Vim for this kind of movement.
 

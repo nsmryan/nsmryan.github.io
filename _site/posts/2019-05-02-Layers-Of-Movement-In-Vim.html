@@ -34,7 +34,7 @@
 <p>This kind of movement is a very important part of text editing- a project can have thousands, tens of thousands, perhaps millions of lines of text, and many millions of individual characters, and you need to get the cursor to the exact character you need in order to start editing. This is greatly assisted by movements going from very course to increasingly fine until you get where you want to go.</p>
 <p>This is a process I have improved over the years, but certainly there are places I could improve (especially through integration with plugins). Even so, with a couple plugins and a lot of bulit in Vim commands, there is a lot of sublety in movement in Vim, multiple sets of commands, and optimization of the common case.</p>
 <h1 id="move-between-source-locations-in-4-easy-steps">Move Between Source Locations in 4 Easy Steps</h1>
-<p>Vim, like many well-used tools, provides a series of differernt levels of precision depending on the task at handle. To prevent unnecessary suspense, the levels of movement as I see them are: movement between files/buffers, movement within a file, movement within the screen, and movement within a line of text.</p>
+<p>Vim, like many well-used tools, provides a series of differerent levels of precision depending on the task at handle. To prevent unnecessary suspense, I will just list the levels of movement as I see them: * Movement between files/buffers * Movement within a file * Movement within the screen * Movement within a line of text.</p>
 <p>Not all levels are necessarily used- more that the levels exist and are useful in different situations. Its also worth stating that you don’t necessarily have to move to an exact character to do a particular edit- deleting a line or series of lines, for example, can be done by moving to the right line, regardless of the particular character.</p>
 <h2 id="stage-1--the-file">Stage 1- The File</h2>
 <p>This stage gets you to the file you need to edit. If you are already there, skip to the next stage. Note that am not talking about moving between projects (which would come before moving between files) - I don’t have a good session manangement or project management solution for myself anyway.</p>
@@ -84,7 +84,11 @@
 <h2 id="stage-3--the-line">Stage 3- The Line</h2>
 <p>The next stage of our journey is to the line of text we want to edit.</p>
 <h3 id="absolute-and-relative-line-numbers">Absolute and Relative Line Numbers</h3>
-<p>There is always a way to get to the exact line of text you want to see, as long as you have line numbers enabled (“:set number”) or relative line numbers (“set relativenumber”). If you are on line 10, and you want to go to line number 55, either type: * ‘:55<CR>’ which jumps to the absolute line number 55. * ‘55G’ which does the same thing- jumps to the absolute line number 55. I tend to use the command mode method, but I may retrain myself as the ‘G’ method is fewer keystrokes.</p>
+<p>There is always a way to get to the exact line of text you want to see, as long as you have line numbers enabled (“:set number”) or relative line numbers (“set relativenumber”). If you are on line 10, and you want to go to line number 55, either type:</p>
+<ul>
+<li>‘:55<CR>’ which jumps to the absolute line number 55.</li>
+<li>‘55G’ which does the same thing- jumps to the absolute line number 55. I tend to use the command mode method, but I may retrain myself as the ‘G’ method is fewer keystrokes.</li>
+</ul>
 <p>To move a relative number, like down 40 lines, simply type ‘40j’. This repeats the movement ‘j’ 40 times, and works with other movements and commands as well.</p>
 <h3 id="course-jumps">Course Jumps</h3>
 <p>There are keys to move to certain regions of the screen: * ‘H’ moves to the <em>H</em>igh part of the screen (the top). * ‘M’ moves to the <em>M</em>iddle of the screen. * ‘L’ moves to the <em>L</em>ow part of the screen (the bottom line).</p>
@@ -102,7 +106,17 @@
 <li>‘$’ to move to the end of the line.</li>
 </ul>
 <h3 id="within-a-line">Within a Line</h3>
-<p>The following commands move within a line. Note that many can be repeated by prefixing them with a number. * ‘W’ to move a <em>W</em>ord forward. * ‘B’ to move a word ‘B’ackward. * ’f’ to move ‘f’orward to a character, such as typing ’f(’ to move the cursor to the next open parenthesis. * ‘F’ to move ‘F’ backwards to a character, such as typing ‘F(’ to move the cursor to the previous open parenthesis. * ‘t’ to move ‘t’oward a character, such as typing ’t(’ to move the cursor to just before the next open parenthesis. * ‘T’ to move ‘T’ backwards to a character, such as typing ‘T(’ to move the cursor to just before the previous open parenthesis. * ‘h’ to move one character to the left. * ‘l’ to move one character to the right.</p>
+<p>The following commands move within a line. Note that many can be repeated by prefixing them with a number.</p>
+<ul>
+<li>‘W’ to move a <em>W</em>ord forward.</li>
+<li>‘B’ to move a word ’B’ackward.</li>
+<li>‘f’ to move ‘f’orward to a character, such as typing ’f(’ to move the cursor to the next open parenthesis.</li>
+<li>‘F’ to move ‘F’ backwards to a character, such as typing ‘F(’ to move the cursor to the previous open parenthesis.</li>
+<li>‘t’ to move ‘t’oward a character, such as typing ’t(’ to move the cursor to just before the next open parenthesis.</li>
+<li>‘T’ to move ‘T’ backwards to a character, such as typing ‘T(’ to move the cursor to just before the previous open parenthesis.</li>
+<li>‘h’ to move one character to the left.</li>
+<li>‘l’ to move one character to the right.</li>
+</ul>
 <p>There is also a plugin <a href="https://github.com/justinmk/vim-sneak">‘vim-sneak’</a> that I never got used to but seems like a good augmentation to Vim for this kind of movement.</p>
 <h1 id="what-to-do-when-you-find-the-character-you-were-looking-for">What to do When You Find The Character You Were Looking For</h1>
 <p>Okay, so we have managed, through a long complex process requiring many separate decisions, to move a cursor to a character within a file. Congradulations! Maybe its time to take a break, or drink a cup of tea.</p>
