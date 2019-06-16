@@ -61,6 +61,7 @@ at runtime in a dependancy injection style. This lack of laying creates a web of
 which should assist in swapping out modules and implementations.
 
 
+### Potential Advantages
 The advantage to this is that modules would be exchangable even in the core infrastructure, and no module would be
 treated specially. The other advantage would be testing- each module could provide a kind of mock implementation
 as well as a real one, and each module that uses an interface could test without the other module's code running by
@@ -73,6 +74,17 @@ it means that it is very hard to extend without modifying all other implementati
 all components provided, even though I know many systems which do not use them all.
 
 
+The other advantage I could see is potentially huge- composability of modules. This would either take the form
+of interfaces implemented in terms of other interfaces, or interfaces composed together to provide the final
+implmementation. One place where this could be helpful is to create an implementation that logged function
+calls in some way before passing the data around- none of the flight software would have to change, but you
+could get instrumentation that visualized or at least recorded interactions between components with very
+little effort. An example of composing interfaces might just be that a configuration manager interface might
+be implemented in terms of a file system interface, or an interface that both forwards data to the intended
+target and records it to a log file for later downlink.
+
+
+### Loose Coupling and Types
 Interestingly, it seems that this kind of design involve systems that talk, but are developed without knowledge of
 each other types. Configuration management won't know about the configuration structures it provides, a software
 bus would not nescessarily know about the message types it routes, etc. Currently this is often done in C through pointer
