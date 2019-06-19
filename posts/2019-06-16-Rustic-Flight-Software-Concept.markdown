@@ -2,7 +2,7 @@
 title: Rustic Flight Software Concept
 author: Noah Ryan
 ---
-I have had a visual of a flight software system written in Rust that I wanted to write down.
+I have had a vision of a flight software system written in Rust that I wanted to write down.
 The concept is a little rough, so this post is also a way to feel out the design and how it
 fits into flight software design in general.
 
