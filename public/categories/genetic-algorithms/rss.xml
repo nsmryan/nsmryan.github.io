@@ -2,18 +2,18 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>itscomputersciencetime</title>
-        <link>http%3A//nsmryan.github.com/public</link>
+        <link>http%3A//itscomputersciencetime.com/public</link>
         <description></description>
         <generator>Zola</generator>
         <language>en</language>
-        <atom:link href="http%3A//nsmryan.github.com/public/categories/genetic-algorithms/rss.xml" rel="self" type="application/rss+xml"/>
+        <atom:link href="http%3A//itscomputersciencetime.com/public/categories/genetic-algorithms/rss.xml" rel="self" type="application/rss+xml"/>
         <lastBuildDate>Wed, 08 Aug 2018 00:00:00 +0000</lastBuildDate>
         
             <item>
                 <title>Purely Functional Genetic Algorithms</title>
                 <pubDate>Wed, 08 Aug 2018 00:00:00 +0000</pubDate>
-                <link>http%3A//nsmryan.github.com/public/purely-functional-genetic-algorithms/</link>
-                <guid>http%3A//nsmryan.github.com/public/purely-functional-genetic-algorithms/</guid>
+                <link>http%3A//itscomputersciencetime.com/public/purely-functional-genetic-algorithms/</link>
+                <guid>http%3A//itscomputersciencetime.com/public/purely-functional-genetic-algorithms/</guid>
                 <description>&lt;p&gt;This post is about what a Genetic Algorithm would look like if seen through the lense of functional programming.
 This means we will look at functional programming techniques and see if they have anything interesting to say about
 Genetic Algorithms (and perhaps evolutionary algorithms in general). This post will focus on data structure choice more

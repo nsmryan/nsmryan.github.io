@@ -2,18 +2,18 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>itscomputersciencetime</title>
-        <link>http%3A//nsmryan.github.com/public</link>
+        <link>http%3A//itscomputersciencetime.com/public</link>
         <description></description>
         <generator>Zola</generator>
         <language>en</language>
-        <atom:link href="http%3A//nsmryan.github.com/public/categories/algorithms/rss.xml" rel="self" type="application/rss+xml"/>
+        <atom:link href="http%3A//itscomputersciencetime.com/public/categories/algorithms/rss.xml" rel="self" type="application/rss+xml"/>
         <lastBuildDate>Sat, 23 Feb 2019 00:00:00 +0000</lastBuildDate>
         
             <item>
                 <title>Floating Bar Numbers</title>
                 <pubDate>Sat, 23 Feb 2019 00:00:00 +0000</pubDate>
-                <link>http%3A//nsmryan.github.com/public/floating-bar/</link>
-                <guid>http%3A//nsmryan.github.com/public/floating-bar/</guid>
+                <link>http%3A//itscomputersciencetime.com/public/floating-bar/</link>
+                <guid>http%3A//itscomputersciencetime.com/public/floating-bar/</guid>
                 <description>&lt;p&gt;There is an awesome power &lt;a href=&quot;https:&#x2F;&#x2F;iquilezles.org&#x2F;www&#x2F;articles&#x2F;floatingbar&#x2F;floatingbar.htm&quot;&gt;here&lt;&#x2F;a&gt; by Inigo Quilez
 which develops his idea of a &amp;quot;floating bar&amp;quot; number. The core idea is to create a representation of rational
 numbers that mimicks the &amp;quot;floating&amp;quot; property of floating points numbers.&lt;&#x2F;p&gt;
@@ -30,8 +30,8 @@ things, and I love thinking about the alternate world they imply.&lt;&#x2F;p&gt;
             <item>
                 <title>More Fun Algorithms</title>
                 <pubDate>Sun, 11 Feb 2018 00:00:00 +0000</pubDate>
-                <link>http%3A//nsmryan.github.com/public/more-fun-algorithm/</link>
-                <guid>http%3A//nsmryan.github.com/public/more-fun-algorithm/</guid>
+                <link>http%3A//itscomputersciencetime.com/public/more-fun-algorithm/</link>
+                <guid>http%3A//itscomputersciencetime.com/public/more-fun-algorithm/</guid>
                 <description>&lt;p&gt;This post is another gruop of fun algorithms (and data structures). These particular techniques are fun because they
 are a core concept that can be applied to many different situations by simply changing some structure that the algorithm
 is parameterized by. I won&#x27;t go into much detail here, but rather provide links to articles with more depth.&lt;&#x2F;p&gt;
@@ -97,8 +97,8 @@ learning that there are whole alternate universes of thought based on a differen
             <item>
                 <title>Some Fun Algorithms</title>
                 <pubDate>Thu, 24 Nov 2016 00:00:00 +0000</pubDate>
-                <link>http%3A//nsmryan.github.com/public/some-fun-algorithms/</link>
-                <guid>http%3A//nsmryan.github.com/public/some-fun-algorithms/</guid>
+                <link>http%3A//itscomputersciencetime.com/public/some-fun-algorithms/</link>
+                <guid>http%3A//itscomputersciencetime.com/public/some-fun-algorithms/</guid>
                 <description>&lt;p&gt;There are many interesting algorithms and data structures out there, but here are just some that I like.&lt;&#x2F;p&gt;
 &lt;ul&gt;
 &lt;li&gt;
