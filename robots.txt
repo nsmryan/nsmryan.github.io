@@ -1,2 +1,0 @@
-User-agent: *
-Sitemap: http://nsmryan.github.com/sitemap.xml
