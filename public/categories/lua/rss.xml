@@ -2,18 +2,18 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>itscomputersciencetime</title>
-        <link>http%3A//itscomputersciencetime.com/public</link>
+        <link>https%3A//itscomputersciencetime.com/public</link>
         <description></description>
         <generator>Zola</generator>
         <language>en</language>
-        <atom:link href="http%3A//itscomputersciencetime.com/public/categories/lua/rss.xml" rel="self" type="application/rss+xml"/>
+        <atom:link href="https%3A//itscomputersciencetime.com/public/categories/lua/rss.xml" rel="self" type="application/rss+xml"/>
         <lastBuildDate>Wed, 29 Nov 2017 00:00:00 +0000</lastBuildDate>
         
             <item>
                 <title>Lua Tables</title>
                 <pubDate>Wed, 29 Nov 2017 00:00:00 +0000</pubDate>
-                <link>http%3A//itscomputersciencetime.com/public/lua-tables/</link>
-                <guid>http%3A//itscomputersciencetime.com/public/lua-tables/</guid>
+                <link>https%3A//itscomputersciencetime.com/public/lua-tables/</link>
+                <guid>https%3A//itscomputersciencetime.com/public/lua-tables/</guid>
                 <description>&lt;p&gt;This is a post about Lua&#x27;s tables. Its not an introduction (its gotten too long as it is) but rather some thoughts on their uses, how they fit into the context of structures
 in other languages, and some of the trade-offs that they make.&lt;&#x2F;p&gt;
 &lt;p&gt;Lua tables are odd structures, mixing an array, a key-value map, a namespace, or an object depending on how you use it. It can be other things too, if
@@ -60,8 +60,8 @@ I won&#x27;t go too much into this- its been described enough elsewhere.&lt;&#x2
             <item>
                 <title>Lua Games!</title>
                 <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
-                <link>http%3A//itscomputersciencetime.com/public/lua-games/</link>
-                <guid>http%3A//itscomputersciencetime.com/public/lua-games/</guid>
+                <link>https%3A//itscomputersciencetime.com/public/lua-games/</link>
+                <guid>https%3A//itscomputersciencetime.com/public/lua-games/</guid>
                 <description>&lt;p&gt;I&#x27;ve been playing around with Lua and the LOVE game engine recently, and it is a lot of fun.&lt;&#x2F;p&gt;
 &lt;p&gt;I am finding that there is something about this combination that is just fun. I can put together concepts quickly, get things on the screen,
 and iterate very quickly.&lt;&#x2F;p&gt;

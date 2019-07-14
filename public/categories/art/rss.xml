@@ -2,18 +2,18 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>itscomputersciencetime</title>
-        <link>http%3A//itscomputersciencetime.com/public</link>
+        <link>https%3A//itscomputersciencetime.com/public</link>
         <description></description>
         <generator>Zola</generator>
         <language>en</language>
-        <atom:link href="http%3A//itscomputersciencetime.com/public/categories/art/rss.xml" rel="self" type="application/rss+xml"/>
+        <atom:link href="https%3A//itscomputersciencetime.com/public/categories/art/rss.xml" rel="self" type="application/rss+xml"/>
         <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate>
         
             <item>
                 <title>Bit Pattern Visualization </title>
                 <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
-                <link>http%3A//itscomputersciencetime.com/public/bit-pattern-visualization/</link>
-                <guid>http%3A//itscomputersciencetime.com/public/bit-pattern-visualization/</guid>
+                <link>https%3A//itscomputersciencetime.com/public/bit-pattern-visualization/</link>
+                <guid>https%3A//itscomputersciencetime.com/public/bit-pattern-visualization/</guid>
                 <description>&lt;p&gt;I did a simple little project recently that creates a gif visualizing the bit patterns within a file.&lt;&#x2F;p&gt;
 &lt;p&gt;The &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nsmryan&#x2F;Bit-Patterns&quot;&gt;program&lt;&#x2F;a&gt; takes as input a file name, and outputs a gif consisting
 of colored cells whose brightness is based on how frequently the corresponding bit pattern occurrs. The bit pattern for
@@ -32,8 +32,8 @@ which is more uniform. I also found that data files, like recorded CCSDS packets
             <item>
                 <title>Processing Particles Art</title>
                 <pubDate>Sun, 30 Dec 2018 00:00:00 +0000</pubDate>
-                <link>http%3A//itscomputersciencetime.com/public/processing-particles-art/</link>
-                <guid>http%3A//itscomputersciencetime.com/public/processing-particles-art/</guid>
+                <link>https%3A//itscomputersciencetime.com/public/processing-particles-art/</link>
+                <guid>https%3A//itscomputersciencetime.com/public/processing-particles-art/</guid>
                 <description>&lt;p&gt;I have been wanting to create some kind of simple computer art for a long time. Recently
 a coworker mentioned Processing to me, and I thought I would try it out. &lt;&#x2F;p&gt;
 &lt;p&gt;The program I ended up writing was an exploration of calculating shapes implicitly by a function which

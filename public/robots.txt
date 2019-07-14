@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: http://itscomputersciencetime.com/public/sitemap.xml
+Sitemap: https://itscomputersciencetime.com/public/sitemap.xml
