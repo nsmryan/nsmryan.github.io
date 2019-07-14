@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: http://itscomputersciencetime.com/sitemap.xml
+Sitemap: http://nsmryan.github.com/sitemap.xml

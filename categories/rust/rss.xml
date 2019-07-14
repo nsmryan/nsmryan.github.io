@@ -2,18 +2,18 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>itscomputersciencetime</title>
-        <link>http%3A//itscomputersciencetime.com</link>
+        <link>http%3A//nsmryan.github.com</link>
         <description></description>
         <generator>Zola</generator>
         <language>en</language>
-        <atom:link href="http%3A//itscomputersciencetime.com/categories/rust/rss.xml" rel="self" type="application/rss+xml"/>
+        <atom:link href="http%3A//nsmryan.github.com/categories/rust/rss.xml" rel="self" type="application/rss+xml"/>
         <lastBuildDate>Sun, 16 Jun 2019 00:00:00 +0000</lastBuildDate>
         
             <item>
                 <title>Rustic Flight Software Concept</title>
                 <pubDate>Sun, 16 Jun 2019 00:00:00 +0000</pubDate>
-                <link>http%3A//itscomputersciencetime.com/rustic-flight-software-concept/</link>
-                <guid>http%3A//itscomputersciencetime.com/rustic-flight-software-concept/</guid>
+                <link>http%3A//nsmryan.github.com/rustic-flight-software-concept/</link>
+                <guid>http%3A//nsmryan.github.com/rustic-flight-software-concept/</guid>
                 <description>&lt;p&gt;I have had a vision of a flight software system written in Rust that I wanted to write down.
 The concept is a little rough, so this post is also a way to feel out the design and how it
 fits into flight software design in general.&lt;&#x2F;p&gt;
@@ -180,8 +180,8 @@ if I do.&lt;&#x2F;p&gt;
             <item>
                 <title>Just Rust</title>
                 <pubDate>Sat, 23 Feb 2019 00:00:00 +0000</pubDate>
-                <link>http%3A//itscomputersciencetime.com/just-rust/</link>
-                <guid>http%3A//itscomputersciencetime.com/just-rust/</guid>
+                <link>http%3A//nsmryan.github.com/just-rust/</link>
+                <guid>http%3A//nsmryan.github.com/just-rust/</guid>
                 <description>&lt;p&gt;I wanted to mention an awesome tool call &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;casey&#x2F;just&quot;&gt;just&lt;&#x2F;a&gt; written in Rust.
 I&#x27;ve started using it in my everyday toolchain, and its been very pleasant and useful, so I wanted
 to mention it here.&lt;&#x2F;p&gt;
@@ -203,8 +203,8 @@ you have any interest in simplifying your workflow, give it a try.&lt;&#x2F;p&gt
             <item>
                 <title> Rust In Space- Integrating CFS And Rust</title>
                 <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
-                <link>http%3A//itscomputersciencetime.com/rust-in-space-cfs-and-rust/</link>
-                <guid>http%3A//itscomputersciencetime.com/rust-in-space-cfs-and-rust/</guid>
+                <link>http%3A//nsmryan.github.com/rust-in-space-cfs-and-rust/</link>
+                <guid>http%3A//nsmryan.github.com/rust-in-space-cfs-and-rust/</guid>
                 <description>&lt;p&gt;This post is about the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nsmryan&#x2F;cfs-sys&quot;&gt;cfs-sys&lt;&#x2F;a&gt; Rust crate which generates the
 bindings required to write CFS Apps in Rust. This include all public include files from CFE,
 OSAL, and the PSP.&lt;&#x2F;p&gt;
@@ -297,8 +297,8 @@ forge this project into a full solution for Rust&#x2F;CFS integration.&lt;&#x2F;
             <item>
                 <title>Why I Like Rust</title>
                 <pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
-                <link>http%3A//itscomputersciencetime.com/why-i-like-rust/</link>
-                <guid>http%3A//itscomputersciencetime.com/why-i-like-rust/</guid>
+                <link>http%3A//nsmryan.github.com/why-i-like-rust/</link>
+                <guid>http%3A//nsmryan.github.com/why-i-like-rust/</guid>
                 <description>&lt;p&gt;I&#x27;ve been very much into Rust recently. I try to write some Rust every day, and I&#x27;ve
 released two crates to crates.io (an implementation of the CCSDS Primary Header, and 
 Rustic bindings to the C library jsmn).&lt;&#x2F;p&gt;
@@ -465,8 +465,8 @@ and pain. I feel like I have the level of control that I want, along with enough
             <item>
                 <title>Rust CCSDS Primary Header Crate</title>
                 <pubDate>Tue, 04 Sep 2018 00:00:00 +0000</pubDate>
-                <link>http%3A//itscomputersciencetime.com/rust-ccsds-primary-header-crate/</link>
-                <guid>http%3A//itscomputersciencetime.com/rust-ccsds-primary-header-crate/</guid>
+                <link>http%3A//nsmryan.github.com/rust-ccsds-primary-header-crate/</link>
+                <guid>http%3A//nsmryan.github.com/rust-ccsds-primary-header-crate/</guid>
                 <description>&lt;p&gt;I published my first crate! Its called ccsds_primary_header and it contains an 
 implementation of the CCSDS header defined in the Space Packet Protocol document.&lt;&#x2F;p&gt;
 &lt;p&gt;This header is used in a lot of space systems, including the Interational Space
@@ -528,8 +528,8 @@ sounds good to me!&lt;&#x2F;p&gt;
             <item>
                 <title>Second Experience with Rust</title>
                 <pubDate>Thu, 30 Aug 2018 00:00:00 +0000</pubDate>
-                <link>http%3A//itscomputersciencetime.com/second-experience-with-rust/</link>
-                <guid>http%3A//itscomputersciencetime.com/second-experience-with-rust/</guid>
+                <link>http%3A//nsmryan.github.com/second-experience-with-rust/</link>
+                <guid>http%3A//nsmryan.github.com/second-experience-with-rust/</guid>
                 <description>&lt;p&gt;After my first pleasant but failed attempt to use Rust, I decided to try to
 contribute a crate to the ecosystem. There are a lot of crates out there,
 depsite the relative youth of the language, so I wanted to find something
@@ -649,8 +649,8 @@ complexity if I don&#x27;t use Haskell.&lt;&#x2F;p&gt;
             <item>
                 <title>First Experiences with Rust</title>
                 <pubDate>Wed, 29 Aug 2018 00:00:00 +0000</pubDate>
-                <link>http%3A//itscomputersciencetime.com/first-experiences-with-rust/</link>
-                <guid>http%3A//itscomputersciencetime.com/first-experiences-with-rust/</guid>
+                <link>http%3A//nsmryan.github.com/first-experiences-with-rust/</link>
+                <guid>http%3A//nsmryan.github.com/first-experiences-with-rust/</guid>
                 <description>&lt;p&gt;I&#x27;ve seen Rust mentioned here and there, but until recently I put off the investment
 needed to learn it. Part of that was that I found the syntax a bit off-putting- 
 some code seems perfectly reasonable, and other code is pretty intimidating
@@ -749,8 +749,8 @@ to feel like a community will be friendly before I would consider contributing.&
             <item>
                 <title>Rust has the Best Names</title>
                 <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
-                <link>http%3A//itscomputersciencetime.com/rust-has-the-best-names/</link>
-                <guid>http%3A//itscomputersciencetime.com/rust-has-the-best-names/</guid>
+                <link>http%3A//nsmryan.github.com/rust-has-the-best-names/</link>
+                <guid>http%3A//nsmryan.github.com/rust-has-the-best-names/</guid>
                 <description>&lt;p&gt;I&#x27;ve been looking into Rust recently, and I am finding that I like it, and that
 I want to like it.&lt;&#x2F;p&gt;
 &lt;p&gt;If nothing else, that language community choses the best names for things:&lt;&#x2F;p&gt;
