@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/abstraction-in-flight-software-part-1-direct-coupling/</loc>
+            
+                <lastmod>2018-11-13</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/abstraction-in-flight-software-part-2-registration/</loc>
+            
+                <lastmod>2018-11-13</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/abstraction-in-flight-software-part-3-message-bus/</loc>
+            
+                <lastmod>2018-11-14</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/abstraction-in-flight-software-part-4-dispatch/</loc>
+            
+                <lastmod>2018-11-18</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/algebraic-data-types/</loc>
+            
+                <lastmod>2016-11-14</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/archive/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/awesome-c-libraries/</loc>
+            
+                <lastmod>2018-12-31</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/bit-pattern-visualization/</loc>
+            
+                <lastmod>2019-01-25</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/categories/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/categories/algorithms/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/categories/art/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/categories/blog/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/categories/c/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/categories/elm/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/categories/embedded/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/categories/flight-software/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/categories/functional-programming/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/categories/functional/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/categories/genetic-algorithms/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/categories/lua/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/categories/nasa/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/categories/rust/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/categories/vim/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/categories/vxworks/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/ccsds-router/</loc>
+            
+                <lastmod>2019-01-25</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/cello/</loc>
+            
+                <lastmod>2018-03-09</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/cfe-cfs-architecture/</loc>
+            
+                <lastmod>2018-09-16</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/decoding-with-session-types/</loc>
+            
+                <lastmod>2019-02-23</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/fifth-elm-project-cursortrail/</loc>
+            
+                <lastmod>2016-10-17</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/first-elm-project-lines/</loc>
+            
+                <lastmod>2016-10-15</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/first-elm-webgl-shader/</loc>
+            
+                <lastmod>2017-03-01</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/first-experiences-with-rust/</loc>
+            
+                <lastmod>2018-08-29</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/first-post/</loc>
+            
+                <lastmod>2014-10-24</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/flight-software-architecture/</loc>
+            
+                <lastmod>2017-12-11</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/flight-software-components-events/</loc>
+            
+                <lastmod>2018-12-31</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/floating-bar/</loc>
+            
+                <lastmod>2019-02-23</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/fourth-elm-project-quad/</loc>
+            
+                <lastmod>2016-10-16</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/functional-programming-conference-videos/</loc>
+            
+                <lastmod>2016-10-25</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/generic-c/</loc>
+            
+                <lastmod>2018-02-13</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/git-working/</loc>
+            
+                <lastmod>2015-10-29</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/handles-for-abstraction/</loc>
+            
+                <lastmod>2018-12-19</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/interests/</loc>
+            
+                <lastmod>2016-05-19</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/introduction-to-flight-software-cfe-cfs/</loc>
+            
+                <lastmod>2018-09-15</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/just-rust/</loc>
+            
+                <lastmod>2019-02-23</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/layers-of-movement-in-vim/</loc>
+            
+                <lastmod>2019-05-02</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/lua-games/</loc>
+            
+                <lastmod>2017-11-28</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/lua-tables/</loc>
+            
+                <lastmod>2017-11-29</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/more-fun-algorithm/</loc>
+            
+                <lastmod>2018-02-11</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/my-current-tool-set/</loc>
+            
+                <lastmod>2017-07-11</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/note-on-radiation-tolerance-of-stored-data/</loc>
+            
+                <lastmod>2019-01-02</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/page/1/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/processing-particles-art/</loc>
+            
+                <lastmod>2018-12-30</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/programming-languages-i-have-used/</loc>
+            
+                <lastmod>2018-10-02</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/pure-functions-in-embedded-systems-programming/</loc>
+            
+                <lastmod>2017-01-25</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/purely-functional-genetic-algorithms/</loc>
+            
+                <lastmod>2018-08-08</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/rust-ccsds-primary-header-crate/</loc>
+            
+                <lastmod>2018-09-04</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/rust-has-the-best-names/</loc>
+            
+                <lastmod>2018-08-19</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/rust-in-space-cfs-and-rust/</loc>
+            
+                <lastmod>2018-12-16</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/rustic-flight-software-concept/</loc>
+            
+                <lastmod>2019-06-16</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/sageiii-launch/</loc>
+            
+                <lastmod>2017-02-23</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/second-elm-project-circles/</loc>
+            
+                <lastmod>2016-10-15</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/second-experience-with-rust/</loc>
+            
+                <lastmod>2018-08-30</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/some-fun-algorithms/</loc>
+            
+                <lastmod>2016-11-24</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/third-elm-project-split/</loc>
+            
+                <lastmod>2016-10-16</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/this-blog/</loc>
+            
+                <lastmod>2015-06-26</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/vim-keybindings/</loc>
+            
+                <lastmod>2016-10-15</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/vim-plugins/</loc>
+            
+                <lastmod>2016-10-15</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/vxworks-tricks/</loc>
+            
+                <lastmod>2016-10-15</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/why-i-like-rust/</loc>
+            
+                <lastmod>2018-09-29</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>http%3A//itscomputersciencetime.com/why-i-use-c/</loc>
+            
+                <lastmod>2018-03-10</lastmod>
+            
+        </url>
+    
+</urlset>
