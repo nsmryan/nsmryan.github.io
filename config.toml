@@ -1,0 +1,38 @@
+# The URL the site will be built for
+base_url = "http://nsmryan.github.com/public"
+
+title = "itscomputersciencetime"
+
+default_language = "en"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = false
+
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = true
+
+highlight_theme = "ayu-mirage"
+# highlight_theme = "gruvbox-dark"
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = true
+
+theme = "even"
+
+taxonomies = [
+    # You can enable/disable RSS
+    {name = "categories", rss = true},
+    {name = "tags", rss = true},
+]
+
+[extra]
+even_menu = [
+    {url = "$BASE_URL", name = "Home"},
+    {url = "$BASE_URL/categories", name = "Categories"},
+    # {url = "$BASE_URL/tags", name = "Tags"},
+    # {url = "$BASE_URL/archive", name = "Archive"},
+    # {url = "$BASE_URL/about", name = "About"},
+]
+
+even_title = "Noah's Blog"
