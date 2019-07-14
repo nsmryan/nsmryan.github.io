@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: http://itscomputersciencetime.com/public/sitemap.xml

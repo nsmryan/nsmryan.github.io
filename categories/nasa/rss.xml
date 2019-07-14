@@ -1,0 +1,1448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>itscomputersciencetime</title>
+        <link>http%3A//itscomputersciencetime.com/public</link>
+        <description></description>
+        <generator>Zola</generator>
+        <language>en</language>
+        <atom:link href="http%3A//itscomputersciencetime.com/public/categories/nasa/rss.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate>
+        
+            <item>
+                <title>CCSDS Router</title>
+                <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
+                <link>http%3A//itscomputersciencetime.com/public/ccsds-router/</link>
+                <guid>http%3A//itscomputersciencetime.com/public/ccsds-router/</guid>
+                <description>&lt;p&gt;This post is about a &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nsmryan&#x2F;CCSDS-Router&quot;&gt;CCSDS packet routing tool&lt;&#x2F;a&gt; I&#x27;ve been writing in Rust. 
+The motivation here is to provides a tool for moving CCSDS packets from one place to another, either from a file&#x2F;TCP socket&#x2F;
+UDP socket to a file&#x2F;TCP socket&#x2F;UDP socket. I often have CCSDS packets in one of these forms, either stored or streaming,
+and I want them to be in another (recorded to a file or streamed to a destination). When doing this, I sometimes want to
+delay packets, throttle packets, or replay them according to their timestamp, such as when replaying captured data
+during a test.&lt;&#x2F;p&gt;
+&lt;p&gt;The use cases that I had when writing this:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;You have stored packets in a file, and you want to replay them according to a timestamp within the packet.
+This can be used for testing, such as to replay sensor data, or to test other tools by sending CCSDS packets to
+them.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;You want to save CCSDS from a network interface to a file.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;You want to route CCSDS packets from a TCP or UDP port to another TCP or UDP port.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;You want to delay packets by a fixed amount. This could be used to simulate a delay that would be experience in operation,
+but not in testing. Introducing this delay can expose issues in timeouts, for example, that would otherwise be seen first
+during operations.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;You want to throttle packet delivery such that packets are received no faster then a given rate. This might help, for example,
+with ensuring commands are not received faster then the maximum allowed rate.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;You want to do one of the above, while filtering for a subset of APIDs.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;You have regular CCSDS packets, or packets with a header and&#x2F;or a footer of fixed size. The tool also supports packets
+that are not CCSDS, but they must be of fixed length for it to know how to find the next packet.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;You have a mixture of packets from a source, and you want to forward packets with certain APIDs to certain sinks. For example,
+you might store all packets in a file for logging, forward some packets to a visuzlizer program, and forward all packets to a
+ground system. You might also want to extract packets with a particular APID from a file, so you read from a file to another file,
+filtering for packets with that APID.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;One thing to note about using this tool- as of today (02&#x2F;23&#x2F;2019) I have tested this tool with real data, but it have not been battle
+tested. I know it has some rough edges, and I expect it will not cover all cases that one might see in production- it needs some
+testing and production use before I would use it as a trusted part of a system. I would certainly use it for testing and development,
+and fix up anything I find, and I hope someone out there might do the same.&lt;&#x2F;p&gt;
+&lt;p&gt;Thanks for reading!&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title> Rust In Space- Integrating CFS And Rust</title>
+                <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
+                <link>http%3A//itscomputersciencetime.com/public/rust-in-space-cfs-and-rust/</link>
+                <guid>http%3A//itscomputersciencetime.com/public/rust-in-space-cfs-and-rust/</guid>
+                <description>&lt;p&gt;This post is about the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nsmryan&#x2F;cfs-sys&quot;&gt;cfs-sys&lt;&#x2F;a&gt; Rust crate which generates the
+bindings required to write CFS Apps in Rust. This include all public include files from CFE,
+OSAL, and the PSP.&lt;&#x2F;p&gt;
+&lt;p&gt;The idea is that this is a step in the direction
+of getting Rust into space by allowing it to interoperate with NASA&#x27;s open source flight software
+architecture CFS. Its not likely that this will be the first way Rust gets into space (see
+the work that Kubos is doing), but the
+more Rust in space the better in my opinion. If you are already using CFS, and want to integrate some
+Rust into your codebase, this crate can help you make that happen.&lt;&#x2F;p&gt;
+&lt;p&gt;A very brief description of CFS- CFS is a combination of projects (OSAL, CFE,
+CFS) which provide a core set of functionality commonly seen in space and drone system. It was 
+developed and released by NASA and is used by many projects across many NASA centers.
+The functionality it provides includes
+configuration tables, time management, module communication, logging, event messages, memory
+pools, and much more. This is all on top of an abstraction layer to assist with portability across
+operating systems (OSAL) and across different boards (PSP).
+In addition, there is a way to add new modules, and a library of existing modules that can be plugged in
+called Apps. The existing apps provide task scheduling, stored commands, data storage, file
+transfer, limit monitoring, housekeeping, and a number of other capabilities.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;cfs-sys&quot;&gt;cfs-sys&lt;&#x2F;h1&gt;
+&lt;p&gt;The cfs-sys crate is intended to be used in a situation where you have a build of CFS that you are
+using, and you want to write an App in Rust. This App will integrate with the rest of the CFS system
+just like any other App- I didn&#x27;t have to make any changes to the rest of CFS to get this working.&lt;&#x2F;p&gt;
+&lt;p&gt;The bindings are generated using BindGen in the build.rs file. This turned out to be fairly straightforward-
+I just used the environmental variables provided by CFS to point bindgen to the right files. BindGen is
+amazingly easy to use, so this was not nearly as painful as I expected.&lt;&#x2F;p&gt;
+&lt;p&gt;There is an &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nsmryan&#x2F;cfs_app_rs&quot;&gt;example App&lt;&#x2F;a&gt;,
+which is in the apps&#x2F;rust&#x2F; directory in that project, which builds an .so which can be loaded by
+CFS. This module is loaded by adding it to the build&#x2F;cpu1&#x2F;cfe_es_startup.scr
+script which is used by CFS to determine which modules to load at runtime.&lt;&#x2F;p&gt;
+&lt;p&gt;Luckily the CFS build system does not build Apps directly- it just calls make files in each App&#x27;s
+directory. This way we can build a Rust project and just make sure that the resulting files end up in
+the right place, with the rest of CFS none the wiser about how the module was built.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;building&quot;&gt;Building&lt;&#x2F;h1&gt;
+&lt;p&gt;The cfs-sys crate it integrates into the CFS build through environment
+variables defined in the setvars.sh script that you run before building CFS. The cfs_app_rs repo 
+shows how to integrate your Rust app by adding it to the build&#x2F;cpu1&#x2F;Makefile just like any other app,
+and then using the apps&#x2F;rust&#x2F;fsw&#x2F;for_build&#x2F;Makefile to set up your Rust App and build it using cargo.&lt;&#x2F;p&gt;
+&lt;p&gt;The bindings are generated with BindGen and appear to work as expected. I have not wrapped them in a Rustic
+interface, so they are used raw with all the *mut that this implies.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;usage&quot;&gt;Usage&lt;&#x2F;h1&gt;
+&lt;p&gt;The cfs-sys crate is on crates.io, so you can depend on it in Cargo.toml with:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212733;&quot;&gt;
+&lt;span style=&quot;color:#ccc9c2;&quot;&gt;cfs-sys=&amp;quot;0.1&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Adding cfs-sys to a Rust file is as easy as:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212733;&quot;&gt;
+&lt;span style=&quot;color:#ffa759;&quot;&gt;extern crate&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt; cfs_sys&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2cc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffa759;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;cfs_sys&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29e74;&quot;&gt;::*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2cc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;I haven&#x27;t split out the bindings into separate modules to allow more fine grain control, opting for simplicity
+for now. &lt;&#x2F;p&gt;
+&lt;p&gt;Once the bindings are imported, you proceed like any other CFS App- call CFE_ES_RegisterApp, call CFE_ES_GetAppID to
+get your APID, register events with CFE_EVS_Register, set up messages with CFE_SB_InitMsg&#x2F;CFE_SB_CreatePipe&#x2F;CFE_SB_Subscribe.
+Then just wait for CFE_ES_WaitForStartupSync, and loop blocking for CFE_SB_RcvMsg. You can check for system shutdown with CFE_ES_RunLoop,
+and mark sections of you code with CFE_ES_PerfLogEnter and CFE_ES_PerfLogExit as normal, although I did have to wrap the perf log
+functions up as they are macros in CFS and don&#x27;t seem to get turned into Rust functions.&lt;&#x2F;p&gt;
+&lt;p&gt;The example app shows how you can do this and get your App talking to CFS. It could use some work, but it runs
+and proves that Rust is useable with CFS. It is even configured in the SCH App to receive its wakeup message every second, although
+the message is build with hardcoded values rather then putting those in headers and then generating Rust bindings for them.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;limitations&quot;&gt;Limitations&lt;&#x2F;h1&gt;
+&lt;p&gt;The cfs-sys bindings are only for OSAL&#x2F;CFE&#x2F;PSP includes- if you need to bind against a particular CFS App&#x27;s headers, that would either have to be
+done separately or the cfs-sys would need flags to build bindings for a particular set of Apps. I could easily see a set of crates like
+cfe-hk-sys, cfe-sch-sys, etc which provide bindings to each App.&lt;&#x2F;p&gt;
+&lt;p&gt;I have not wrapped the bindings in a Rustic interface (hence the -sys in the name), which makes them awkward to use. Nearly all code
+must be unsafe in a Rust App right now. In addition, macros in CFS do not result in bindings in cfs-sys for some reason. I thought 
+generate_inline_functions was supposed to do this, but I haven&#x27;t been able to get it to work.&lt;&#x2F;p&gt;
+&lt;p&gt;The integration of the build process for a Rust App and the rest of CFS does work, but does not include unit testing or documentation generation.
+I also haven&#x27;t looked at how the CFS cmake system might integrate with Rust as I do not currently use it.&lt;&#x2F;p&gt;
+&lt;p&gt;The build currently forces the target for cargo to be &#x27;i686-unknown-linux-gnu&#x27;, which could be made configurable. I don&#x27;t have a good
+test system to work on generalizing this, but it shouldn&#x27;t be hard.&lt;&#x2F;p&gt;
+&lt;p&gt;I also hardcoded the choice &lt;em&gt;LINUX_OS&lt;&#x2F;em&gt; required for network_includes.h in CFE. This is in the build.rs for cfe-sys.&lt;&#x2F;p&gt;
+&lt;p&gt;A CFS App is expected to have a series of header files for message IDs, configuration parameters, etc. These are usually internal,
+but certain tools expect them to be there, and if you have to, say, add a message to the SCH App&#x27;s schedule for a particular App,
+you need to include these files. A Rust App should really create these files like a C App would, and then generate bindings for
+Rust. This way the App fits into the ecosystem without requiring special cases for Rust Apps. The example App does not do this,
+so when it is integrated with SCH, I&#x27;m using a hardcoded number instead of including a header file.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;future-work&quot;&gt;Future Work&lt;&#x2F;h1&gt;
+&lt;p&gt;From the list of limitations, it should be clear that this is a prototype and a work in progress.&lt;&#x2F;p&gt;
+&lt;p&gt;While I am using CFS for software that will one day make its way to space, I may or may not be able to integrate Rust into that codebase.
+This means that this project will continue to be a proof of concept unless someone can help make it more professional and better integrated
+into CFS, ideally by using it in practice.&lt;&#x2F;p&gt;
+&lt;p&gt;I would like to keep working on it, especially the example App since it is an important starting point for people. If I do end up
+using Rust at work, I will certainly post about it, so stay tuned if this interests you. I expect the fires of production use would
+forge this project into a full solution for Rust&#x2F;CFS integration.&lt;&#x2F;p&gt;
+&lt;p&gt;Otherwise, I hope this is interesting for someone, and Rust on!&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>Abstraction in Flight Software 4- Handles</title>
+                <pubDate>Sun, 18 Nov 2018 00:00:00 +0000</pubDate>
+                <link>http%3A//itscomputersciencetime.com/public/abstraction-in-flight-software-part-4-dispatch/</link>
+                <guid>http%3A//itscomputersciencetime.com/public/abstraction-in-flight-software-part-4-dispatch/</guid>
+                <description>&lt;p&gt;This post is the fourth in a series talking about abstraction mechanisms that I have seen in flight software systems.&lt;&#x2F;p&gt;
+&lt;p&gt;The topic of this post is a mechanism called a handle. This is the same use of that word as in a file handle, where
+the effect of a function called on that handle depends on what the handle refers to. We will see that while handles
+are used to allow one module to control resources for other modules, it also allows a kind of dispatch based on
+how the handle was initialized that has other uses.&lt;&#x2F;p&gt;
+&lt;p&gt;The idea is to have a module make direct use of an interface such as a hardware driver, but to fill in that interface
+at runtime. The interface can be called directly, but the result of a call depends on a piece of data provided with every
+function in the interface which is used in some way to determine the effect of the call. A great example of this is
+the VxWorks &lt;a href=&quot;https:&#x2F;&#x2F;www.ee.ryerson.ca&#x2F;%7Ecourses&#x2F;ee8205&#x2F;Data-Sheets&#x2F;Tornado-VxWorks&#x2F;vxworks&#x2F;ref&#x2F;iosLib.html&quot;&gt;iosLib&lt;&#x2F;a&gt;
+library. You register a set of functions which provide the
+implementation of the create&#x2F;open&#x2F;close&#x2F;read&#x2F;write&#x2F;ioctl&#x2F;delete functions. Then, when you open a device, the handle
+that is returned from open can be passed to other functions like read or write, and the correct function will be called
+for the particular device.&lt;&#x2F;p&gt;
+&lt;p&gt;Another example, this time in Haskell, can be found &lt;a href=&quot;https:&#x2F;&#x2F;jaspervdj.be&#x2F;posts&#x2F;2018-03-08-handle-pattern.html&quot;&gt;here&lt;&#x2F;a&gt;
+with discussion of pros and cons in the context of a much more abstract language.&lt;&#x2F;p&gt;
+&lt;p&gt;This post will discuss how this works, and a more general application of this kind of design that I have been using
+recently with some success.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;handles&quot;&gt;Handles&lt;&#x2F;h1&gt;
+&lt;p&gt;A handle mechanism consists of a series of functions defining an interface, as well as a way to re-purpose those
+functions depending on the runtime context. There is a bundle of information provided by one module to another whose
+intepretation is only known the the module that produces it. This information is passed back into the providing module
+which then inteprets it to determine what functions to call. The module that receives this information does not inspect it
+or use it in any way expect to pass it back to the providing module.&lt;&#x2F;p&gt;
+&lt;p&gt;This can be used to create a kind of dependancy injection situation where the result of using an interface depends on information
+provided to the module, allowing you to provide different handles to get different results.&lt;&#x2F;p&gt;
+&lt;p&gt;All of this (hidden state, dispatch based on runtime information) will make this abstraction sound like a lot of other abstractions
+(especially vtables, traits&#x2F;typeclasses in certain situations, and forms of dynamic dispatch), and I hope to cover these similarities in this
+post. In the code that uses a handle it will certainly look like an OOP object, where the handle takes the place of a &#x27;self&#x27; argument, however,
+this similarity seems skin deep to me, and we will see that they do not have the same properties as objects.&lt;&#x2F;p&gt;
+&lt;p&gt;To name the two modules involved in this, we could say that the module providing and using the handle is a driver, and
+the functions that can be used with the handle are its interface.  The module that uses the handle will just be called the user.
+An example would be a serial interface, where the driver might be a module that knows how to configure and use the hardware while the
+user might be a module that knows about a particular device&#x27;s communication and operation and uses the driver to talk to the device.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;vxworks-example&quot;&gt;VxWorks Example&lt;&#x2F;h1&gt;
+&lt;p&gt;The main example that I&#x27;ve worked with is the VxWorks driver system where the functions (open&#x2F;close&#x2F;read&#x2F;write&#x2F;etc) take
+an integer handle which is used to call the correct function for a particular driver. This system is very convienent for
+certain types of devices, and it is not particularly complex to use.&lt;&#x2F;p&gt;
+&lt;p&gt;The VxWorks functions like open take a handle, look up a struct of function pointers, and then call the corresponding
+struct&#x27;s &#x27;open&#x27; function. In other words, the open function dispatches based on the handle.&lt;&#x2F;p&gt;
+&lt;p&gt;It does have some limitations, however, such as the
+need to use ioctl as an &#x27;escape hatch&#x27; when the calls exposed by this mechanism don&#x27;t cover certain functionality. Not
+all devices are as simple as reading and writing data- if you want to program a 1553B interface, simple reading and writing is
+just too limiting to describe what needs to happen.&lt;&#x2F;p&gt;
+&lt;p&gt;Whenever
+a driver needs additional functionality that is not one of the functions defined in the iosLib, they provide an identifier
+and an argument to ioctl, which then has to dispatch off of that information. The argument can of course be a pointer to
+a struct, allowing effectively multiple arguments. The problem here is that each new function needs an enum value and potentially
+a struct, and adding functions goes through a switch statement instead of just being a new function. In other words, the 
+system isn&#x27;t directly extensible for individual drivers. We will see how to improve the situation in this post.&lt;&#x2F;p&gt;
+&lt;p&gt;Certainly file handles in, say, Linux also may be references to different software systems in the &amp;quot;all things are files&amp;quot; (or &amp;quot;many things are files&amp;quot;)
+philosophy. I don&#x27;t know much about the details of this mechanism, but I imagine its very similar, although likely much more complex.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;what-s-in-a-handle&quot;&gt;What&#x27;s in a Handle?&lt;&#x2F;h1&gt;
+&lt;p&gt;There are multiple ways for a handle to be implemented.&lt;&#x2F;p&gt;
+&lt;p&gt;A handle is an opaque object that
+the application has to treat essentially as a symbol- their only property is that they are unique and are only equal to themselves.
+Handles are always small- integers or pointers- so they can be passed around, stored in arrays, and generally used without
+worrying about performance.&lt;&#x2F;p&gt;
+&lt;p&gt;Their internal structure is known by the module that manages them. I know of two ways for this module to interpret a handle.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;handles-as-a-reference-to-a-hidden-resource&quot;&gt;Handles as a Reference to a Hidden Resource&lt;&#x2F;h3&gt;
+&lt;p&gt;With this strategy, the handle is usually an integer used internally as the index into an array of structures. These structures
+have the information required by the driver to carry out function calls for the interface.&lt;&#x2F;p&gt;
+&lt;p&gt;This is a common way to deal with handles, and has some advantages. The module providing handles can hide details about allocation and
+deallocation, and details on exactly how a function call translates into an action using the handle. However, it does put some 
+complexity on the module providing the handles- you expect to be able to allocate and deallocate handles and to have that module
+capable of providing as many handles as needed, and to track allocation perhaps reuse handles that have been deallocated.&lt;&#x2F;p&gt;
+&lt;p&gt;Handles are usually of type &#x27;int&#x27; in C, where negative numbers indicate an error. In a language with algebraic data types we could use
+unsigned integers. Keeping the handle itself small allows it to be passed around the program, stored in other structures, and printed
+to the screen.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;handles-as-a-structure-of-functions&quot;&gt;Handles as a Structure of Functions&lt;&#x2F;h3&gt;
+&lt;p&gt;Another way to implement handles, which is method I have been using, is to use a pointer to a structure containing functions. This keeps the
+handle small just as in the previous case, but does not require the centralized resource management. The handle is itself the resource
+that we would be looking up with the &#x27;handle as int&#x27; strategy.&lt;&#x2F;p&gt;
+&lt;p&gt;This strategy makes the handle a
+usable thing by itself, without needing interpretation by another module. This has its own drawbacks- users of the
+handle have to track their own resources, and there is no central registery of handles that can be used to record usage information or
+track statistics. This is not so bad, however, as it means lower complexity in drivers.&lt;&#x2F;p&gt;
+&lt;p&gt;One reason that I have been using this design is that I intend there to be many different types of handles, each with their own interface.
+If each type of handle had to implement resource tracking it would add complexity linearly with the number of handle types. Even if there
+was a single implementation of resource tracking, perhaps dealing with &amp;quot;void*&amp;quot; types, the user would have to think about whether there was
+a global registery, or many local registeries, and they may even have to track which registery a particular handle comes from. There might be
+multithreading issues that come up as well. Keeping the handles separate means that they are self contained and can be treated in isolation, which
+seems desirable when there are many types of handles, each implementing one of many types of interfaces.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;building-a-handle&quot;&gt;Building a Handle&lt;&#x2F;h1&gt;
+&lt;p&gt;There are many abstraction mechanisms that provide different types of dispatch, where each one could be used to provide a similar
+result to a handle system. If C had traits&#x2F;typeclasses, I might even prefer them to handles, and use static resolution of dispatch
+rather then dynamic.&lt;&#x2F;p&gt;
+&lt;p&gt;The main distinctions between classes&#x2F;traits&#x2F;mixins&#x2F;etc seems to be how they are built and what operations can be performed on them.
+Handles are build by defining a struct with an interface of function pointers and possibly other data. This struct is then filled in
+at runtime with the functions to call. There is no direct notion of inheritance or composition, although you could perform these
+operations explicitly with enough code.&lt;&#x2F;p&gt;
+&lt;p&gt;Composition in particular is interesting for handles- I can imagine composing handles that perform transformations or processing of
+data as it is passed down a chain of handles, especially for debugging.&lt;&#x2F;p&gt;
+&lt;p&gt;The particular implementation I&#x27;ve been using will have to wait to another post, but it makes use of forward declaration and function
+pointers to define a series of functions that take a pointer to a struct, where each function simply extracts a function pointer within
+that struct and calls it, passing the struct pointer and any required arguments. The drivers define their own struct whose first
+element is this struct full of function pointers, and fill in that struct with their own implementations. Each driver provides
+its own &#x27;init&#x27; function which initializes a new handle. Once initialized, the handle can be passed to any user of the interface.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;architectural-implications&quot;&gt;Architectural Implications&lt;&#x2F;h1&gt;
+&lt;p&gt;Its interesting to see the implications of each of these mechanisms on the large scale design of a software system. I have not seen handles
+used in a pervasive way in flight software, but I think they have the potential to have at least as large an effect as a message bus. &lt;&#x2F;p&gt;
+&lt;p&gt;There is a distinction here for the level at which a handle operates vs the level a message bus operates- the message bus is a large
+scale mechanism that facilitates a certain kind of information transfer. Its an asynchronous mechanism, best for multicasting data,
+and passing packets of data that do have have strict time dependances or complex protocols involved in their transfer.&lt;&#x2F;p&gt;
+&lt;p&gt;A bus does not help you abstract away function calls or general interfaces
+like hardware devices or operating system functions. They can replace direct function calls, but when you must make function calls the message
+bus does not provide a means of abstraction.&lt;&#x2F;p&gt;
+&lt;p&gt;A handle, on the other hand, abstracts direct function calls and the direct use of a module&#x27;s interface. This means that it can help when abstracting
+something like performance sensitive code (although it does have a small cost) or code that makes direct calls to an operating system, hardware driver,
+or a module where we want to abstract the details of which module or which function is being called.  In some sense this means that message
+bus&#x27; provide abstraction for higher level data flow, while handles provide abstraction for more direct, low level data flow. However,
+handles could be used to subsume message bus&#x27;, but not the other way around.&lt;&#x2F;p&gt;
+&lt;p&gt;Note that handles can be used to abstraction data flow similar to a message bus- you could have an interface with a function like &amp;quot;receive_packet&amp;quot;,
+and have implementations that write that packet to multiple queues. This would be a kind of point-to-point or multicast mechanism. You could also
+imagine that this receive_packet function checks the packet&#x27;s APID and provides it to a set of subscribers, implementing a pub&#x2F;sub system using
+handles.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;inspiration&quot;&gt;Inspiration&lt;&#x2F;h1&gt;
+&lt;p&gt;The thing that led me to thinking about handles and what use they might have in flight software was working on the SafeGuard project, a UAV geo-fencing 
+system which is designed for high assurance. I won&#x27;t go into too much detail, but the code makes use of a dynamics algorithm for predicting the trajectory
+of the vehicle, and it makes use of an algorithm for determining whether a point is within a distance from a polygon (for testing whether the vehicle has
+left a boundary). These two algorithms are used in a large algorithm that collect and calculates the inputs to these algorithm, and then
+decides what actions to take based on their results.&lt;&#x2F;p&gt;
+&lt;p&gt;The dynamics and polygon algorithms are libraries that that inputs and provide outputs, and have no side effects. This makes them easy to test, predictable,
+and reliable. The higher level algorithm, however, has to deal with incoming sensor data that may be stale, invalid, or nonsensical. It has to ensure that it
+runs when it is supposed to run, and that it doesn&#x27;t take too long to come up with an answer. It has to produce telemetry describing the inputs and outputs
+of all the calculations, as well as its own state. It also has to take action if it determines that there is a problem with the vehicles current state, 
+calling another modules interface to report problems it detected.&lt;&#x2F;p&gt;
+&lt;p&gt;All of this means that the algorithm is not a pure mapping of input to output. I have tried over time to factor the algorithm into a pure and impure part, and
+every place in the code where I have been able to do this has been easier to test, better factored, and easier to adapt to changing requirements.&lt;&#x2F;p&gt;
+&lt;p&gt;However, there is a level at which the algorithm is simply not a pure function, and we have to deal with its dependancies on other modules, its use of
+tasks&#x2F;semaphores&#x2F;message queues and other operating system functionality, and its telemetry. Thinking about this lead me to realize that the algorithm
+could be written in such a way that each of these effectful function calls are abstracted out, so that we could feed in test data, simulated data, or
+real data as desired. I didn&#x27;t want this abstraction to result in complex or unusual code- it would be easier to adopt if it looked like normal code but 
+somehow had this magical property that we could place it in a test harness and inject data, and then run the exact same code without modification in flight.&lt;&#x2F;p&gt;
+&lt;p&gt;This lead me to design a kind of handle system in which code like operating system interface, and the interfaces of other modules, are abstracted into an interface
+of functions that take a handle, where the handle is used to determine what happened at runtime when these functions are called. This way, the algorithm binds
+directly to the interface (it needs to bind to something) but it doesn&#x27;t require the other modules to be up an running, or the operating system to be the one
+it was designed for, as long as we can provide an implementation that satisfies the needs of the algorithm.&lt;&#x2F;p&gt;
+&lt;p&gt;I believe this could allow a whole series of amazing opportunities for this algorithm:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;We could run it outside of the target system, allowing us to test and study it on a laptop instead of an embedded system. We could even create a visualization
+that we could tweak to get a better understanding of what happens under the hood. I&#x27;ve done this stuff before with other algorithms, but this one has been difficult before
+at first look it relies on VxWorks and the rest of the flight software to operate.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;It would allow us to write unit tests independant of the rest of the system. We could test out properties about detecting errors, overstepping its time bounds, 
+or injecting invalid data in a reproducable way. These tests could be run at any time, not just with the hardware available, and would be amenable to CI.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;It would allow us to run the whole algorithm faster then real time. This is something we have talked about, and we have some hardware-in-the-loop simulation, 
+but this is all done in real time as it uses the real hardware.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;It should make the algorithm much more portable. We have talked about whether the algorithm could be made into a module that could be moved between systems,
+and I believe that this is possible if its dependancies were replaced by handle mechanisms. The handles would be provided at initialization, and would hide
+the operating system and external interfaces. They could even be constructed with callbacks, allowing the user code to essentially drive the algorithm and collect its
+data.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;tradeoffs&quot;&gt;Tradeoffs&lt;&#x2F;h2&gt;
+&lt;p&gt;As with any design, there are tradeoffs to be considered.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;pros&quot;&gt;Pros&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Handles allow abstraction of interfaces such that multiple implementations can exist at once within a single system. This is unlike
+the advantages of header files, where only a single implementation can exist at once.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Handles can be constructed at runtime- the particular functions involved may be arranged at runtime to serve a particular need. I don&#x27;t see
+that I would use this all that much, except perhaps in debugging code where I could replace a function call with a logging call, or swap
+out a single function from an interface to test it.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Handles are composable. It is possible to write a handle that takes another handle as an input, and extends its functionality. This would
+work like decorators in python. You could have a handle that logs inputs and outputs, redirects them to another interface, or tees them off
+and combines the results between two handles.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Handles can be written for specific interfaces. A message bus is usually a single abstraction passing any kind of data around, while a handle
+interface can be a collection of functions and types specific to the interface. This allows more complex interfaces to be described, such as a 
+1553B interface, while remaining abstract.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Handle function calls look like normal functions. This is as opposed to tring to build in an object system in C, or constructing a complex
+macro system to abstract calls. A handle function call is just a function call.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Handles bind only against an interface. This is as opposed to abstracting using header files, which does provide a level of abstraction in the
+code, but eventually binds directly against something. This is a somewhat subtle situation, but the point is that a module build using a
+handle mechanism has shallow static dependancies.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;cons&quot;&gt;Cons&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The implementation of a handle system is more complex then direct function calls. It makes use of function pointers and requires struct
+for each interface to hold these pointers. Each function must be written to redirect based on the handle, resulting in potentially a
+large number of similar functions.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Handle functions can&#x27;t be traced to the executing code directly- there is runtime information used for function dispatch which adds
+complexity to static reasoning.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;The handle systems I&#x27;ve been writing involve some redundancy. The code could be generated automatically, but so far I&#x27;ve been writing it
+by hand each time.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;For a module with many dependancies, if each dependancy requires a handle then the module may need to keep track of a large number of
+handles. If the same module made direct function calls, it would not need to store and retrieve all of these handles.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;There is a runtime cost to dynamic dispatch. I doubt it is very large, but its certainly larger then a direct function call. I&#x27;m sure
+its less then a message bus system, however.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h1&gt;
+&lt;p&gt;Hopefully this post gives some idea of what a handle system is and how to use one. I think they are an underutilitized form of abstraction,
+and offer some potentially amazing advantages to embedded system&#x27;s in particular.&lt;&#x2F;p&gt;
+&lt;p&gt;I hope to write more on the details of implementing a system like this. I&#x27;ve been doing some &#x27;real-world&#x27; testing of these ideas, and 
+successfully ported a complex algorithm using a series of handle systems, which gives me confidence that its advantages do in fact work
+out in practice.&lt;&#x2F;p&gt;
+&lt;p&gt;I think the details on implementing handle system, as well as some useful handle system&#x27;s I&#x27;ve started to write, will have to wait to another
+post. This one is long enough as it is.&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>Abstraction in Flight Software 3- Message Bus</title>
+                <pubDate>Wed, 14 Nov 2018 00:00:00 +0000</pubDate>
+                <link>http%3A//itscomputersciencetime.com/public/abstraction-in-flight-software-part-3-message-bus/</link>
+                <guid>http%3A//itscomputersciencetime.com/public/abstraction-in-flight-software-part-3-message-bus/</guid>
+                <description>&lt;p&gt;This post is the third in a series talking about abstraction mechanisms that I have seen in flight software systems.
+The topic of this post is the message bus. This is a mechanism through which messages are passed
+between modules through an arbiter. This allows the sender and receiver to be completely decoupled- the sender does not
+know who receives their messages, or even how many modules receive them, and the receiver does not know the source of the messages.
+Both sender and receive couple directly to the software bus mechanism, becoming directly dependent on it. In this way, they
+trade direct dependance on other modules to direct dependance on an intermediate module. This leads to an architecture where
+the software bus is a central component that all components connect too. This reduces the overall number of direct connections
+in a large system, which can provide benefits in the complexity of the architecture.&lt;&#x2F;p&gt;
+&lt;p&gt;The main example I&#x27;ve seen of this kind of system is the CFS Software Bus (SB) module. This module provides a publish&#x2F;subscribe
+message bus which seems commonly, but is not the only kind of bus that is possible. The SB module is a core component of CFS, part of the
+CFE modules. Not all communication between CFS modules uses this mechanism, and is instead part of tight coupling
+between modules, but there are a number of mechanisms that rely on it.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;the-message-bus&quot;&gt;The Message Bus&lt;&#x2F;h1&gt;
+&lt;p&gt;A message bus is a way to transfer data between components such that the sender and receiver are decoupled from each other.
+The message bus itself is not necessarily a specific data structure or even a task- its a mechanism that forwards data between modules
+based on runtime information. The CFS SB module is a publish&#x2F;subscribe system, other styles like a point-to-point transfer could be
+useful in some situations.&lt;&#x2F;p&gt;
+&lt;p&gt;For a message bus to be publish&#x2F;subscribe means that a component can register a message identifier (for CFS, an APID), indicating
+that it will send messages with that ID. Then, other components can register to receive a particular message ID. When a message of that
+ID is provided by a component, the message bus will send it to all other components that have requested to receive it.&lt;&#x2F;p&gt;
+&lt;p&gt;In the case of CFS, a component requests a &amp;quot;pipe&amp;quot; (a message queue) and registers message Ids that it will receive on that queue. The
+message bus keeps track of what pipes are registered with each message Id, and when a message is received it is copied onto each queue
+in turn.&lt;&#x2F;p&gt;
+&lt;p&gt;Note that the bus has a certain packet header it relies on to pass messages. It acts as a kind of router, and all components must agree
+on the protocol to use. For CFS, this is CCSDS, which is a pretty lightweight protocol with only 6 bytes of header required. Most
+systems will include additional header, but that is system specific.&lt;&#x2F;p&gt;
+&lt;p&gt;There are definitely situations where this style of transfer does not seem to work out, at least not how I&#x27;ve seen it implementated. Something
+like moving an update of a table between modules would require a request and response, which is even more complexity and overhead to deal with,
+or would require a way to broadcast messages. Both of these have issues- a request&#x2F;response needs a (simple) state machine and some way to 
+recover from errors like a response that never comes, and a broadcast means all modules have to know to ignore certain messages. 
+Instead, transfer like this go through direct coupling in CFS, which is probably the better design.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;examples&quot;&gt;Examples&lt;&#x2F;h2&gt;
+&lt;p&gt;An interesting use in CFS is task scheduling- the task scheduler does not release semaphores or run callbacks, but rather sends
+messages to other components. These components will block waiting for new messages, and will run when the arrive. 
+The messages &amp;quot;wake up&amp;quot; the module, allowing it to perform some periodic task like provide telemetry, run commands, or check for changes.&lt;&#x2F;p&gt;
+&lt;p&gt;Another example in CFS is data storage- the logging module does not need to know what module produces messages, and it can be re-used without
+modification when new modules are added with new messages to log. To be clear, the code can be reused- there are usually changes to configuration
+that have to happen to get this to work.&lt;&#x2F;p&gt;
+&lt;p&gt;One other example I&#x27;ve seen where this works out well is external interfaces. A component that communicates with an external interface can
+receive a subset of messages from the bus and forward them out, and can forward incoming messages to the bus, all without have to involve
+the sending or receiving components.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;tradeoffs&quot;&gt;Tradeoffs&lt;&#x2F;h2&gt;
+&lt;p&gt;As with any design, there are tradeoffs to be considered.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;pros&quot;&gt;Pros&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Modules can listen to existing messages without modification to other modules. This is useful in several situations- if a new module
+needs access to some data (such as sensor data), if a new modules makes general use of data (like a logging module), or if the new module
+replaces an old module and is being swapped out by taking over the receipt of a message previously handled bythe old module.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;New messages, even with no subscribers, can be added without modification to other modules. They will be dropped until a subscriber is
+added, but they can be send as soon as they are defined.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Generic modules like the scheduler or data logger can be written in terms of packets, and then re-used. They are each coupled to the
+message bus system, and other core modules in the case of CFE, but a certain subset of modules will require no other coupling.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Requiring a packet header means that transfers through the message bus have an id, where a direct transfer does not. This means
+that communication between components is a bit more formal, which can aid in documentation and reasoning.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;cons&quot;&gt;Cons&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The distributed nature of the message passing can make it difficult to trace the path or cause of messages through a system.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;If the system is based on message queues, then it can&#x27;t be used for certain kinds of communication- the message will be processed
+at some time in the future, and if it needs to be handled immediately then direct coupling may be more appropriate.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;There is a certain overhead involved in a message bus. Data is copied into queues, and data that does not require a header must be
+wrapped in one before being sent. I don&#x27;t expect the overhead to be too high, and if you need low latency transfer, you don&#x27;t have to
+use the message bus, but overhead is still a consideration.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;There is a certain mental overhead required to create a new transfer- instead of calling a function, the code has to contain a message ID,
+a packet, and the data itself. If we are receiving data, we might also need a new pipe, at least in the CFS design.
+The tradeoff being made here is that the complexity of individual transfers is increased with the hope that the the overall system complex is decreased
+by avoiding a web of direct couplings that would otherwise result from many local decisions on what modules to connect.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Large buffers of data are more difficult to transfer. CFS has a zero-copy transfer mechanism to handle these situations, but in general
+there has to be some way to avoid copying large buffers on transfer.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Sending data to the message bus can take an unknown amount of time- if the packets are copied directly to the receiving queues then the
+number of copies is determined by how many modules regsitered to receive the message. This means that this mechanism shouldn&#x27;t be used
+in certain situations like interrupts or drivers that need to get data out quickly. In these cases, we might want a separate task that
+pends on a queue, and forwards data from the queue to the message bus rather then sending it directly from the hardware.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h1&gt;
+&lt;p&gt;The message bus can have a significant affect on a system&#x27;s architecture. While not all transfers will use the bus, it is a central part
+of the system if it is included and can grow to handling a significant amount of traffic. My experience has been that it does assist
+in software reuse- certain modules lend themselves to the use of a bus. For these modules, I have been able to re-use code without
+modification, which I have not been able to do in more directly coupled systems.&lt;&#x2F;p&gt;
+&lt;p&gt;I have also experienced some of the drawbacks of the message bus- its a lot of work to set up when adding a little data transfer, and
+the decoupling does make it hard to feel like I understand what is happening in the system. Its very easy to miss messages when a central
+module must receive all or a large subset of messages, or
+fail to account for them in all modules that need to be updated to receive a message. This is partially because for the project
+that I&#x27;m using CFS, I&#x27;m the only programmer, but in general a message bus is certainly more mental overhead then a function call.&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;ve found that the architectural influence of this system is fairly large- when people draw the CFS architecture, they show SB at the center
+and show modules connecting to it. This is mostly true at runtime- there are certainly direct connections, but a good deal of CFS message
+passing is through SB. However, the static aspect of the CFS architure is more complex- there is direct coupling to the CFE modules, PSP,
+OSAL, and then through OSAL to the operating system.&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>Abstraction in Flight Software 2- Registration</title>
+                <pubDate>Tue, 13 Nov 2018 00:00:00 +0000</pubDate>
+                <link>http%3A//itscomputersciencetime.com/public/abstraction-in-flight-software-part-2-registration/</link>
+                <guid>http%3A//itscomputersciencetime.com/public/abstraction-in-flight-software-part-2-registration/</guid>
+                <description>&lt;p&gt;This post is the second in a series talking about abstraction mechanisms that I have seen in flight software systems.
+The topic of this post is the first type of abstraction- while the first post was about direct coupling between
+modules with no indirection, this post is about a way to reduce coupling between modules.&lt;&#x2F;p&gt;
+&lt;p&gt;I don&#x27;t know of a name for this kind of mechanism, so I&#x27;m calling it registration. It can come in the form of a callback,
+a data structure, or a concurrency mechanism that is provided by one module to another. An example would be a callback provided
+to a driver that performs some user defined processing of data when it arrives on a hardware interface.&lt;&#x2F;p&gt;
+&lt;p&gt;In CFS this mechanism is used to validate tables, where one module is responsible for the definition of a table, and for
+providing a function that checks whether a particular table is valid and can be used. The event message system also requires
+modules to register an array of descriptions of the event messages they will send.&lt;&#x2F;p&gt;
+&lt;p&gt;Another example I have seen is registering command callbacks to a module that determine what to do with commands received
+by a system, or functions registered with a task management component to be spawned as tasks.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;registration&quot;&gt;Registration&lt;&#x2F;h1&gt;
+&lt;p&gt;A registration mechanism consists of a function exposed by a module that allows other modules to provide it data or function pointers (in C&#x2F;C++).
+The data flow is from other components into the component that exposes this function, which means that any module that registers with the component
+depends on it.&lt;&#x2F;p&gt;
+&lt;p&gt;Here is a piece of imagined sample code, where the module ABC registers some callbacks with other modules. I put in some error checking
+just to make it more like real code. The module CMD handles providing commands to appropriate modules, SWMSG handles a software message
+mechanism where messages are simple strings, and TLM provides a way to update a section of telemetry given its size.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#212733;&quot;&gt;
+&lt;span style=&quot;color:#ffa759;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffd580;&quot;&gt;ABC_Initialize&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffa759;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffcc66;&quot;&gt;moduleId&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;)
+{
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffa759;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt; result &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29e74;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffcc66;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2cc;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;
+
+  gvABC_moduleId &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29e74;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt; moduleId&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2cc;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;
+
+  result &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29e74;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffd580;&quot;&gt;CMD_RegisterCommandCallback&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;(ABC_ReceiveCommand&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2cc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffcc66;&quot;&gt;NULL&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2cc;&quot;&gt;;
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffa759;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;(result &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29e74;&quot;&gt;&amp;lt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffcc66;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;)
+  {
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffd580;&quot;&gt;SWMSG_SendMessage&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;(gvABC_moduleId&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2cc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bae67e;&quot;&gt;&amp;quot;ABC Register Command Callback Failed&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2cc;&quot;&gt;;
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;}
+
+  result &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29e74;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffd580;&quot;&gt;TLM_RegisterTelemetry&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;(gvABC_moduleId&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2cc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffa759;&quot;&gt;sizeof&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;(ABC_Telemetry))&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2cc;&quot;&gt;;
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffa759;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;(result &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f29e74;&quot;&gt;&amp;lt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffcc66;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;)
+  {
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffd580;&quot;&gt;SWMSG_SendMessage&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;(gvABC_moduleId&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2cc;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bae67e;&quot;&gt;&amp;quot;AB Register Telemetry Failed&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2cc;&quot;&gt;;
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;}
+
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffa759;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt; result&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2cc;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The registered data can be used to configure a module, to provide a processing function, a task, a semaphore to synchronize with, a message queue
+to place data on- anything that a module does could be provided by a registration. This can be a single module registering with one other module,
+such as if a module&#x27;s behavior might be abstracted to be re-used where it behavior is determined by different modules in different projects. This can
+also be used when many module interact with a single one, such as when all modules provide function pointers to be spawned as tasks.&lt;&#x2F;p&gt;
+&lt;p&gt;Its interesting to look at the tradeoffs between registering function pointers and registering data. When there is a particular type of transfer, like
+a command packet, it can make sense to provide a message queue and to simply place the packet on the queue. In general, however, we might not want
+to dictate how a module receives or provides data, so we can hide that information in a function. In this case we are essentially replacing data
+with computation, where the computation may simply place the data on a queue anywhere, but is allowed to do other things like record that the data
+was received, or avoid a queue and process the data immediately. This provides extra flexibility, although C function pointers are not as easy to
+work with as functions in, say, Haskell, and this can lead to some duplication where multiple modules define identical callbacks. This can be mitigated
+by allowing a single argument to the callback function that provides configuration specific to the module, like which message queue to use, which can
+allow a single function definition to be used by any module that needs default behavior, allowing modules to define their own function and data if the
+want to handle data differently.&lt;&#x2F;p&gt;
+&lt;p&gt;The registration mechanism is a push style of transfer- data is pushed from a module into the one providing the registration. However, the 
+use of that data may be push or pull- a module may provide a callback that can be used to push data to it, or it may provide a callback that can be
+used to pull data from it. In the first case, the callback might take a pointer to some data as an input argument, and in the second it might take
+a pointer to data as an output which it is expected to fill out for the calling module to make use of.&lt;&#x2F;p&gt;
+&lt;p&gt;The decoupling here allows a module to provide a service to other modules without depending on those modules, it allows modules to be added or
+removed without changing the provider, and it allows some flexibility in how a module behaves without changing it source code. However it can lead
+to some sublities, such as if a callback function is used in an interrupt, and the providing module must be careful to respect the requirements of the
+module it provides data to. I&#x27;ve seen this cause problems when long running computations are performed in a callback- when writing and reviewing this
+kind of code you have to look at its use of data, synchronization, and its execution time to know if a function is okay to use as a callback in a particular
+situation.&lt;&#x2F;p&gt;
+&lt;p&gt;Registrations mechanisms can also lead to situations where resources are exhausted if too many modules register, or if a module registers too many
+times. Very often the registration is done at initialization so
+if this happens you fix it during development and it never occurs in flight.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;tradeoffs&quot;&gt;Tradeoffs&lt;&#x2F;h2&gt;
+&lt;p&gt;As with any design, there are tradeoffs to be considered.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;pros&quot;&gt;Pros&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;This mechanism helps isolate module-specific logic within that module. An example is the table validity checking, where a module
+that is responsible for a table also contains the function used to check table&#x27;s validity.&lt;&#x2F;li&gt;
+&lt;li&gt;This is a way for a module to provide a service to an unknown number of other modules, and to add modules without necessarily updating
+the module that provides the service. If the service is general enough, like a software message service, then it may be portable between
+projects without modification.&lt;&#x2F;li&gt;
+&lt;li&gt;The module providing registration is not directly coupled to other modules, allowing other modules to change their relationship with the providing
+module without updating that modules. This also means that the providing module can be moved to another system without considering modules
+that use it.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;cons&quot;&gt;Cons&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;This mechanism can make reasoning about certain module more difficult. A module that has many callbacks registered with it can be difficult
+to understand- to know what it is doing at a particular time you may need to know not just how the module works, but every callback registered
+with it an how they work. This means that local reasoning about the module&#x27;s runtime behavior may require global knowledge about the project.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Modules written to register in this way depend on the component they register with. If modules depend on multiple regstrations with mulitple
+other modules then they are tightly coupled to the particular architecture. This can be alleviated somewhat by allowing this kind of tight
+coupling to a subset of core modules, such as in the design of CFS where the CFS modules are used directly, but other modules are usually not.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;It can be difficult to know how a module is configured. This is related to the above, but specifically it is difficult to know exactly what
+registrations occurred and what data they contain. This can be alleviated by providing a report about how a module is configured, although
+this is additional complexity in the flight software to provide this report, in the ground software to interpret it, and in operations to retrieve
+it an understand it.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Change to a registration mechansim can have an affect on many, potentially all, other modules. It can also be a problem if a module providing
+registration is used on mulitple projects, but needs to be extended or modified for the needs of one project. This can lead to a situation where
+other modules are slightly different to account for this difference in registration, which makes re-use and porting difficult.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h1&gt;
+&lt;p&gt;The registration mechanism is a very flexible way to introduce abstraction into a system. It is fairly easy to implement and can have a good
+tradeoff in complexity vs the additional flexibility. I&#x27;ve seen it provide software re-use where a service provider can be moved
+between projects without modification, providing a lot of value when getting together a new system.
+There can be issue with this where the needs of a specific system may require changes to the service,
+which may propagate to all users, but in general this is pretty hard to avoid regardless of design.&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>CFE&#x2F;CFS Architecture</title>
+                <pubDate>Sun, 16 Sep 2018 00:00:00 +0000</pubDate>
+                <link>http%3A//itscomputersciencetime.com/public/cfe-cfs-architecture/</link>
+                <guid>http%3A//itscomputersciencetime.com/public/cfe-cfs-architecture/</guid>
+                <description>&lt;p&gt;This post is a followup to the previous post introducing CFE&#x2F;CFS.
+In this post I want to start talking about the design of CFE&#x2F;CFS and
+what implications its design decisions have when using this software.&lt;&#x2F;p&gt;
+&lt;p&gt;I will go over some possible architectures one could use for flight software,
+and then go a little bit into CFE&#x2F;CFS&#x27;s architecture in terms of static and
+dynamics dependancies between software components. Part of the point here is
+to provide more detail on how CFE&#x2F;CFS is organized beyond saying that it is
+a publish-subscribe system with a software bus- the reality is more complex then
+that.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;possible-flight-software-architectures&quot;&gt;Possible Flight Software Architectures&lt;&#x2F;h1&gt;
+&lt;p&gt;When developing a flight software system, there are a large number of
+possible designs and tradeoffs that can be made. In this way it is just like
+any other type of software even though it has its own unique set of
+challenges and pressures. Architectures seem to have evolved over the years,
+each with its own advantages and disadvantages.&lt;&#x2F;p&gt;
+&lt;p&gt;Lets go over some possible architectures and their tradeoffs. There could very well
+be other architectures out there, but these are the basic designs that I can
+think of.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;monolithic&quot;&gt;Monolithic&lt;&#x2F;h2&gt;
+&lt;p&gt;In this architecture, we write one monolithic system which controls the entire
+system. All features are tightly coupled, and the system is likely the least
+portable between projects, operating systems, or hardware.&lt;&#x2F;p&gt;
+&lt;p&gt;In this architecture, we might have a single task&#x2F;thread&#x2F;process which recieves commands,
+produces telemetry, and does all the hardware control in one place. This provides
+the greatest degree of control, potentially the least overhead, and the fewest
+mental overhead as it has no mechanisms to learn or decoupling to reason about.&lt;&#x2F;p&gt;
+&lt;p&gt;This architecture would be the quickest to get up and running if starting from
+scratch and creating a system with a limit set of functionality as it does not
+require developing additional infrastructure beyond the needs of the specific
+application.&lt;&#x2F;p&gt;
+&lt;p&gt;Of course, there are some significant disadvantages as a project gets bigger, as it
+is ported between projects and has to be largely rewritten, and as its architecture
+requires large changes to accomidate new requirements or functionality. It is the least
+flexible and provides no abstractions to use when reasoning about the codebase.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;modules&quot;&gt;Modules&lt;&#x2F;h2&gt;
+&lt;p&gt;All embedded software systems that I&#x27;ve ever seen split off functionality into
+modules.  A module contains internal state, and communicates with other modules
+through shared memory, message queues and other synchronization primitives, and
+function called- whatever is appropriate for the specific need.&lt;&#x2F;p&gt;
+&lt;p&gt;Each hardware interface will get a module, each complex algorithm, each piece
+of identifiable functionality like task scheduling or health monitoring. The
+decomposition of the system into modules is usually done early in the project
+to organize and schedule software development.  Having an architecture like
+this assists in reasoning about the software, understanding execution and
+dependancies between its pieces, helps scheduling which functionality should be
+developed at what time, and manages complexity by sectioning off software into
+islands which can be developed, reviewed and understood mostly in isolation.&lt;&#x2F;p&gt;
+&lt;p&gt;Modules can vary in size enormously There is no limit to how complex a module can be, 
+but the ones I see are usually between 1K and 10K lines of code. In the systems I have 
+worked in there have been ~20 modules, and somewhere between 20K to 40K lines of code in total
+(logical lines of code counted by cloc).&lt;&#x2F;p&gt;
+&lt;p&gt;Some modules provide a library of functions to use by other modules, some provide core services
+used throughout the system, and some provide project-specific functionality. The libraries and core modules
+can often be re-used between projects, providing a consistent architecture and set of functionality
+that can be delivered for each system.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;software-bus&quot;&gt;Software Bus&lt;&#x2F;h2&gt;
+&lt;p&gt;The Software Bus architecture is a module system as discussed above, but one which has a module
+which performs communication between other modules. In a way, the task of communicating between modules
+is factored out into a single module rather then spread through the systems as a cross-cutting concern.&lt;&#x2F;p&gt;
+&lt;p&gt;A software bus is usually (as in the case of CFE) a publish-subscribe system. Modules can indicate to the
+software bus module that they will produce a certain kind of data (perhaps indicated by a unique ID),
+and other modules can request that they be provided each packet with that ID.&lt;&#x2F;p&gt;
+&lt;p&gt;With this design, the sender of a packet does not necessarily know where it will be sent, and the receiver
+does not know where the packet originated. This has a number of advantages, and of course it has a number 
+of disadvantages.&lt;&#x2F;p&gt;
+&lt;p&gt;The advantages are that we can add new components more easily- the decoupling between
+modules means that a new component does not usually require changes in any other component. Sometimes you
+can develop a new module and plug it into the system, and when that happens you are realizing the 
+benefits of this module.&lt;&#x2F;p&gt;
+&lt;p&gt;The disadvantages come from places in the code where you benefit from tight coupling- since you no
+longer know the source and destination of every packet, it can be difficult to tell exactly what the
+system is doing. You need knowledge of every packet published and every place where a subscription
+occurs in order to understand the control flow of the system. In a way this is okay- the
+software bus module can report all links between all modules. However, if you need control over
+communication, or you need communication that occurs in a particular way, you may want to bypass
+the software bus.&lt;&#x2F;p&gt;
+&lt;p&gt;Bypassing the software bus leads to the next part of this post- CFE&#x2F;CFS.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;cfe-cfs&quot;&gt;CFE&#x2F;CFS&lt;&#x2F;h1&gt;
+&lt;p&gt;The CFE&#x2F;CFS system is a set of modules with a software bus in from the ground up. It is an architecture
+that combines the decoupling that is available in a publish-subscribe system when possible, but makes
+use of tight coupling when appropriate. When I say tight coupling here, I am referring to making
+function calls to a modules exposed functions, and when I say loose coupling I am referring to communicating
+through the software bus.&lt;&#x2F;p&gt;
+&lt;p&gt;In particular, CFE is a series of very tightly coupled modules, and CFS Apps may be tightly coupled to CFE
+apps. In addition, CFE and CFS modules are tightly coupled to the OSAL- they will make direct function calls
+to OSAL functions. The intend of this design is to factor out the portion of the system that benefits most from
+tight coupling into a small set of modules, called CFE, allowing other modules to be more loosely coupled.&lt;&#x2F;p&gt;
+&lt;p&gt;This means that the CFE&#x2F;CFS architecture is designed as an abstraction layer over the operating system with
+multiple implementats, a series of tightly coupled modules providing core features, a series of modules
+called CFS Apps are tightly coupled to CFE and OSAL but not to each other, and a series of project-specific
+applications which are tightly coupled to OSAL and CFE, to their platform&#x2F;operating system&#x2F;or 
+hardware, and perhaps to each other, but not to other CFS Apps.&lt;&#x2F;p&gt;
+&lt;p&gt;Note that there are several places were tight coupling is used here- any module may depend directly on OSAL,
+all CFE modules depend directly on each other, all CFS Apps depend on OSAL and CFE, and project specific apps
+depend on OSAL, CFE, their platform, and each other if appropriate. This means that CFS is not a fully decoupled
+system- rather it is a system that allows decoupling in user code when appropriate and allows tight coupling
+when required.&lt;&#x2F;p&gt;
+&lt;p&gt;This is an important aspect to the design in several ways. Sometimes we want something to happen &lt;em&gt;right now&lt;&#x2F;em&gt;,
+and not just when a packet arrives at a module. Sometimes we want to pass data directly rather then packing it
+up in a packet and sending it off. Sometimes we want to send large pieces of data, and while CFE provides a 
+Zero Copy message passing option, sometimes we want to control memory more directly.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;applications-of-de-coupling-in-cfe-cfs&quot;&gt;Applications of De-coupling in CFE&#x2F;CFS&lt;&#x2F;h1&gt;
+&lt;p&gt;Now that we have an idea of where the dependancies are between modules in CFE&#x2F;CFS, I wanted to point out some
+places where the loose coupling provided by a software bus is used in CFE&#x2F;CFS.&lt;&#x2F;p&gt;
+&lt;p&gt;One places is the Scheduler App. This application runs a schedule consisting of slots, each of which is associated
+with a slice of time within the schedule. For example, you might have 100 slots of each 10 ms each, and you might
+run these slots once per second. Within each slot there are some actions you want to take, such as producing telemetry,
+polling hardware, checking the system&#x27;s health, or running an algorithm.&lt;&#x2F;p&gt;
+&lt;p&gt;The Scheduler App make use of loose coupling by sending a series of pre-defined commands to the software bus in each
+schedule slot. In other words, it schedules by sending packets at a particular time with the assumption that the receiver
+is waiting for new packets in some thread, and that the receiver will take a particular action when it receives the
+Scheduler&#x27;s packet. This is as opposed to a more direct approach such as releasing a binary semaphore to unblock a task.&lt;&#x2F;p&gt;
+&lt;p&gt;Another example is the Data Storage App. This module recieves packets from the software bus, defined in a set of tables
+(configuration files) which tell it which packet ID to ask for from the software bus. When it recieves a packet, it stores
+it in log file according to rules defined in another table. This design does not rely on the source of the data, and the
+senders of each packet do not know whether Data Storage is out there receiving the data or not.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;static-coupling-vs-dynamic-coupling&quot;&gt;Static Coupling vs Dynamic Coupling&lt;&#x2F;h1&gt;
+&lt;p&gt;A quick final point I want to make here is that the design of CFE&#x2F;CFS provides loose coupling at runtime, not necessarily
+at compile time. In other words, when you write a CFS App, it is a CFS App and not a generic module that could be used 
+within another software system. It will rely on the OSAL and CFE, at the very least, and can&#x27;t be used without those
+static dependancies. One thing I find interesting is architecture where we make use of loose coupling at compile time
+to create modules that are not tied to a specific architecture, but that is a topic in itself.&lt;&#x2F;p&gt;
+&lt;p&gt;Notice that with CFE just as most tight coupling was deliberatly factored out into a small set of modules, with OSAL
+the static coupling to the operating system was factored out into a set of header files which can be given multiple 
+implementation. In other words, the CFE&#x2F;CFS&#x2F;OSAL combination is designed to manage static coupling in a particular
+way which effects what coupling you will see in your own CFS Apps. This is a monolithic form of static coupling in the
+sense that if you depend on any part of OSAL, you depend on all of it. It is not a set of modules for each part of
+the operating system, it is a monolithic interface and if you use it you are tied to the whole thing. This is not usually
+a problem, but it is worth noticing.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h1&gt;
+&lt;p&gt;There is a lot more to say about CFE&#x2F;CFS as a software system, but hopefully we have started to see its design at a high
+level and how it manages coupling at compile time (statically) and at run time (dynamically) and what options you
+have and don&#x27;t have when you write CFS apps.&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>Brief Introduction Flight Software - CFE&#x2F;CFS</title>
+                <pubDate>Sat, 15 Sep 2018 00:00:00 +0000</pubDate>
+                <link>http%3A//itscomputersciencetime.com/public/introduction-to-flight-software-cfe-cfs/</link>
+                <guid>http%3A//itscomputersciencetime.com/public/introduction-to-flight-software-cfe-cfs/</guid>
+                <description>&lt;p&gt;One of my goals with this blog is to talk about flight software- what it looks
+like, how it is developed, and what it is like to be in the aerospace domain. I
+think it would be nice to see more discussion of this kind of programming,
+especially as space becomes available to more people through small satellites.&lt;&#x2F;p&gt;
+&lt;p&gt;To do my part, I will discuss some of my thoughts on the Core Flight Executive
+and Core Flight Software system developed by NASA, along with the Operating
+system abstraction layer (OSAL) used by this project. This post will just be a
+brief introduction to lay the groundwork for a more in depth look at the system.&lt;&#x2F;p&gt;
+&lt;p&gt;I want to be clear in that I only see a particular slice of the aerospace world-
+I don&#x27;t work on planes or rockets or human rated systems . I have worked on a
+safety critical piece of software for UAV applications, and the science payload
+SAGE III, and I&#x27;m currently working on a small satellite science mission called
+ARCSTONE that will use CFE&#x2F;CFS for its flight software. I say this to give some
+context in my background and where I&#x27;m coming from in this post.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;cfe-cfs&quot;&gt;CFE&#x2F;CFS&lt;&#x2F;h1&gt;
+&lt;p&gt;There are a number of resources on &lt;a href=&quot;https:&#x2F;&#x2F;cfs.gsfc.nasa.gov&#x2F;&quot;&gt;CFE&#x2F;CFS&lt;&#x2F;a&gt; out
+there, including its &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nasa&#x2F;cFE&quot;&gt;github&lt;&#x2F;a&gt; page, &lt;a href=&quot;http:&#x2F;&#x2F;coreflightsystem.org&#x2F;&quot;&gt;community
+site&lt;&#x2F;a&gt;, &lt;a href=&quot;https:&#x2F;&#x2F;sourceforge.net&#x2F;projects&#x2F;coreflightexec&#x2F;&quot;&gt;sourceforge
+site&lt;&#x2F;a&gt;, and the CFS
+applications on the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nasa&quot;&gt;NASA github&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;In addition, the project has a significant amount of documentation available
+for each module, both as PDF files and Doxygen pages included in the source
+distribution.&lt;&#x2F;p&gt;
+&lt;p&gt;A brief overview is that CFE consists of a set of software components that
+provide the main services used by flight software, whether that software is for
+space, UAVs, or other embedded applications. It turns out that when writing
+flight software there are some system one seems to need on every project, and
+CFE is an attempt to package these systems up for reuse across many projects,
+while providing additional modules that are not used in all projects but are
+still common. This is done in an operating system agnostic way, assisting
+portability.&lt;&#x2F;p&gt;
+&lt;p&gt;These core components provide mechanisms for managing tables, sending packets
+between software components, logging system events, creating small messages to
+communicate the system&#x27;s state to a user, allocating blocks of memory from a
+pool, performing performance monitoring, managing files, managing time and
+timestamping, and more.&lt;&#x2F;p&gt;
+&lt;p&gt;In addition to these core modules, there are additional modules called apps that
+are part of the larger CFS system, where you can add whichever Apps you want to
+your project to get additional capabilities that are common but not neccesarily
+in every project. Some examples of these additional modules are limit
+monitoring, stored command execution, telemtry packet creation (HouseKeeping),
+file management, data storage, and task scheduling.&lt;&#x2F;p&gt;
+&lt;p&gt;All of these software modules do things like spawn tasks, create and use message
+queues, semaphores, files, etc. When they need to do these things, they do not
+call operating system functions directly, as that would tie the code to a
+particular system. Instead they call functions defined in the header files of
+the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nasa&#x2F;osal&quot;&gt;OSAL&lt;&#x2F;a&gt; project. The OSAL software provides an
+interface which is then implemented in a set of C files for a specific operating
+system. The operating systems available on github are Posix (which has worked
+for me on both desktop and embedded Linux), VxWorks 6.7, and RTEMS. I&#x27;ve only
+had experience running the Posix implementation of OSAL on Linux systems.&lt;&#x2F;p&gt;
+&lt;p&gt;There seems to be a common confusing about the OSAL layer and CFS in general-
+if you write software as a CFS application there is absolutely nothing hiding
+the operating system or hardware from you. It is more accurate to say that you
+can choose to use the OSAL (and PSP) functions to make your software more
+portable, but if you need low level access to hardware you do so just as you
+might in other software.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;running-cfe-cfs&quot;&gt;Running CFE&#x2F;CFS&lt;&#x2F;h1&gt;
+&lt;p&gt;The CFE&#x2F;CFS project has an extensive makefile system which builds the core
+components including OSAL, CFE, and the PSP (the platform specific code that is not
+part of OSAL), and can be extended to call makefiles in subfolders of the apps
+directory in order to build additional modules.&lt;&#x2F;p&gt;
+&lt;p&gt;Once CFS is built, you end up with a single executable file, a series of
+object files, and a
+&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nasa&#x2F;cFE&#x2F;blob&#x2F;master&#x2F;build&#x2F;cpu1&#x2F;exe&#x2F;cfe_es_startup.scr&quot;&gt;cfe_es_startup.scr&lt;&#x2F;a&gt;.
+When the executable is run (core-linux.bin for the POSIX build), it starts
+up the CFE components, and reads the cfe_es_startup.scr file. This file
+lists the additional modules to load, and the executable will load each
+one in turn and call an initialization function listed in the
+cfe_es_startup.scr file.&lt;&#x2F;p&gt;
+&lt;p&gt;At this point you have a series of operating system threads running,
+message queues created, semaphores, and files open. The CFS flight
+software is running, logging, updating time, perhaps executing a schedule
+of task executions using the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nasa&#x2F;SCH&#x2F;&quot;&gt;SCH&lt;&#x2F;a&gt;
+application, creating telemetry packets which might be stored in a file by
+the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nasa&#x2F;DS&#x2F;&quot;&gt;DS&lt;&#x2F;a&gt; app, and so on.&lt;&#x2F;p&gt;
+&lt;p&gt;You have to provide input and output to this system somehow, often with a
+project specific module which know about your hardware&#x27;s interfaces and perhaps
+the ground system you are talking to. There are some modules called Command
+Ingest and Telemetry Output, each of which has a &amp;quot;lab&amp;quot; version for development
+which forward commands over UDP to send to the Software Bus, and receive
+telemetry packets from the Software Bus to send out over UDP.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h1&gt;
+&lt;p&gt;Hopefully this provides some references and a vague idea of what CFE&#x2F;CFS is. I
+hope to keep posting about this software, and get more into the architecture and
+tradeoffs it makes in future posts.&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>Generic C</title>
+                <pubDate>Tue, 13 Feb 2018 00:00:00 +0000</pubDate>
+                <link>http%3A//itscomputersciencetime.com/public/generic-c/</link>
+                <guid>http%3A//itscomputersciencetime.com/public/generic-c/</guid>
+                <description>&lt;p&gt;This post is about how to write generic code in C. This is a problem I often have- I write tools in C which are fairly
+simple, but often would benefit from more advanced techniques as they get larger. I use C because it is the language we use for flight code,
+it is a simple language that I can expect people to know, and it is easier to control the layout of memory then other languages.
+I can write a useful GUI program in LabWindows in hours, talk to hardware, and process telemetry from other systems. Its by no means
+my favorite language, but its often the right tool for the work that I do.&lt;&#x2F;p&gt;
+&lt;p&gt;This is a language that does not include a lot of means for abstraction, and we will have to pull some tricks to reduce redundancy
+and express more complex concepts. These things do not feel native to the language, and I feel like I am usually using a fairly
+primitive set of building blocks to create my programs.
+The techniques we will look at are manual and its easier to get wrong in C then other languages, but still worth thinking about.&lt;&#x2F;p&gt;
+&lt;p&gt;So- lets look at what we can do to get some polymorphism in C when we are not ready or able to reach for other languages.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;some-context&quot;&gt;Some Context&lt;&#x2F;h1&gt;
+&lt;p&gt;The C language is fairly low level and explict. Sometimes it is not low level enough, and often it is much too low level.
+In flight code (any code that runs on the embedded systems for space or aero applications) we keep a small subset of C and stray very little
+into more advanced techniques in order to keep the code as understandable as possible. For me then, these techniques are things I would
+use when no one is looking too closely at my code, or I&#x27;m writing something for myself.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-c-language&quot;&gt;The C Language&lt;&#x2F;h2&gt;
+&lt;p&gt;The main constructions in C are procedures, structs, unions, enums, global values, and 
+proprocessor directives. I&#x27;m grouping the preprocessor into C as they are part of C programs in practice,
+even if they are a separate stage of compilation before the C language itself. C&#x27;s type system
+has primitive types (int, char, etc), the array type constructor, user types in the form
+of structs and unions, type alias in typedefs, and pointer types.&lt;&#x2F;p&gt;
+&lt;p&gt;Of these, pointer types give the most means for abstraction- they let you talk about data in an uniform way (through an address) that does not
+depend on the structure of the data, as the pointer is always the same form regardless of what it points to.
+In addition, function pointers get you the bare minimum to treat computation as a subject that one can control in
+C. There is no way to create functions at run time such as through composition, but at least we have first order functions.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;the-cast&quot;&gt;The Cast&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;pre-processor-magic&quot;&gt;Pre-Processor Magic&lt;&#x2F;h2&gt;
+&lt;p&gt;One way to get a form of polymorphism in your code is to essentially expand it automatically to monomorphic code-
+in other words, create an entirely separate copy for each type you are interested in manipulating. This can be
+done with the preprocessor, allowing entire data structures and their interfaces to be generated per type.
+This reminds me in logic of expanding your inference rules so that there is technically a separate rule for each
+proposition, rather then using quantification and saying that the rules apply for all propositions.&lt;&#x2F;p&gt;
+&lt;p&gt;This has the advantage of type safety, since the code is generated for a particular type, and it may have some
+performance advantages when the implementation can make use of properties of the type like its size to generate
+specific code like memory layouts.&lt;&#x2F;p&gt;
+&lt;p&gt;One disadvantage is complexity- both in the implementation which must be written mostly within the pre-processor,
+and in the user code which must generate a great deal of code that can&#x27;t be read directly. Even reading the generated
+code is not as good as having simple code to read in the first place. I imagine this code is hard to write and test,
+although I&#x27;ve never done it myself.&lt;&#x2F;p&gt;
+&lt;p&gt;An example of this approach is in &lt;a href=&quot;http:&#x2F;&#x2F;sglib.sourceforge.net&#x2F;doc&#x2F;index.html&quot;&gt;sglib&lt;&#x2F;a&gt; where the author create type safe
+data structures and some higher order functionality like sorting with user-defined functions, in C.&lt;&#x2F;p&gt;
+&lt;p&gt;One other note here is that I&#x27;ve seen this technique done manually as well- duplicate data structures and functions with
+almost no difference all through codebases. This is bad programming practice and is wasteful in time for programming, testing,
+and reviewing, but in some contexts its hard to avoid.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;void&quot;&gt;void * &lt;&#x2F;h2&gt;
+&lt;p&gt;Another possibility is to simply drop into the world of untyped data, making everything a pointer to void. This means
+that you take responsibility for the types of your data. You can do this by always using void pointers to a particular type
+with a section of code, such as in a data structure like a tree where all nodes point to data of the same type, or you can
+do a manual kind of sum type and make an enum with all the types you want to use, tagging your pointers with a value of this enum
+to distinguish what it points to. This amounts to carving out a universe of types from the C type system, and when I&#x27;ve done this usually
+I only allow basic types like uint8, int16, uint32, etc, and then a generic buffer or C string type.&lt;&#x2F;p&gt;
+&lt;p&gt;The advantage of this techinque is that your code works on many data types- you can store information like the size of the data along with it,
+and allocate, deallocate, move, and manipulate your data without knowing what it is. This is almost a parametric polymorphism in the sense that if you
+truely do not know what your data contains, so you can only perform operations on it that work on all data. Nothing stops you from doing otherwise,
+but we are in C and we have to accept this responsibility.&lt;&#x2F;p&gt;
+&lt;p&gt;This is the technique I go for most often. I don&#x27;t enjoy it, but it comes in useful too often to ignore.&lt;&#x2F;p&gt;
+&lt;p&gt;I know of no way to enforce constraints in this case, unless you consider the next technique a kind of constraint.&lt;&#x2F;p&gt;
+&lt;p&gt;One example of this style can be found &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;srdja&#x2F;Collections-C&quot;&gt;here&lt;&#x2F;a&gt;. This is also the style used in LabWindows for its
+generic data structures in the &lt;a href=&quot;http:&#x2F;&#x2F;zone.ni.com&#x2F;reference&#x2F;en-XX&#x2F;help&#x2F;370051V-01&#x2F;toolslib&#x2F;toolslibprogrammerstoolbox_functiontree&#x2F;&quot;&gt;programmer&#x27;s toolbox&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;row-polymorphism&quot;&gt;Row Polymorphism&lt;&#x2F;h2&gt;
+&lt;p&gt;This is perhaps the most interesting technique, at least to me. In this case you define a series of structures, some of which contain others as their
+first field. Doing this means that you can upcast a struct into one of the ones it contains, losing information about what it contains. This gives it a
+similar feel to subtyping (although this does not hold up formally), where you can go own the tree of subtypes and get more information, and up the tree
+to lose information when you want to express something more generically.&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;ve wanted to explore this in more detail, as it opens up a lot of possibiilty in the restricted world of C. You do have to be careful with memory layout-
+you can no longer assume you know the size of a structure based on its type. You are also restricted in the sense that you can extend in only one way per
+struct- you can extend with new fields, but the order of extensions matters without some kind of dictionary or table lookup.&lt;&#x2F;p&gt;
+&lt;p&gt;One example of this technique is the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;torvalds&#x2F;linux&quot;&gt;Linux kernel&lt;&#x2F;a&gt;. Linux apparently uses this technique to embed structs in other struct,
+along with macros for getting out to the containing structure.&lt;&#x2F;p&gt;
+&lt;p&gt;Another example might be &lt;a href=&quot;http:&#x2F;&#x2F;libcello.org&#x2F;home&quot;&gt;Cello&lt;&#x2F;a&gt;, which is a very different implementation then the one used in Linux, and does use a lookup
+to dispatch functions. I hope to write a bit more about this in the future, but its definitely worth checking out, even if only for fun.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;generic&quot;&gt;_Generic&lt;&#x2F;h2&gt;
+&lt;p&gt;In C11 there was a feature added to the C language called _Generic. This is not a general technique for generic programming- all it allows you to do
+is to select a function based on a type. You can then write macros that select the right function but give a single interface which is nice, but to my knowledge
+there is no way to use this more generally- you have to know beforehand which types you are concerned with. Its still a fine feature, its just got a more limited
+application then the techniques above.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h1&gt;
+&lt;p&gt;I tend to stick to void* style generic programming in C because it is the most straightforward in my opinion and the easiest to review for. I&#x27;m more interested
+in sticking to conventions and keeping code simple then powerful and generic. I am even willing to trade the type safety of macros for code that uses the simplest
+subset of C possible, but that is mostly my training and my application domain talking. I treat C more carefully than other languages because my C code must be
+higher quality then my other code.&lt;&#x2F;p&gt;
+&lt;p&gt;Also,for reference, &lt;a href=&quot;http:&#x2F;&#x2F;andreinc.net&#x2F;2010&#x2F;09&#x2F;30&#x2F;generic-data-structures-in-c&#x2F;&quot;&gt;here&lt;&#x2F;a&gt; is another treatment of these same topics.&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>Flight Software Architecture</title>
+                <pubDate>Mon, 11 Dec 2017 00:00:00 +0000</pubDate>
+                <link>http%3A//itscomputersciencetime.com/public/flight-software-architecture/</link>
+                <guid>http%3A//itscomputersciencetime.com/public/flight-software-architecture/</guid>
+                <description>&lt;p&gt;I&#x27;ve found over the last 6 years that flight software is its own programming domain with its own techniques, concerns, tools,
+and mentality. I thought it would be good to go over some things I&#x27;ve learned and share my experiences with this kind of software and
+its design. Its a world in its own, and I&#x27;ve seen only a small slice of this world, but its still hard earned experience worth sharing.&lt;&#x2F;p&gt;
+&lt;p&gt;This could go on for many posts after post, so this one will just introduce some ideas.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;what-is-flight&quot;&gt;What is &amp;quot;Flight&amp;quot;&lt;&#x2F;h1&gt;
+&lt;p&gt;The distinction of &amp;quot;flight&amp;quot; software versus other software is that it either goes on an airplane or in space. This software is often
+high assurance- it is built to more rigorous standards, with a more intensive process, than other software.
+Note however that being &amp;quot;flight&amp;quot; does not by itself make it high assurance software- there are classes that indicate how critical the software is. Class A include
+software on vehicles with human beings, and critical functionality that humans depend on. Class B is for secondary systems, and for
+larger robotic systems. The other classes can be smaller missions, and systems that are not used for critical functions
+and have no ability to impact critical systems. These classes are also used for ground software, but thats not the subject of this post.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;cfs&quot;&gt;CFS&lt;&#x2F;h1&gt;
+&lt;p&gt;The best example that I can provide of flight software is &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nasa&#x2F;cFE&quot;&gt;CFS&lt;&#x2F;a&gt;. Its well used, well documented, and comes with a unit test
+suite for each module. The link is to CFE, the core set of modules for the CFS system,
+and there are other modules you can get &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nasa&quot;&gt;here&lt;&#x2F;a&gt;. This system implements core functionality for flight software systems in a set of
+modules called CFE, and then provides a set of modules uses these core systems. The user then configures the core modules and any additional modules they need,
+and adds their own modules- either for generic functionality not provided by CFS or for mission-specific code like the control of a subsytem or a hardware interface
+to a spacecraft bus.&lt;&#x2F;p&gt;
+&lt;p&gt;I have worked with other flight software, and only recently gotten into using CFS. I like CFS, even when I disagree with parts of its design, and I have been
+impressed with it in practice- I was able to get a fairly complete flight software system set up and start writing my mission code fairly quickly as a one-man
+team on one of my projects. I haven&#x27;t had to change almost anything within CFS itself- in the core CFE modules or the application modules- so in practice they
+truely are generic and truely are modular.  It is not a perfect system, and I would like to work towards some improvements, but its very good, well tested and
+has heritage in other missions, which does weigh in its favor.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;flight-software-concepts&quot;&gt;Flight Software Concepts&lt;&#x2F;h1&gt;
+&lt;p&gt;There are a series of concepts that seem common in flight software systems. Each one can be handled in a variety of ways, but in general flight software
+tends to have many of the following systems:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Telemetry Collection&lt;&#x2F;li&gt;
+&lt;li&gt;Command Handling&#x2F;Routing&lt;&#x2F;li&gt;
+&lt;li&gt;Fault Detection, Isolation, and Recovery (FDIR)&lt;&#x2F;li&gt;
+&lt;li&gt;Software Messages &#x2F; Event Messages&lt;&#x2F;li&gt;
+&lt;li&gt;Hardware interfaces&lt;&#x2F;li&gt;
+&lt;li&gt;Mode Control&lt;&#x2F;li&gt;
+&lt;li&gt;Table Management (Configuration)&lt;&#x2F;li&gt;
+&lt;li&gt;Command Sequences (relative time and absolute time)&lt;&#x2F;li&gt;
+&lt;li&gt;File Transfer&lt;&#x2F;li&gt;
+&lt;li&gt;Data Storage&lt;&#x2F;li&gt;
+&lt;li&gt;Task Scheduling&lt;&#x2F;li&gt;
+&lt;li&gt;Time Management&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;There are also some utilities that are common to see:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fixed size allocation for packets and other structures&lt;&#x2F;li&gt;
+&lt;li&gt;Time stamp generation&lt;&#x2F;li&gt;
+&lt;li&gt;Packet creation&#x2F;modification&#x2F;inspection (usually CCSDS), and packet routing&lt;&#x2F;li&gt;
+&lt;li&gt;Logging&lt;&#x2F;li&gt;
+&lt;li&gt;Critical error reporting&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;We also need operating system functionality like:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Threads&lt;&#x2F;li&gt;
+&lt;li&gt;Queues&lt;&#x2F;li&gt;
+&lt;li&gt;Binary semaphores&lt;&#x2F;li&gt;
+&lt;li&gt;Mutexes&lt;&#x2F;li&gt;
+&lt;li&gt;Counting semaphores&lt;&#x2F;li&gt;
+&lt;li&gt;Ring buffers&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Other concepts may be used if available, or built if needed, but this is a basic list of functionality you will need in a flight
+software system. Some of this is overkill for smaller systems, but scales to larger ones.&lt;&#x2F;p&gt;
+&lt;p&gt;Each of these deserves a post of its own. There are a lot of details here.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;flight-software-implementation&quot;&gt;Flight Software Implementation&lt;&#x2F;h1&gt;
+&lt;p&gt;The flight software I&#x27;ve seen is either in C&#x2F;C++ or plain C. CFS&#x2F;CFE is an example of plain C, and I would like to do a future post on why I think
+C is the right language to have choosen for this work.&lt;&#x2F;p&gt;
+&lt;p&gt;The code is broken up into modules called either modules, apps (in CFS), or CSC (computer software components). Each module implements one task
+or chunk of functionality- each of the concepts listed above can have its own module. Modules boundaries are controlled- memory is usually not shared,
+and communication is mostly through message passing. Function calls also occur for some functions, like getting a timestamp or unblocking a task on a
+schedule.&lt;&#x2F;p&gt;
+&lt;p&gt;A module may implement a hardware interface, a mission specific requirement like the managment of science data, or the management of a particular algorithm.
+They tend to have acronyms for their names, like TBL for table management, SC for stored command management, or SB for a software bus.&lt;&#x2F;p&gt;
+&lt;p&gt;Each module is a sigificant amount of work requiring design and implementation, review, documention, and testing. The testing can be on a unit level, and a
+system level when possible.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;commands-and-telemetry&quot;&gt;Commands and Telemetry&lt;&#x2F;h1&gt;
+&lt;p&gt;Flight systems have a asymmetric communication model with the ground system. The distinction
+between packets received by your system, commands, and packets produced by your system,
+telemetry, appears to be universal in these designs, and influences a lot of design.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;commands&quot;&gt;Commands&lt;&#x2F;h2&gt;
+&lt;p&gt;Going from the ground system or another flight system to your flight system are commands-
+packets, often small, that contain information about what actions to take. There is almost
+always one hardware interface that accepts commands.
+Commands can contain data blocks in some cases, but they are often very short containing
+not much more then more opcode indicting which action to take, followed by zero or more
+arguments to control how the action is taken. The cases where a command contains a data
+block might be to upload some configuration to the system, or to provide a small file.&lt;&#x2F;p&gt;
+&lt;p&gt;Commands are also sometimes called telecommands in analogy with telemetry. Some examples of
+what actions would be commands are:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Reset the system&lt;&#x2F;li&gt;
+&lt;li&gt;Capture an image&lt;&#x2F;li&gt;
+&lt;li&gt;Create a report&lt;&#x2F;li&gt;
+&lt;li&gt;Run a pre-loaded command sequence&lt;&#x2F;li&gt;
+&lt;li&gt;Turn on or off power to a system&lt;&#x2F;li&gt;
+&lt;li&gt;Change mode&lt;&#x2F;li&gt;
+&lt;li&gt;Clear storage&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;telemetry&quot;&gt;Telemetry&lt;&#x2F;h2&gt;
+&lt;p&gt;Telemetry packets can larger, and each contain a particular report about the state of a system,
+sometimes called housekeeping or health and status, or a block of data the system needs to
+downlink, like a block of file data or a science measurement.&lt;&#x2F;p&gt;
+&lt;p&gt;Unlike commands, there can be many interfaces that provide telemetry. This depends on the
+architecture of your system, but you may have a health and status interface as well as a higher
+speed science downlink interface to get your data into a storage system.&lt;&#x2F;p&gt;
+&lt;p&gt;Some examples of telemetry packets would be:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Health and Status with the state of your system&#x27;s CSCs&lt;&#x2F;li&gt;
+&lt;li&gt;Science measurements packets with the contents of a sensors measurement&lt;&#x2F;li&gt;
+&lt;li&gt;Data downlink packets, either containing the data in a file, or a report generated about
+the status of your software.&lt;&#x2F;li&gt;
+&lt;li&gt;Event message packets containing one or more message generated by your software&lt;&#x2F;li&gt;
+&lt;li&gt;Subsystem telemetry generated by another system and received by your software. I recommend
+wrapping this kind of data in a new header generated by your system, even if you used the
+same protocol as the subsystem.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h1 id=&quot;event-messages-software-messages&quot;&gt;Event Messages &#x2F; Software Messages&lt;&#x2F;h1&gt;
+&lt;p&gt;One mechanism that is hugely useful in flight software is the capability to generate small
+messages from anywhere in your software. These are either called event messages or software messages.&lt;&#x2F;p&gt;
+&lt;p&gt;In some systems they contain text, and in others they contain binary data. For smaller systems,
+text is nice because the human operator will want to look over these messages, and it gives you
+a simple way to allow your software to communicate information to you in a quick and easy
+way.&lt;&#x2F;p&gt;
+&lt;p&gt;For larger projects, binary data can be preferable to text. You can have a ground system
+monitor for binary data more easily then it can parse text, and you can store and retrieve
+binary data parameters in a database more easily then text. The tradeoff is that if you
+want human readable output, you have to contruct it in your ground system.&lt;&#x2F;p&gt;
+&lt;p&gt;One recommendation I have when designing event message systems is to provide a timestamp along
+with every message, and to provide microsecond accuracy. This makes event messages a way
+to timestamp your softwares actions, giving you insight into its operation that is otherwise
+lost.&lt;&#x2F;p&gt;
+&lt;p&gt;Examples of software messages might be:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;System initialized successfully&lt;&#x2F;li&gt;
+&lt;li&gt;Memory corruption found, along with data on where the corruption was found&lt;&#x2F;li&gt;
+&lt;li&gt;Science data collected, along with the time and parameters for the data collection&lt;&#x2F;li&gt;
+&lt;li&gt;Command rejected, along with some data on why it was rejected&lt;&#x2F;li&gt;
+&lt;li&gt;Temperature out of safe range, along with which temperature and its current value&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Use software messages liberally, reporting most things that your software does. However, be
+careful to not to allow your software to report messages constantly, or they will drown
+out rarer but important messages.&lt;&#x2F;p&gt;
+&lt;p&gt;Label your messages with which software component generated them, with a number indicating
+which message was generated, and with a severity indicating how important the message is.
+Examples of severities are warning, error, critical error, information, or routine.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;moding&quot;&gt;Moding&lt;&#x2F;h1&gt;
+&lt;p&gt;These system have distinct modes that they can occupy. These should be designed early on
+as they influence a lot of parts of the system, and you need to decided what parts of the
+system can be used in each mode, and how to limit your system to only act appropriately for
+its mode.&lt;&#x2F;p&gt;
+&lt;p&gt;Designing the system&#x27;s state machine
+is a tricky thing- you have to be careful about limiting how many modes you have and what
+transitions are possible. Each mode should have the system in a well defined state, and if
+the system does not reach that state then you have to decide how to report that and what
+&amp;quot;mode&amp;quot; you are in for those cases.&lt;&#x2F;p&gt;
+&lt;p&gt;System states can be things like the power status of your subsystems. Ensuring this status
+can also be tricky- you don&#x27;t want your system to be too smart in trying to reach a particular
+state if you can help it.&lt;&#x2F;p&gt;
+&lt;p&gt;Examples of modes might be Safe mode, Standby mode, Operation Mode, Science Mode, Idle Mode,
+or Configuration Mode. Each one would be named to reflect the way the system is operated while
+it occupies that mode. Note that while systems and subsystems have modes, there may be
+operational modes that are not part of the system, but are ways of using the system
+that are for the human operators.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;complex-algorithms&quot;&gt;Complex Algorithms&lt;&#x2F;h1&gt;
+&lt;p&gt;Its common that flight software contains algorithms that are developed by an expert in some field. This can be something like predicting the geometry of a system
+throughout its orbit, the sequence of actions for the system&#x27;s main task like collecting science data, or other algorithms. Each of these is a challenge in software-
+the algorithm is best understood by someone who is rarely a software engineer, and the implemention must be verified by a combination of software testing and 
+algorithm testing. The boundary between what is the responsiblity of the software engineer and the domain expert can be difficult.&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;ve had good experience with algorithm designers that are willing to go through software processes, will provide test cases for me to run against my implementation,
+and will go over the implementation with me.&lt;&#x2F;p&gt;
+&lt;p&gt;One lesson I&#x27;ve learned is to always set up your algorithm so it can be run off the flight system- it should be able to run on a laptop by anyone who needs to.
+This allows us to experiment with the algorithm, do debugging in case of problems, and allow people to do their own analysis without flight software support.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;software-tools&quot;&gt;Software Tools&lt;&#x2F;h1&gt;
+&lt;p&gt;One lesson that I have taken to heart in the last year or so is that flight software teams need to produce tools. You need tools for decoding your telemetry, even if you
+also have a ground system. You need tools to monitor for warnings and errors so they don&#x27;t go unnoticed. You need tools for building your configuration tables, for
+visualizing your system&#x27;s operation, for simulating your subsystems.&lt;&#x2F;p&gt;
+&lt;p&gt;Having tools for these things is a huge productivity boost. It also gives you the ability to review your processes- if you look over telemetry reports by hand and miss something,
+you might miss it again, but if your tool misses something, you just change your tool and it will never miss that particular thing again. Your tools can be reviewed, you can
+report what they do, and you can provide them to people in your project- it gives you a way to encode your expertise with your software into something other people can use.&lt;&#x2F;p&gt;
+&lt;p&gt;I have been writing a new tool every month or so for a while now, and I find that I&#x27;m a must bigger asset to my projects when I put in the time and effort to produce
+these programs. In my case, they are usually either LabWindows GUI programs, simple command line C programs, or personal tools in Haskell or Lua that I use for one-off
+tasks or for visualizations that I have limited use for.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;software-updating&quot;&gt;Software Updating&lt;&#x2F;h1&gt;
+&lt;p&gt;The ability to update software in operation is vital. Its own of the reason to prefer doing things in software when possible- software is softer then firmware and hardware,
+as you might expect. This is a delicate process as a mistake here can render a system unbootable and end your mission. Test this as much as possible and always do it in the
+same way.&lt;&#x2F;p&gt;
+&lt;p&gt;Its preferable to build your software into a single image when possible. This image can be stored in a persistant memory device like flash, and can be stored redundantly
+and with CRCs or other checks. My experience has been to prefer triple redundancy whenever possible, and to store a CRC32 with the data so you can check integrity without
+having to compare the images. One other detail is if you have no valid images, nominate one to boot anyway- its a last ditch effort but if all your images are corrupt its
+worth trying to boot so you can fix the problem with a running system just hope your corruption is in an non-vital area.&lt;&#x2F;p&gt;
+&lt;p&gt;There will usually also be more then one version of the software on a system. My experience is that it is much better to keep a golden image that is never updated and a
+main image that is used for operations then to allow multiple images that can each be updated. Keep this simple and avoid the possibility of confusion- when confusion is
+possible it will occur.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;flight-software-reviews&quot;&gt;Flight Software Reviews&lt;&#x2F;h1&gt;
+&lt;p&gt;I&#x27;ve come to realize that software reviews are a vital part of creating high quality software. They do not ensure that software is high quality, but not holding reviews ensures
+that it is not. Reviews don&#x27;t just increase your software quality, they help with sharing knowledge about design and interfaces, they increase consistancy, and they
+make you think about your systems from other people&#x27;s perspectives.&lt;&#x2F;p&gt;
+&lt;p&gt;For flight software reviews, my experience is that your reviewers should look over the code or documentation under review before hand and come with issues. Some reviews
+and go over the material during the review, but this is less effective, and its easier to miss things.&lt;&#x2F;p&gt;
+&lt;p&gt;Review issues must be tracked and closed one way or another. They can be deffered if necessary, or tracked by other systems, but they must not be dropped until there is some
+kind of resolution. This doesn&#x27;t mean you have to fix every issues, but you at least have to document what you did and why.&lt;&#x2F;p&gt;
+&lt;p&gt;Reviews should be harsh- you should nitpick and argument over everything. If you are going in with a design, be ready to defend it. I&#x27;ve found that vigorous debate in reviews
+keeps your software at its best, and lax reviews are much less helpful. Its possible to get bogged down in nitpicking, or to bike-shed, but if you have a good moderator who
+keeps the review on track then you can get a huge amount from each review.&lt;&#x2F;p&gt;
+&lt;p&gt;Look for everything you can in your review- is the documentation accurate and useful?, is the software as simple as it can be?, does it have edge case or can it be used
+incorrectly?, does it check every error condition?, does it present issues with future maintanance or changes?, does it meet its requirements?, does it correctly use its interfaces
+with other software components?, does it present a useable interface out to other components?, does it perform well (when that is important)?, does it report its status or is there
+more information you might want in case of a problem?, does it fail cleanly? There is a lot to think about, and reviews can take a considerable amount of each persons time for each 
+review they participate in.&lt;&#x2F;p&gt;
+&lt;p&gt;One word of caution however- reviews are not a silver bullet. The result of a review is usually better software, but it often feels like a hill-climbing this to me. If the
+software is badly designed, or doesn&#x27;t meet its requirements, a review may not be able to fix that. Consider holding design meetings beforehand to vet each software component&#x27;s
+design, and consider holding re-reviews if too much needs to be changed. If possible, review early and often so you don&#x27;t go too far down a path with your software before learning
+that someone has a serious issue with its design or implementation.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;flight-software-mentaliity&quot;&gt;Flight Software Mentaliity&lt;&#x2F;h1&gt;
+&lt;p&gt;There is a lot to say here, but I just want to say that I&#x27;ve learned to prefer flight software that is simple, uses as few concepts and syntax as possible, is as consistant
+in any way possible (variable and function names, checking, messaging, testing, debugging, comment- every you can), does not have too much extra functionality that can
+lead to errors while having nicities that your operators will thank you for, checks all possible error conditions, provides insight into its operation and is loud about
+all errors, contains as little state as possible, and as a rule is simple above almost anything else. It must be reviewable both by your coworkers, and by you in a year
+when you have forgotten how it works.&lt;&#x2F;p&gt;
+&lt;p&gt;Flight software is much, much more risk adverse then other software. This shows up in all places, and can lead to designs that would be hard to understand in other software.
+We have a great deal of flexibility in software with how to do things, but in flight software we have to be more restricted and careful with our designs. It is better to
+limit how the system works whenever possible so that only correct behavior is possible. We have to be very pessimistic: expect errors, expect hardware failures, expect
+software failures (even in our own software), expect anything you can think of.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;flight-software-s-role&quot;&gt;Flight Software&#x27;s Role&lt;&#x2F;h1&gt;
+&lt;p&gt;Again, there is too much to say, but I will try. This is something I am always learning about and trying to improve, but these are my current thoughts.
+The software discipline needs to get people thinking about their conops and how they want to operate a system. We need to let them know
+what software can do and what the options are taking into account cost, complexity, and the effect of each feature on the software as a whole. We need to keep people up to date
+on progress and implemention- people have a hard time understanding software, and we need to communicate what we are doing and why. We need to be transparent- our software repositories
+are a resource to the project and not just our own. Our documentation is important for operators. Our design decisions effect people just like the decisions of any other disicpline, and
+we need to communicate those decisions and why we made them to the project, documenting our reasoning for the day that our implementation effects other peoples jobs.&lt;&#x2F;p&gt;
+&lt;p&gt;Software needs to be part of a project early on to get its needs and requirement in the mix, and to inform people about the cost and ability of software systems. People over and under
+estimate software in many areas and need a software domain expert to answer these questions. On the other hard, software often has little work early on, in the mission concept planning.
+In that stage I think we can provide engineering insight and just help when possible, knowing that the actual role software itself is a long way off.&lt;&#x2F;p&gt;
+&lt;p&gt;Software needs to follow best practices and be ready to answer questions about your approach to requirements, design, development, testing, reviews, and releases. You need to track
+problems with software, to track issues from reviews, and to track and document what testing has been done with what versions of software.&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>SAGE III Launch</title>
+                <pubDate>Thu, 23 Feb 2017 00:00:00 +0000</pubDate>
+                <link>http%3A//itscomputersciencetime.com/public/sageiii-launch/</link>
+                <guid>http%3A//itscomputersciencetime.com/public/sageiii-launch/</guid>
+                <description>&lt;p&gt;The SAGE III payload launched on SpaceX CRS-10 last weekend. I worked on the software for the flight computer for this payload, the IAM, and I got to see the launch.o&lt;&#x2F;p&gt;
+&lt;p&gt;Check out the technical webcast from SpaceX (https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=rUDLxFUMC9c) at 25:03.
+You can see the SAGE III Payload inside the Dragon trunk, along with the NVP that the payload mounts to. Its really incredible to see.&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>VxWorks</title>
+                <pubDate>Sat, 15 Oct 2016 00:00:00 +0000</pubDate>
+                <link>http%3A//itscomputersciencetime.com/public/vxworks-tricks/</link>
+                <guid>http%3A//itscomputersciencetime.com/public/vxworks-tricks/</guid>
+                <description>&lt;p&gt;I had never heard of VxWorks before coming to NASA, but now I have been using it for 
+over 5 years. I thought I would write down some things I&#x27;ve learned- some tricks and
+commands, concepts it uses, and larger scale considerations for programs written
+for it.&lt;&#x2F;p&gt;
+&lt;p&gt;In some ways, using VxWorks is simpler than, say, Linux. Once you spawn your tasks in
+usrAppInit they just run- there is no file system assumed, very few other tasks, and very
+few concepts to learn. A particular BSP (board support package) may have its own complexity,
+but VxWorks itself is surprisingly simple. Code written for it will have only a couple 
+of special types and a couple of libraries like msgQLib, semLib, taskLib, and for the
+most part the operating system will just get out of your way. This
+does have downsides when you wish certain features, primitives, programs, etc were
+available. The situation seems to be getting better and better with new versions, but
+you are sometimes at the mercy of your BSP.&lt;&#x2F;p&gt;
+&lt;p&gt;Note that I&#x27;ve used VxWorks 6.7 for most of the development I&#x27;ve done, and only recently
+started to use VxWorks 7.0. I haven&#x27;t used the new command line features much, the new
+configuration system, or many of the new libraries. It seems much more complex, but
+some of the libraries provide standard was to access hardware that are much better then
+using system specific libraries for each project.&lt;&#x2F;p&gt;
+&lt;p&gt;I also haven&#x27;t used the RTP features even in 6.7- we build a single kernel module which
+runs in a single memory space.  This is simple, but less safe then the alternative.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h1 id=&quot;command-line&quot;&gt;Command Line&lt;&#x2F;h1&gt;
+&lt;p&gt;First off, the VxWorks command line is indespensible. I have used VxWorks 6.7 for almost
+the whole time I&#x27;ve been at NASA, and I haven&#x27;t gotten accustomed to the new VxWorks 7.0
+extended command line, so these commands are for the default one that the system boots up
+into in 6.7 and 7.0&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;i&lt;&#x2F;strong&gt; The information command &lt;strong&gt;i&lt;&#x2F;strong&gt; lists the current status of all VxWorks tasks.
+I mostly use this for task status in case a task is suspended, making sure a task is present, 
+getting the task id to use with another command, or for checking for errnos in tasks.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;ti&lt;&#x2F;strong&gt; The task information command takes either the task name or the task id number and prints
+a detailed description of the task and its current status. I usually need this when a task
+crashes and I want to look at the exception, the program counter, the stack pointer, and
+the memory location that cause the crash for a memory access exception.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;tt&lt;&#x2F;strong&gt; The task trace command shows the current stack trace of a task. This is useful for
+quickly finding the code that caused a trask to crash even without the debugger provided
+by Workbench. Note that this command attempts to build a stack trace by inspection of the state
+of the tasks stack- if there is memory corruption then it can be wrong.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;l&lt;&#x2F;strong&gt; The list command takes a memory location and produces a disassembly of the memory at that
+location. It can also take a count of how many instructions to print.&lt;&#x2F;p&gt;
+&lt;p&gt;If you don&#x27;t mind reading assembly, this can be a huge help. I&#x27;ve used it to understand stack
+corruption problems, and to debug a very tricky problem that turned out to be caused by
+loading a floating point number from a misaligned address on a PowerPC processor.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;d&lt;&#x2F;strong&gt; The dump command displays the contents of memory at a given location. It takes the
+address to display from, the number of items to display, and the size of the items
+(1, 2, 4, or 8).
+This is one of my most used commands. If you need to inspect memory to understand how
+a structure is layed out, find corruption, or inspect a stack then this command is the
+fastest option. Against, you may be able to use the debugger, but more often I just
+want to look around in memory, and this is the best way to do that.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;spy&lt;&#x2F;strong&gt; The spy command is a quick way to profile processor use. You provide it a period
+and the number of samples per second, and it will print out a report at the end of the
+period with processor usage information.&lt;&#x2F;p&gt;
+&lt;p&gt;The profiling that it does is based on frequently sampling which task is running, and counting
+how many times each task is observed to be running.&lt;&#x2F;p&gt;
+&lt;p&gt;This is a command I&#x27;ve only recently discovered, and it immediately uncovered an issue with
+log files on my current project. A single task was taking 30% to 40% of the total processor
+time, which is a problem that could have gone unnoticed for a long time and only come up
+monthes or years down the road.&lt;&#x2F;p&gt;
+&lt;p&gt;Note that you can enable this command the kernel configuration if it is not available to you.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;lkup&lt;&#x2F;strong&gt; The lookup command is another one I use frequently. It takes a string argument and
+searches for occurrances of that string in all defined symbols. This is a great way to
+find function names that you can&#x27;t rememeber, or to inspect a system that you don&#x27;t have
+code for to find useful information and functionality.&lt;&#x2F;p&gt;
+&lt;p&gt;One other use is if your program&#x27;s symbols get any C++ name mangling.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;period&lt;&#x2F;strong&gt; The period command, gives you a way to spawn a process that you want to run 
+on a period basis. You can use this to monitor or log information periodly and see how
+things change over time.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;sp&lt;&#x2F;strong&gt; The spawn command lets you spawn any function as a task. One thing I use this for
+is to run a long running function at a lower priority then the command line task. There are
+two reasons to do this- one is that you can still use the command line while the other
+task runs, and the other is that we always have watchdogs in our systems, and if the command
+line task runs too long the task petting the watchdog can be starved, resetting the system.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre style=&quot;background-color:#212733;&quot;&gt;
+&lt;span style=&quot;color:#ccc9c2;&quot;&gt;The defaults that *sp** provides are usually fine, but if you want you can specify
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ccc9c2;&quot;&gt;task priorities, stack sizes, etc with the taskSpawn command.
+&lt;&#x2F;span&gt;&lt;&#x2F;pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The last thing I use the command line for is running my own functions. Any function that
+is not declared static can be run from the command line.
+This is a way to test functions and inspect the system at runtime. I write a lot of
+utility functions, especially early on in a project, as well as units tests to run on
+the command line.&lt;&#x2F;p&gt;
+&lt;p&gt;Note that the command line doesn&#x27;t accept floats or doubles, so you have to be
+a little tricker there.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h1 id=&quot;tasks&quot;&gt;Tasks&lt;&#x2F;h1&gt;
+&lt;p&gt;Tasks are allocated a single block of memory that contains both their TCB (task control block)
+and their stack. Note that in a kernel module all tasks run in the same flat memory space, allowing
+them to corrupt each other&#x27;s memory.&lt;&#x2F;p&gt;
+&lt;p&gt;Task priorities are ordered to that lower numbers mean higher priorities. Priorities greater then
+10 are open for use by user code, with priorities lower than 10 reserved for VxWorks tasks.&lt;&#x2F;p&gt;
+&lt;p&gt;If you need more control over task scheduling then priorities give you, such as maintaining
+a global processing cycle with time slices allocated to different tasks, or a way to easily
+schedule a task at a given rate, or just to monitor running tasks, consider writing a task
+scheduler task. This task can use semaphores to release tasks, monitor that the tasks complete,
+and could even keep statistics on tasks if you wanted. This sort of thing isn&#x27;t built into
+VxWorks, but it makes a system much easier to reason about as compared to separate tasks all
+scheduling themselves.&lt;&#x2F;p&gt;
+&lt;p&gt;Since VxWorks is a real time operating system, the task with the highest priority that is ready
+to run will have as much time as it needs. Lower priority tasks will be starved forever if
+tasks do not release control by pending or delaying with taskDelay.&lt;&#x2F;p&gt;
+&lt;p&gt;Task scheduling occurs after iterrupts, and in every system call. This is how a msgQSend or
+semGive or any other call causes a rescheduling- a piece of VxWorks code is run to determine
+if a new task with higher priority can now run.&lt;&#x2F;p&gt;
+&lt;p&gt;If two tasks have the same priority then a round-robin scheduler is used. I&#x27;ve never used
+this functionality, but it could be useful for tasks that can trade off control between
+each other when they block.&lt;&#x2F;p&gt;
+&lt;p&gt;One thing that always come up when talking about task priorities is (re)inversion of control.
+If a low priority task task a resource, but is interrupted by a higher priority task, then it
+will of course lose control. If the higher priority task then pends on the resource it will block
+until the lower priority task releases it. This is called inversion of control because the lower
+priority task now controls the higher priority one. The problem here is that the lower priority
+task may not run if a medium priority task is ready, which blocks the high priority task, perhaps
+indefinitely.&lt;&#x2F;p&gt;
+&lt;p&gt;VxWorks deals with this by re-inversion of control- the task priority of a task that takes a
+resource is the highest priority of any task pending on that resource.This means that a low
+priority task with a resource will run until it gives up that resource to prevent it from blocking
+out a higher priority task that is pending on the same resource.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;message-queues&quot;&gt;Message Queues&lt;&#x2F;h1&gt;
+&lt;p&gt;The main communication we use between tasks are message queues. Message queues
+in VxWorks are great, but they do have some limitations- you can&#x27;t empty a queue without just reading out
+all of its messages, and they allocate space for the largest message you can receive. This means
+that if you have a queue that needs to receive a lot of types of messages, and needs to be large,
+you either waste a lot of space or you need a series of queues of different sizes.&lt;&#x2F;p&gt;
+&lt;p&gt;This comes up when writing logging tasks that store data from the rest of the system. These
+tasks usually have low priorities and huge queues- you don&#x27;t want to lose data, but logging can 
+happen at any time.&lt;&#x2F;p&gt;
+&lt;p&gt;If you split the messages into several queues just be aware that you can&#x27;t
+simply pend on the first message from any queue- you have to poll, release a semphore when
+queuing, use a counting semaphore, or have a &amp;quot;message description&amp;quot; queue. The last option is
+where you have a separate queue where you queue an indicator of which of the other queues to
+read from- if you receive a small message, you put it on the smallest queue and write
+SMALL_MESSAGE_QUEUED (for exampled) to the message description queue. You can then pend on this
+queue, and it will tell you which of the other queues to read from.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;interrupts&quot;&gt;Interrupts&lt;&#x2F;h1&gt;
+&lt;p&gt;The main thing to know about interrupts in VxWorks is that you are allowed to release semaphores
+and write to queues with NO_WAIT, but not to take semaphores or to receive messages.&lt;&#x2F;p&gt;
+&lt;p&gt;If you need to print from an ISR (for debugging) you have to use logMsg from logLib- this will
+log the message you want to print to a queue which is when printed when the log task runs.&lt;&#x2F;p&gt;
+&lt;p&gt;Another thing to know about ISRs- when they perform system calls like message queue sends or
+semaphore gives, the action they request is not actually performed. It is merely logged to a
+global queue, and then run when the ISR exits. This prevents inconsistent views of the VxWorks
+operating system state.&lt;&#x2F;p&gt;
+&lt;p&gt;When an ISR exits, the system does not simply return to the last running task. There is a piece
+of VxWorks operation system code that performs the ISR&#x27;s actions and reschedules tasks if
+necessary.&lt;&#x2F;p&gt;
+&lt;p&gt;Also note that ISR (interrupt service routines) run in a special interrupt stack (as far as I
+know). I believe in older VxWorks versions they use the current task&#x27;s stack, but that was changed.&lt;&#x2F;p&gt;
+&lt;p&gt;It goes without saying, but I will say it anyway- keep your ISRs short. This is true in any
+system- interrupt latency is a global issue. Any time you spend in an interrupt will create
+jitter in measurements and hold off other interrupts. Some ISRs have do a lot of work,
+especially when trying to figure out who caused a hardware interrupt.
+If you interact with the hardware in your own interrupts, just be aware that things like 
+transactions with hardware, say across a PCI or cPCI bus, are expensive.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;watchdogs&quot;&gt;Watchdogs&lt;&#x2F;h1&gt;
+&lt;p&gt;VxWorks provides a software watchdog mechanism. You register a function to run after a certain
+number of system clock ticks, and VxWorks will call your function is its own system clock tick
+interrupt. This means that precautions related to writing ISRs apply to watchdog functions.&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;ve used these for keeping track of system time, incrementing a counter when the watchdog goes
+off, and for ensuring that certain events occur. The second use is more like what a hardware
+watchdog would do- if you don&#x27;t keep rescheduling your software watchdog it goes off and
+either resets the system, or reports a problem.&lt;&#x2F;p&gt;
+&lt;p&gt;This is especially important in hard real time system where exceeding a time limit is a
+catastropic problem and there needs to be a fail-safe executed if that occurs.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;ring-buffers&quot;&gt;Ring Buffers&lt;&#x2F;h1&gt;
+&lt;p&gt;VxWorks does have ring buffers. Read rngLib documenation for details, but these ring buffers
+do not perform locking and unlocking- they are intended to be used in a single reader, single
+writer context between tasks without requiring synchronization. If you need mutual exclusion
+because you have multiple readers or writers, you need to ensure that yourself with a mutex.&lt;&#x2F;p&gt;
+&lt;p&gt;These ring buffers are byte based- you can read and write a whole buffer into the ring buffer
+in one function call, but the buffer itself only knows about bytes. This means you either
+have to have fixed size messages, a message header, or some other way to know how to decode
+the data on the ring buffer.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;semaphores&quot;&gt;Semaphores&lt;&#x2F;h1&gt;
+&lt;p&gt;VxWorks provides a couple of different semaphore types. Like with message queues, VxWorks doens&#x27;t
+provide every nice feature, it just provides simple features with solid implementations.&lt;&#x2F;p&gt;
+&lt;p&gt;The semaphores that it provides are binary semaphores (mostly for signalling), counting semaphores
+(mostly for resource control), and mutexes (for mutual exclusion of a resource). There is
+also a shared memory semaphore which I have never used, but is perhaps useful in shared memory
+systems.&lt;&#x2F;p&gt;
+&lt;p&gt;These concurrency primitives are common, so I won&#x27;t go into detail on them in this post.
+There are certainly other primitives one might want (like MVars or concurrent ring buffers),
+so just note that you might have to implement them yourselve using the primitives VxWorks provides.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;errno&quot;&gt;Errno&lt;&#x2F;h1&gt;
+&lt;p&gt;VxWorks keeps a task-local errno for each task. You can access this with the variable errno, which
+is just a macro that expands out to an access to the errno field of the current task&#x27;s TCB.&lt;&#x2F;p&gt;
+&lt;p&gt;The way to use errno is to check the return of all system calls, and if it is not OK then to
+look at the errno. You can clear the errno with errnoSet if you know a call will set the errno
+and you don&#x27;t want it to be left set.&lt;&#x2F;p&gt;
+&lt;p&gt;The main thing that triggers errnos for me is timeouts on semaphore or queues, and sometimes
+invalid handles to queues or semaphores. Other conditions are definitely possible though.&lt;&#x2F;p&gt;
+&lt;p&gt;The one time I actually cleared an errno was to detect when a task overran its allocated time.
+It was important that the task not start itself in the middle of its time slice, but if it overran
+its time limit and attempted to pend for its scheduling semaphore (released by another task)
+then it would immediately see that the sempahore had been given and start in the middle of the
+time slice.&lt;&#x2F;p&gt;
+&lt;p&gt;What I ended up doing was attempting to take the semahpore with NO_WAIT as soon as the task
+was complete, and if this succeeded then the task must have overran its time limit enough
+that it had been scheduled again. In this case I would wait for the next time slice by
+taking the semaphore (after reporting the problem of course). If the semaphore had not been given, 
+then the task would just take the semaphore again with a longer wait time.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;time&quot;&gt;Time&lt;&#x2F;h1&gt;
+&lt;p&gt;Time is a very complex topic, so I will just mention sysLib and timerLib. Note that your system
+may has a primary and an auxiliary clock with different rates, and that you may need to set
+the system clock rate with sysClkRateSet during initialization.&lt;&#x2F;p&gt;
+&lt;p&gt;Scheduling wait times and delays usually use sysClkRateGet, and you can connect a callback
+to the system clock with sysClkConnect.&lt;&#x2F;p&gt;
+&lt;p&gt;Make sure you understand time in your system, and if timestamps are important make sure
+you look at drift with respect to a trusted time source (like a pulse generator) so you
+can correct for drift in software, hardware, and due to thermal effects on the oscillator
+used for the system clock.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;The documentation I use the most when programming in VxWorks is &lt;a href=&quot;http:&#x2F;&#x2F;www.vxdev.com&#x2F;docs&#x2F;vx55man&#x2F;vxworks&#x2F;ref&#x2F;libIndex.htm&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;VxWorks 7.0 is different in some ways from 6.7, and its worth looking over the documentation of the version
+you are using to make sure you get the right information.&lt;&#x2F;p&gt;
+&lt;p&gt;There is a lot more to say about using VxWorks, but I think this is all I can handle for now.&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+    </channel>
+</rss>
