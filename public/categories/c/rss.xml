@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>itscomputersciencetime</title>
+        <link>https%3A//nsmryan.github.com.com/</link>
+        <description></description>
+        <generator>Zola</generator>
+        <language>en</language>
+        <atom:link href="https%3A//nsmryan.github.com.com/categories/c/rss.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Mon, 31 Dec 2018 00:00:00 +0000</lastBuildDate>
+        
+            <item>
+                <title>Awesome C Libraries</title>
+                <pubDate>Mon, 31 Dec 2018 00:00:00 +0000</pubDate>
+                <link>https%3A//nsmryan.github.com.com/awesome-c-libraries/</link>
+                <guid>https%3A//nsmryan.github.com.com/awesome-c-libraries/</guid>
+                <description>&lt;p&gt;This post goes over some very cool C libraries, each of which is awesome in one way or another.  They
+are generally fairly small and clean, and solve an interesting problem.&lt;&#x2F;p&gt;
+&lt;p&gt;I tend to find C libraries that are particularly clean, or which implement a complex concept not usually
+seen in C, to be very interesting. The very best examples are well engineered or solve a problem in an
+clean way that fits into the C language.&lt;&#x2F;p&gt;
+&lt;p&gt;Unfortunately I&#x27;ve never used most of these libraries, but I think they are very cool and I would like to fit
+some of them into a project some day.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;the-list&quot;&gt;The List&lt;&#x2F;h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;silentbicycle&#x2F;theft&quot;&gt;Theft&lt;&#x2F;a&gt;, a library for property based testing in C. This is a good example of
+a concept that I would usually consider too advanced for C and left it more in the domain of Haskell. This library is
+certainly not as easy to use as QuickCheck, but I don&#x27;t think that it can be given the limitations of C.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;zserge.com&#x2F;jsmn.html&quot;&gt;jsmn&lt;&#x2F;a&gt; is a library for parsing JSON. Its interface is truly simple and manages to
+avoid building an explicit tree of nodes or requiring memory allocation. This means I would be able to use it in 
+an embedded system (if I had to parse JSON for some reason?). I have been using it to parse configuration files in
+some LabWindows programs in permissive mode. I liked this library so much I wrapped it in a Rust interface as
+&lt;a href=&quot;https:&#x2F;&#x2F;docs.rs&#x2F;jsmn-rs&#x2F;0.2.0&#x2F;jsmn_rs&#x2F;&quot;&gt;jsmn-rs&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;atomicobject&#x2F;heatshrinkP&quot;&gt;heatshrink&lt;&#x2F;a&gt; is a compression library in C. I like this one because it
+does not allocate memory and allows tuning performance and streaming. This makes it nice for embedded systems use.
+I&#x27;m not usually doing resource constrained programming, even when programming embedded systems, but if I did I would
+keep this library in mind.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;libcello.org&#x2F;&quot;&gt;Cello&lt;&#x2F;a&gt;, a library that embeds a great deal of advanced features into C. The list
+is pretty extensive, but includes polymorphism, garbage collection, reflection, and generic data structures. This
+is all achieved with fat pointers. I think this library is more of an experiement than a method for writing 
+production C code, but it is at least interesting to look over and understand.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;JSchaenzle&#x2F;cedux&quot;&gt;Cedux&lt;&#x2F;a&gt; is an implementation of a React-like system in C. The idea
+is to have an application state that is not modified directly, but only through messages which contain information
+used to modify the state through a set of registered functions. Its another example of a place where we have a concept
+not usually seen in C. I don&#x27;t know how it would place out in practice, but I could imagine certain situations where it
+could be useful.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;CObjectSystem&#x2F;COS&quot;&gt;COS&lt;&#x2F;a&gt;, the C Object System. This is another library for adding features to
+C that seem out of its reach, like polymorphism and an OOP system like CLOS (from Common Lisp). This one is actually
+intended to be used for real programming, and in particular it was developed for some style of scientific computing.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;libfann&#x2F;fann&quot;&gt;fann&lt;&#x2F;a&gt; for neural networks in C. The library seems well engineered, and well used.
+As with many of these, I&#x27;ve never had reason to use it, but if I needed some neural networks in C, I would go here.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.cs.ubc.ca&#x2F;research&#x2F;flann&#x2F;&quot;&gt;flann&lt;&#x2F;a&gt; for nearest neighbor calculations. This just seems like a nice clean implementation
+of an algorithm with some nice features. &lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ocornut&#x2F;imgui&quot;&gt;imgui&lt;&#x2F;a&gt; is an immediate mode GUI library, and the only C++ library in this list. I like
+the look of this GUI, and it easy enough to set up and use in many languages. I would like to get something in Rust as a tool
+for work one day.
+An example of an imgui system in pure C is &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;vurtun&#x2F;nuklear&quot;&gt;nukclear&lt;&#x2F;a&gt;, which also looks good. I&#x27;ve never tried it
+myself, however.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;repo.hu&#x2F;projects&#x2F;cchan&#x2F;&quot;&gt;cchan&lt;&#x2F;a&gt; provides a channel mechanism with unbounded queueing.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;tinycthread.github.io&#x2F;&quot;&gt;TinyCThread&lt;&#x2F;a&gt; provides the C11 threading API. Its an idiomatic C API and adds mutexes, condition
+variables, and threads, along with thread specific storage.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;mqtt.org&#x2F;&quot;&gt;mqtt&lt;&#x2F;a&gt; and the implementation &lt;a href=&quot;https:&#x2F;&#x2F;mosquitto.org&#x2F;&quot;&gt;mosquitto&lt;&#x2F;a&gt;. This is a pub&#x2F;sub messaging system with a broker.
+I was able to set it up pretty easily and get messages from Python into a C program in a couple hours. I like the simplicity and
+the flexibility of the topic system. I would consider using it if I needed distributed messaging between languages or programs, especially
+if the source of the data was an embedded system.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.throwtheswitch.org&#x2F;unity&quot;&gt;Unity&lt;&#x2F;a&gt; is a testing framework that I&#x27;ve been using to test code in LabWindows programs. I looked
+over some testing frameworks to see what would work for testing embedded systems, and this one seems to fit nicely- its simple enough to
+add to a program, provides the usual testing features, and has room for more advanced usage. This is one that I have used for real code and
+it has served me well.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;ccodearchive.net&#x2F;info&#x2F;talloc.html&quot;&gt;Talloc&lt;&#x2F;a&gt; provides a tree of memory allocations where freeing memory takes care of freeing
+children in the tree. It also has a way to register destructor callbacks to call when an allocation is freed.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h1&gt;
+&lt;p&gt;I hope some of these are interesting to someone. I know there is overlap with &lt;a href=&quot;https:&#x2F;&#x2F;notabug.org&#x2F;koz.ross&#x2F;awesome-c&quot;&gt;Awesome C&lt;&#x2F;a&gt;
+and there are some other good libraries at &lt;a href=&quot;http:&#x2F;&#x2F;ccodearchive.net&#x2F;&quot;&gt;ccan&lt;&#x2F;a&gt;, but these are ones I&#x27;m particularly drawn to.&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>Why I use C for Flight Software</title>
+                <pubDate>Sat, 10 Mar 2018 00:00:00 +0000</pubDate>
+                <link>https%3A//nsmryan.github.com.com/why-i-use-c/</link>
+                <guid>https%3A//nsmryan.github.com.com/why-i-use-c/</guid>
+                <description>&lt;p&gt;This post is about why I use C for any serious project at work, and why I would
+choose to use C again even if starting from stratch on a new project.  I am
+hoping to cover where this choice comes from and what advantages and
+disadvantages it has, specifically for the sort of work that I do. Its not
+intended to be a rant or to put down other languages or processes- I just want
+this blog to provide some insight into my experiences with what flight software 
+is like at NASA Langley Research Center.&lt;&#x2F;p&gt;
+&lt;p&gt;This choice is certainly not motivated by something as simple as performance-
+its the result of the particular tradeoffs that apply to flight software.
+All engineering choices have tradeoffs, and have to be understood in
+terms of the costs that apply to a particular situation.  The most important
+things for flight software, in my experience, are: simplicity, maintanability,
+consistency, testability, and reviewability. These may not be surprising, but
+the decisions that they motivate can be very different from the decisions I see
+in other software.&lt;&#x2F;p&gt;
+&lt;p&gt;Language choice is a very important- you inherit your ecosystem, tools, and the
+mentality and capabilities of your language as your framework for expressing
+yourself, and its important to think carefully about language when starting a
+project.  There is some tendency to obsess about languages, but if you are
+going to be using a tool for years on a large project, it does merit some
+thought.&lt;&#x2F;p&gt;
+&lt;p&gt;I see places in this post where my thinking may be formed by my choice of
+tools, where my estimate of costs and benefits are from the perspective of the
+tools and practices that I have already chosen to use. I&#x27;ve certainly used
+other languages at work- Haskell, Ruby, Python, Perl, R, MatLab- and outside of
+work- C#, Lua, Rust, Java, and more. However, my serious development has all be
+in C&#x2F;C++ and I can&#x27;t help but see things in the light of my tools. &lt;&#x2F;p&gt;
+&lt;p&gt;Most of these topics deserve posts of their own, but I wanted
+to at least get the ideas down first. It could also use more examples, but
+its become too long and just needs to be posted.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-domain&quot;&gt;The Domain&lt;&#x2F;h2&gt;
+&lt;p&gt;The particular domain I am talking about here is embedded systems
+work for the flight software systems I have worked on at NASA. These are not
+the resource contrained systems that some embedded software inhabits- I haven&#x27;t
+done microcontrollers for this work, I&#x27;ve only done processor boards with
+hundreds of megabytes of RAM and flash, and processors in the hundreds of
+megahertz range. They are fairly powerful for what they are- you need to be
+aware of resources, and careful about timing and latency, but they don&#x27;t have
+the mentality of scarcity that you see in some systems.&lt;&#x2F;p&gt;
+&lt;p&gt;In this domain, you interact with a number of other systems through some
+hardware interface, you accept commands, produce telemetry, and run one or more
+complex algorithm. Your code may never be in its &amp;quot;production&amp;quot; environment until
+it is actually in space (or whereever it goes), and if your code fails it can
+be catastrophic to the project. You don&#x27;t have easy access to your production
+systems, and updating code- even for the simpliest change- could take monthes
+of development, review, testing, and operations time. In a sense, you need
+to get things right the first time, and your code needs to operate continually,
+perhaps for years at a time.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-options&quot;&gt;The Options&lt;&#x2F;h2&gt;
+&lt;p&gt;Its easy to rule out huge groups of languages- nothing with a
+garbage collector is deterministic enough, languages with a virtual machine
+don&#x27;t supports all the processors and operating systems we use, and dynamic typing
+is just not an option when correctness is important.&lt;&#x2F;p&gt;
+&lt;p&gt;In a way, the only options for flight software systems are C and C++. There are
+examples of other language like Python being used in cubesat projects, or
+assembly for some things. Certainly Ada is used in these domains, but I&#x27;ve
+never personally come across one of these systems.&lt;&#x2F;p&gt;
+&lt;p&gt;The only contender that I see entering this space is Rust. All other
+alternatives I&#x27;ve seen never mature enough to be used in serious work, and Rust
+is not there yet. I&#x27;m hoping that one day it will prove itself, and become a
+contender in new projects, but we are not there yet.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;simplicity&quot;&gt;Simplicity&lt;&#x2F;h1&gt;
+&lt;p&gt;In flight software, simplicity is vital. C is a relatively small
+language, and I prefer to only use a subset of the language.  This means I use
+as few syntactic forms as possible, and enforce consistency in as many aspects
+of the code as possible. C could certainly be simplier, but it is at least 
+possible to write very explicit C with enough displine. There are certainly
+dark corners of C, but compared to any other language I know, it has to be
+considered very simple.&lt;&#x2F;p&gt;
+&lt;p&gt;Simplicity is required here because every language construct and every new
+construct interacts with every other one. Each thing that is allowed in the
+codebase introduces difficultly in reviewing and maintaining code- it is better
+to be safe and rely on only a small group of concepts then to risk some
+interaction causing a subtle failure. More abstract code can be smaller, which
+does aid review and maintanence, but for many of the problem we solve, C is at
+about the right level of abstraction, and we prefer explicit code to smaller,
+more indirect code.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;least-power&quot;&gt;Least Power&lt;&#x2F;h2&gt;
+&lt;p&gt;This is a case where additional power is often not helpful- its
+a principal of least power sort of situation. Most of the problems we solve are
+fairly straightforward- they do not usually require complex algorithms or data
+structures. For these situations, the cost of abstraction is very apparent. The
+systems are already complex- you have to be very careful where you add mental
+overhead through abstraction.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;consistency-and-discipline&quot;&gt;Consistency and Discipline&lt;&#x2F;h2&gt;
+&lt;p&gt;I think the consistency, simplicity, and
+determinism here would be considered draconian in other programming domains- we
+don&#x27;t allocate memory after startup, we almost never free memory, we check the
+result of every function, we check every pointer for NULL, and we revalidate
+all inputs in every function, even if they are validated in calling functions.
+We declare all variables at the top of a function, we don&#x27;t use single letter
+variables even in loops, we don&#x27;t call functions in &#x27;if&#x27; statements, we use
+consistent naming of all functions, variables, and globals. These practices are
+enforced to keep the code deterministic, to add in reviewing codebases, to
+ensure that errors are caught and do not propagate. Its very pessimistic
+programming, and each line of code that accomplish a task is followed by at
+least 5 lines of error handling, often more.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;c&quot;&gt;C++&lt;&#x2F;h2&gt;
+&lt;p&gt;This is a place where I see a real danger in C++. When I have
+used C++ I have restricted myself to a very small subset of the language, not
+using templates, inheritance, operator overloading, lambdas- we use it as an
+expanded C. The advantages you get are not bad- function overloading, default
+parameters, and access to a larger standard library do help. The cost that I
+see in this is that consistency becomes a much more difficult battle to fight.
+Its like you are standing on a precipice and you have to step carefully to
+avoid falling into a pit of complixity. It becomes a battle to keep things
+simple and choose which concepts to introduce, and it can become very easy to
+make mistakes. This is not an unjustified fear- I found a case within a complex
+algorithm where data was allocated at runtime, which is forbidden in our
+systems. It was not obvious that this was happening- the language left us open
+to an implicit allocation that we were not used to seeing or reviewing for.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;review&quot;&gt;Review&lt;&#x2F;h1&gt;
+&lt;p&gt;Flight software must all be reviewed, and code should be as transparent to the
+reviewers as possible. I don&#x27;t like to see new concepts introduced unless they
+are really providing some benefit- the reviewers cognative overhead should be
+as small as you can make it. Reviewers have to catch a lot of possible mistakes
+in C- it is very easy to corrupt memory in particular- so discipline is required
+to avoid memsets, memcpys, and other functions which can cause corruption. Data
+structures and algorithm are kept as simple as possible.&lt;&#x2F;p&gt;
+&lt;p&gt;This might seem like a case against C, but I find that it is very easy in other
+languages to introduce new concepts, and very hard to ensure that they do not
+lead to problems. In C++, as soon as I start to see a bunch of classes, my heart
+sinks because I know I&#x27;m going to have to jump through hoops to ensure that the code
+is correct. We almost never use inheritance for this reason- I don&#x27;t want choices
+of what function is called to be determined by the runtime properties of code.&lt;&#x2F;p&gt;
+&lt;p&gt;In a sense, the advantage to C here is its lack of means of abstraction- the
+way to build complex systems is through procedures. Lacking other mechanisms,
+you always know how some feature will be built- structs, unions, enums,
+#defines, and functions.  When you review the code, you will not be learning
+some tower of abstraction, or looking through files trying to find where
+something is implemented, or testing your ability to remember some complex
+dispatch mechanism. Its just procedures and data all the way down.&lt;&#x2F;p&gt;
+&lt;p&gt;The main place where you might not be able to follow the code precisely is when
+function pointers are used. We do use function pointers, but only in certain modules,
+and only in fairly simple ways.&lt;&#x2F;p&gt;
+&lt;p&gt;Note that we don&#x27;t use complex macros, which can lead to some very complex constructions.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;tooling&quot;&gt;Tooling&lt;&#x2F;h1&gt;
+&lt;p&gt;Part of tooling for me is LabWindows, VxWorks, CFE&#x2F;CFS, and a
+flight software architecture used at Langley.  It happens that I am in an
+environment that makes a great deal of use of C, so naturally it is more
+confortable to keep it that way. VxWorks is one example where C++ fits,
+but for the others, C is the native language.&lt;&#x2F;p&gt;
+&lt;p&gt;Some advantages here include being able to port code between an embedded system
+and a LabWindows tool, and making it easier to support compiling an subset of
+the embedded code on a desktop. Certainly this can be done in C++, but I&#x27;ve
+always found it simplier to do with C then C++.&lt;&#x2F;p&gt;
+&lt;p&gt;Another part of tooling is that the C language is simplier then C++, and easier
+to integrate with FFIs such as Lua or Python, and just simplier overall.  This is an
+example of the downstream costs of complexity that effect every tool and
+concept involved in your code.&lt;&#x2F;p&gt;
+&lt;p&gt;Nearly all FFIs seem to be for C, and support for C++ is partial and far more
+complex. Parsing C++ is hugely complex, its name mangling is a pain, and its
+size makes it unmanageble when a high degree of control is required.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;disadvantages&quot;&gt;Disadvantages&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;safety&quot;&gt;Safety&lt;&#x2F;h2&gt;
+&lt;p&gt;If I could express at least some of my code in a safer language, use
+more modern programming concepts, and have more algorithms and structures
+available, I would be more productive. There are many places where its easy to
+get bitten by the C&#x2F;C++ scalpel, or to find that we can&#x27;t be sure of
+correctness of a section of code without a great deal of work. We handle this
+with stringent practices, review, unit testing, and system testing, but I would
+prefer to not have to worry about some of the problems that lurk in most C&#x2F;C++
+code.&lt;&#x2F;p&gt;
+&lt;p&gt;Something like &lt;a href=&quot;https:&#x2F;&#x2F;ivorylang.org&#x2F;ivory-introduction.html&quot;&gt;ivory&lt;&#x2F;a&gt;, Rust, or
+one of the other safer but still low level languages might be doable one day,
+and I would love to incorporate it into a smaller project and see if it helps.&lt;&#x2F;p&gt;
+&lt;p&gt;However, we have to be pessimistic in our evaluation and only use languages and
+code that we trust in this domain. No research or untested code can be used in
+the large projects- we have to make the best decision as engineers who are
+following a process. We can&#x27;t afford costly bugs or code that we don&#x27;t
+understand fully, and we already have so much infrastructure and so many
+practices built around the C&#x2F;C++ paradigm that its very hard to make any other
+choice. We have to estimate cost and schedule, and use operating systems,
+drivers, and board support packages written in C&#x2F;C++. This is where Rust&#x27;s
+ability to be integrated into and to talk to other code could be its critical
+feature to find its way into high assurance code.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;level-of-abstraction&quot;&gt;Level of Abstraction&lt;&#x2F;h1&gt;
+&lt;p&gt;For some tasks, the level of abstraction in C is about
+right- moving data around, interacting with hardware, and doing simple tasks.
+Certainly I wish it were better with things like endianness and bitfields, but
+we work around its shortcomings. However, sometimes its limitations do
+become confining rather then freeing and I wish for a different level
+of abstraction.&lt;&#x2F;p&gt;
+&lt;p&gt;I see places where using the same language for everything means that it is
+almost never at exactly the right level of abstraction. The language
+&lt;a href=&quot;heeps:&#x2F;&#x2F;ivorylang.org&#x2F;tower-overview.html&quot;&gt;tower&lt;&#x2F;a&gt; is a good example of where
+system architecture could be domain specific language, leaving implementation
+details to another language.&lt;&#x2F;p&gt;
+&lt;p&gt;In some code, I would love to have a separate language, or subset of a language,
+where additional checking could be done, or which does not have ways of expressing
+unsafe code. This is another principal of least power situation- I would like
+the option to use less power when appropriate, but in C you have full power all the
+time.&lt;&#x2F;p&gt;
+&lt;p&gt;The other place I see this is in complex algorithm The lack of abstraction and
+built-in tools can make this code more complex then necessary, and it is a
+place where translating from another language does make sense. This is done in
+some systems- I&#x27;ve heard of Simulink used this way- but even with this strategy
+you face issues with trusting the algorithm code.  You have to make some
+decisions on how to review it, test it, and ensure maintain it  as part of the
+rest of the system.&lt;&#x2F;p&gt;
+&lt;p&gt;C++ certainly has a lot of power, and I could see it being a step in the right
+direction in some cases. My main relunctance for these algorithms would be
+wanting to avoid introducing too many new concepts- each new concept and its
+interaction with other concepts in the code adds complexity and overhead into a
+largely manual review and testing process. I could see some of this being
+aleviated by better tooling that could replace manual components, but I still
+think adheritance to simplicity is an important thing to hold on to.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;type-safety&quot;&gt;Type Safety&lt;&#x2F;h2&gt;
+&lt;p&gt;C is not a type safe language. There are certain things it will
+catch, but in many cases the correct use of types is up to the programmer.  It
+is not dynamic, but we can cast pointers freely, and the language does not help
+us avoid issues with memory use. We can cast incorrectly, index off of arrays,
+and overwrite memory almost anywhere.&lt;&#x2F;p&gt;
+&lt;p&gt;One argument for C++ would be the ability to express more in its type system,
+and the ability to more clearly express and check casts.  I&#x27;m not well versed
+in this style, so it is hard for me to evaluate how this relates to my work.
+There may be an intermediate where some safety can be gained with very little
+complexity that would improve overall code quality.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;discipline&quot;&gt;Discipline&lt;&#x2F;h2&gt;
+&lt;p&gt;Some of the advantges to developing in C come from strict discipline in development,
+rather then something provided by the language. I would love to have a language
+that would aleviate the manual work we do in reviews to make sure we do things
+safely and catch error cases. Again, in principal C++ can help with this, but
+I haven&#x27;t been willing to accept the cost of increased complexity that it brings.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h1&gt;
+&lt;p&gt;Look back, this post has as much about disadvantages as it has about advantages.
+I think what this tells me is that we live in a messy and imperfect world, where
+the tool that provides the best results comes with a host of disadvantages that we
+live with. If there were a language without the edge cases, the portability issues,
+and with simplier syntax and fewer choices, which caught more mistakes in safety
+and memory usage, I would use it, but it does not exist.&lt;&#x2F;p&gt;
+&lt;p&gt;I wonder if using Ada could result in safer and better code, or some subset of
+C++ chosen for flight software. Or maybe Rust will take over everything. I
+don&#x27;t know, but for now, when I&#x27;m writing code that has to be correct, I
+use C.&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>Cello</title>
+                <pubDate>Fri, 09 Mar 2018 00:00:00 +0000</pubDate>
+                <link>https%3A//nsmryan.github.com.com/cello/</link>
+                <guid>https%3A//nsmryan.github.com.com/cello/</guid>
+                <description>&lt;p&gt;I&#x27;ve been thinking about C programming a lot lately, and what its limits are. This lead my to a very interesting C library
+call &lt;a href=&quot;http:&#x2F;&#x2F;libcello.org&#x2F;&quot;&gt;cello&lt;&#x2F;a&gt;. I highly recommend reading this page, and looking through the source code. The author
+deserves some notice for such an interesting library.&lt;&#x2F;p&gt;
+&lt;p&gt;Cello is described as a library that brings high level programming to C. This includes quite a lot of functionality such as
+generic data structures with mapping and folding, polymorphic functions, threading and synchronization, garbage collection, 
+a type class &#x2F; interface mechanism, and higher order functions. Its surprising how much leverage you can get from this- you
+can extend this library with new interfaces, functions, and structures, and get a good bit of functional programming into C
+as well as build high level interfaces. You can fit interator, streams, references, and all sorts of other things that are
+usually much more manual in C- its quite impressive to see an encoding of these concepts in C that is not an intrusive set of
+complex macros!&lt;&#x2F;p&gt;
+&lt;p&gt;The way all of this is implemented seems to be with &lt;a href=&quot;http:&#x2F;&#x2F;libcello.org&#x2F;learn&#x2F;a-fat-pointer-library&quot;&gt;fat pointers&lt;&#x2F;a&gt;, where a pointer
+points to data as usual, but there is extra metadata just before the pointer in memory. This technique is also used in the Forth
+community, where you can jump right to the code for a word, but can also back up and find things like the words name as a string
+and flags for its execution.&lt;&#x2F;p&gt;
+&lt;p&gt;This mechanism allows pointers (all of these seem to be of type void&amp;amp;ask;) to have a structure of properties. It appears (through
+some quick check in the source code) that Cello looks up properties in some kind of table in order to dispatch the correct
+implementation for a function. This is more flexible than a v-table style, where these must be known statically for each class,
+but does incure some run-time overhead. Interestingly this makes it a bit more typeclassy in the Haskell sense (ignoring the dynamic
+types for now) because you have a single implemenation of an interface per type. &lt;&#x2F;p&gt;
+&lt;p&gt;Unfortunately, while this is very interesting, I would not be able to use it for my work, and I would likely move to another language
+rather then accept a non-standard style in C. I&#x27;m used to a very restricted C style for high assurance systems, and this is too
+much of a pervasive change to how you use to language for me to invest time in using it. Howver, it is a certain point in the generic
+C design landscape with a novel set of tradeoffs compared to what I&#x27;ve seen done in C.&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>Generic C</title>
+                <pubDate>Tue, 13 Feb 2018 00:00:00 +0000</pubDate>
+                <link>https%3A//nsmryan.github.com.com/generic-c/</link>
+                <guid>https%3A//nsmryan.github.com.com/generic-c/</guid>
+                <description>&lt;p&gt;This post is about how to write generic code in C. This is a problem I often have- I write tools in C which are fairly
+simple, but often would benefit from more advanced techniques as they get larger. I use C because it is the language we use for flight code,
+it is a simple language that I can expect people to know, and it is easier to control the layout of memory then other languages.
+I can write a useful GUI program in LabWindows in hours, talk to hardware, and process telemetry from other systems. Its by no means
+my favorite language, but its often the right tool for the work that I do.&lt;&#x2F;p&gt;
+&lt;p&gt;This is a language that does not include a lot of means for abstraction, and we will have to pull some tricks to reduce redundancy
+and express more complex concepts. These things do not feel native to the language, and I feel like I am usually using a fairly
+primitive set of building blocks to create my programs.
+The techniques we will look at are manual and its easier to get wrong in C then other languages, but still worth thinking about.&lt;&#x2F;p&gt;
+&lt;p&gt;So- lets look at what we can do to get some polymorphism in C when we are not ready or able to reach for other languages.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;some-context&quot;&gt;Some Context&lt;&#x2F;h1&gt;
+&lt;p&gt;The C language is fairly low level and explict. Sometimes it is not low level enough, and often it is much too low level.
+In flight code (any code that runs on the embedded systems for space or aero applications) we keep a small subset of C and stray very little
+into more advanced techniques in order to keep the code as understandable as possible. For me then, these techniques are things I would
+use when no one is looking too closely at my code, or I&#x27;m writing something for myself.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-c-language&quot;&gt;The C Language&lt;&#x2F;h2&gt;
+&lt;p&gt;The main constructions in C are procedures, structs, unions, enums, global values, and 
+proprocessor directives. I&#x27;m grouping the preprocessor into C as they are part of C programs in practice,
+even if they are a separate stage of compilation before the C language itself. C&#x27;s type system
+has primitive types (int, char, etc), the array type constructor, user types in the form
+of structs and unions, type alias in typedefs, and pointer types.&lt;&#x2F;p&gt;
+&lt;p&gt;Of these, pointer types give the most means for abstraction- they let you talk about data in an uniform way (through an address) that does not
+depend on the structure of the data, as the pointer is always the same form regardless of what it points to.
+In addition, function pointers get you the bare minimum to treat computation as a subject that one can control in
+C. There is no way to create functions at run time such as through composition, but at least we have first order functions.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;the-cast&quot;&gt;The Cast&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;pre-processor-magic&quot;&gt;Pre-Processor Magic&lt;&#x2F;h2&gt;
+&lt;p&gt;One way to get a form of polymorphism in your code is to essentially expand it automatically to monomorphic code-
+in other words, create an entirely separate copy for each type you are interested in manipulating. This can be
+done with the preprocessor, allowing entire data structures and their interfaces to be generated per type.
+This reminds me in logic of expanding your inference rules so that there is technically a separate rule for each
+proposition, rather then using quantification and saying that the rules apply for all propositions.&lt;&#x2F;p&gt;
+&lt;p&gt;This has the advantage of type safety, since the code is generated for a particular type, and it may have some
+performance advantages when the implementation can make use of properties of the type like its size to generate
+specific code like memory layouts.&lt;&#x2F;p&gt;
+&lt;p&gt;One disadvantage is complexity- both in the implementation which must be written mostly within the pre-processor,
+and in the user code which must generate a great deal of code that can&#x27;t be read directly. Even reading the generated
+code is not as good as having simple code to read in the first place. I imagine this code is hard to write and test,
+although I&#x27;ve never done it myself.&lt;&#x2F;p&gt;
+&lt;p&gt;An example of this approach is in &lt;a href=&quot;http:&#x2F;&#x2F;sglib.sourceforge.net&#x2F;doc&#x2F;index.html&quot;&gt;sglib&lt;&#x2F;a&gt; where the author create type safe
+data structures and some higher order functionality like sorting with user-defined functions, in C.&lt;&#x2F;p&gt;
+&lt;p&gt;One other note here is that I&#x27;ve seen this technique done manually as well- duplicate data structures and functions with
+almost no difference all through codebases. This is bad programming practice and is wasteful in time for programming, testing,
+and reviewing, but in some contexts its hard to avoid.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;void&quot;&gt;void * &lt;&#x2F;h2&gt;
+&lt;p&gt;Another possibility is to simply drop into the world of untyped data, making everything a pointer to void. This means
+that you take responsibility for the types of your data. You can do this by always using void pointers to a particular type
+with a section of code, such as in a data structure like a tree where all nodes point to data of the same type, or you can
+do a manual kind of sum type and make an enum with all the types you want to use, tagging your pointers with a value of this enum
+to distinguish what it points to. This amounts to carving out a universe of types from the C type system, and when I&#x27;ve done this usually
+I only allow basic types like uint8, int16, uint32, etc, and then a generic buffer or C string type.&lt;&#x2F;p&gt;
+&lt;p&gt;The advantage of this techinque is that your code works on many data types- you can store information like the size of the data along with it,
+and allocate, deallocate, move, and manipulate your data without knowing what it is. This is almost a parametric polymorphism in the sense that if you
+truely do not know what your data contains, so you can only perform operations on it that work on all data. Nothing stops you from doing otherwise,
+but we are in C and we have to accept this responsibility.&lt;&#x2F;p&gt;
+&lt;p&gt;This is the technique I go for most often. I don&#x27;t enjoy it, but it comes in useful too often to ignore.&lt;&#x2F;p&gt;
+&lt;p&gt;I know of no way to enforce constraints in this case, unless you consider the next technique a kind of constraint.&lt;&#x2F;p&gt;
+&lt;p&gt;One example of this style can be found &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;srdja&#x2F;Collections-C&quot;&gt;here&lt;&#x2F;a&gt;. This is also the style used in LabWindows for its
+generic data structures in the &lt;a href=&quot;http:&#x2F;&#x2F;zone.ni.com&#x2F;reference&#x2F;en-XX&#x2F;help&#x2F;370051V-01&#x2F;toolslib&#x2F;toolslibprogrammerstoolbox_functiontree&#x2F;&quot;&gt;programmer&#x27;s toolbox&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;row-polymorphism&quot;&gt;Row Polymorphism&lt;&#x2F;h2&gt;
+&lt;p&gt;This is perhaps the most interesting technique, at least to me. In this case you define a series of structures, some of which contain others as their
+first field. Doing this means that you can upcast a struct into one of the ones it contains, losing information about what it contains. This gives it a
+similar feel to subtyping (although this does not hold up formally), where you can go own the tree of subtypes and get more information, and up the tree
+to lose information when you want to express something more generically.&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;ve wanted to explore this in more detail, as it opens up a lot of possibiilty in the restricted world of C. You do have to be careful with memory layout-
+you can no longer assume you know the size of a structure based on its type. You are also restricted in the sense that you can extend in only one way per
+struct- you can extend with new fields, but the order of extensions matters without some kind of dictionary or table lookup.&lt;&#x2F;p&gt;
+&lt;p&gt;One example of this technique is the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;torvalds&#x2F;linux&quot;&gt;Linux kernel&lt;&#x2F;a&gt;. Linux apparently uses this technique to embed structs in other struct,
+along with macros for getting out to the containing structure.&lt;&#x2F;p&gt;
+&lt;p&gt;Another example might be &lt;a href=&quot;http:&#x2F;&#x2F;libcello.org&#x2F;home&quot;&gt;Cello&lt;&#x2F;a&gt;, which is a very different implementation then the one used in Linux, and does use a lookup
+to dispatch functions. I hope to write a bit more about this in the future, but its definitely worth checking out, even if only for fun.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;generic&quot;&gt;_Generic&lt;&#x2F;h2&gt;
+&lt;p&gt;In C11 there was a feature added to the C language called _Generic. This is not a general technique for generic programming- all it allows you to do
+is to select a function based on a type. You can then write macros that select the right function but give a single interface which is nice, but to my knowledge
+there is no way to use this more generally- you have to know beforehand which types you are concerned with. Its still a fine feature, its just got a more limited
+application then the techniques above.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h1&gt;
+&lt;p&gt;I tend to stick to void* style generic programming in C because it is the most straightforward in my opinion and the easiest to review for. I&#x27;m more interested
+in sticking to conventions and keeping code simple then powerful and generic. I am even willing to trade the type safety of macros for code that uses the simplest
+subset of C possible, but that is mostly my training and my application domain talking. I treat C more carefully than other languages because my C code must be
+higher quality then my other code.&lt;&#x2F;p&gt;
+&lt;p&gt;Also,for reference, &lt;a href=&quot;http:&#x2F;&#x2F;andreinc.net&#x2F;2010&#x2F;09&#x2F;30&#x2F;generic-data-structures-in-c&#x2F;&quot;&gt;here&lt;&#x2F;a&gt; is another treatment of these same topics.&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+    </channel>
+</rss>
