@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://nsmryan.github.com.com/sitemap.xml
+Sitemap: https://nsmryan.github.com/public/sitemap.xml

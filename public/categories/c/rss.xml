@@ -2,18 +2,18 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>itscomputersciencetime</title>
-        <link>https%3A//nsmryan.github.com.com/</link>
+        <link>https%3A//nsmryan.github.com/public/</link>
         <description></description>
         <generator>Zola</generator>
         <language>en</language>
-        <atom:link href="https%3A//nsmryan.github.com.com/categories/c/rss.xml" rel="self" type="application/rss+xml"/>
+        <atom:link href="https%3A//nsmryan.github.com/public/categories/c/rss.xml" rel="self" type="application/rss+xml"/>
         <lastBuildDate>Mon, 31 Dec 2018 00:00:00 +0000</lastBuildDate>
         
             <item>
                 <title>Awesome C Libraries</title>
                 <pubDate>Mon, 31 Dec 2018 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com.com/awesome-c-libraries/</link>
-                <guid>https%3A//nsmryan.github.com.com/awesome-c-libraries/</guid>
+                <link>https%3A//nsmryan.github.com/public/awesome-c-libraries/</link>
+                <guid>https%3A//nsmryan.github.com/public/awesome-c-libraries/</guid>
                 <description>&lt;p&gt;This post goes over some very cool C libraries, each of which is awesome in one way or another.  They
 are generally fairly small and clean, and solve an interesting problem.&lt;&#x2F;p&gt;
 &lt;p&gt;I tend to find C libraries that are particularly clean, or which implement a complex concept not usually
@@ -107,8 +107,8 @@ and there are some other good libraries at &lt;a href=&quot;http:&#x2F;&#x2F;cco
             <item>
                 <title>Why I use C for Flight Software</title>
                 <pubDate>Sat, 10 Mar 2018 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com.com/why-i-use-c/</link>
-                <guid>https%3A//nsmryan.github.com.com/why-i-use-c/</guid>
+                <link>https%3A//nsmryan.github.com/public/why-i-use-c/</link>
+                <guid>https%3A//nsmryan.github.com/public/why-i-use-c/</guid>
                 <description>&lt;p&gt;This post is about why I use C for any serious project at work, and why I would
 choose to use C again even if starting from stratch on a new project.  I am
 hoping to cover where this choice comes from and what advantages and
@@ -350,8 +350,8 @@ use C.&lt;&#x2F;p&gt;
             <item>
                 <title>Cello</title>
                 <pubDate>Fri, 09 Mar 2018 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com.com/cello/</link>
-                <guid>https%3A//nsmryan.github.com.com/cello/</guid>
+                <link>https%3A//nsmryan.github.com/public/cello/</link>
+                <guid>https%3A//nsmryan.github.com/public/cello/</guid>
                 <description>&lt;p&gt;I&#x27;ve been thinking about C programming a lot lately, and what its limits are. This lead my to a very interesting C library
 call &lt;a href=&quot;http:&#x2F;&#x2F;libcello.org&#x2F;&quot;&gt;cello&lt;&#x2F;a&gt;. I highly recommend reading this page, and looking through the source code. The author
 deserves some notice for such an interesting library.&lt;&#x2F;p&gt;
@@ -381,8 +381,8 @@ C design landscape with a novel set of tradeoffs compared to what I&#x27;ve seen
             <item>
                 <title>Generic C</title>
                 <pubDate>Tue, 13 Feb 2018 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com.com/generic-c/</link>
-                <guid>https%3A//nsmryan.github.com.com/generic-c/</guid>
+                <link>https%3A//nsmryan.github.com/public/generic-c/</link>
+                <guid>https%3A//nsmryan.github.com/public/generic-c/</guid>
                 <description>&lt;p&gt;This post is about how to write generic code in C. This is a problem I often have- I write tools in C which are fairly
 simple, but often would benefit from more advanced techniques as they get larger. I use C because it is the language we use for flight code,
 it is a simple language that I can expect people to know, and it is easier to control the layout of memory then other languages.

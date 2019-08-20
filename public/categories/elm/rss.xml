@@ -2,18 +2,18 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>itscomputersciencetime</title>
-        <link>https%3A//nsmryan.github.com.com/</link>
+        <link>https%3A//nsmryan.github.com/public/</link>
         <description></description>
         <generator>Zola</generator>
         <language>en</language>
-        <atom:link href="https%3A//nsmryan.github.com.com/categories/elm/rss.xml" rel="self" type="application/rss+xml"/>
+        <atom:link href="https%3A//nsmryan.github.com/public/categories/elm/rss.xml" rel="self" type="application/rss+xml"/>
         <lastBuildDate>Wed, 01 Mar 2017 00:00:00 +0000</lastBuildDate>
         
             <item>
                 <title>First Elm WebGL Shader</title>
                 <pubDate>Wed, 01 Mar 2017 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com.com/first-elm-webgl-shader/</link>
-                <guid>https%3A//nsmryan.github.com.com/first-elm-webgl-shader/</guid>
+                <link>https%3A//nsmryan.github.com/public/first-elm-webgl-shader/</link>
+                <guid>https%3A//nsmryan.github.com/public/first-elm-webgl-shader/</guid>
                 <description>&lt;p&gt;Next up in the Elm experiments is a little animation using WebGL (elm-community&#x2F;webgl).&lt;&#x2F;p&gt;
 &lt;p&gt;The result is created using a single quad (a square) with no interesting attributes, along with a fragment
 shader that creates the entire effect. The fragment shader constructs a circle using a signed distance field,
@@ -27,8 +27,8 @@ where the X&#x2F;Y position is moved randomly. The space inside the shape is a v
             <item>
                 <title>Third Elm Project-Split</title>
                 <pubDate>Sun, 16 Oct 2016 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com.com/third-elm-project-split/</link>
-                <guid>https%3A//nsmryan.github.com.com/third-elm-project-split/</guid>
+                <link>https%3A//nsmryan.github.com/public/third-elm-project-split/</link>
+                <guid>https%3A//nsmryan.github.com/public/third-elm-project-split/</guid>
                 <description>&lt;p&gt;A third elm program!&lt;&#x2F;p&gt;
 &lt;p&gt;Try pressing any key to split the line as it grows.&lt;&#x2F;p&gt;
 &lt;p&gt;The program is &lt;a href=&quot;http:&#x2F;&#x2F;itscomputersciencetime.com&#x2F;elm&#x2F;split.html&quot;&gt;here&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
@@ -41,8 +41,8 @@ where the X&#x2F;Y position is moved randomly. The space inside the shape is a v
             <item>
                 <title>First Elm Project- Lines</title>
                 <pubDate>Sat, 15 Oct 2016 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com.com/first-elm-project-lines/</link>
-                <guid>https%3A//nsmryan.github.com.com/first-elm-project-lines/</guid>
+                <link>https%3A//nsmryan.github.com/public/first-elm-project-lines/</link>
+                <guid>https%3A//nsmryan.github.com/public/first-elm-project-lines/</guid>
                 <description>&lt;p&gt;I have been playing around with elm recently, and I put my first project up on this site.&lt;&#x2F;p&gt;
 &lt;p&gt;You can see it &lt;a href=&quot;http:&#x2F;&#x2F;itscomputersciencetime.com&#x2F;elm&#x2F;lines.html&quot;&gt;here&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;The code is in the elm directory of the github repository for
@@ -54,8 +54,8 @@ where the X&#x2F;Y position is moved randomly. The space inside the shape is a v
             <item>
                 <title>Second Elm Project- Circles</title>
                 <pubDate>Sat, 15 Oct 2016 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com.com/second-elm-project-circles/</link>
-                <guid>https%3A//nsmryan.github.com.com/second-elm-project-circles/</guid>
+                <link>https%3A//nsmryan.github.com/public/second-elm-project-circles/</link>
+                <guid>https%3A//nsmryan.github.com/public/second-elm-project-circles/</guid>
                 <description>&lt;p&gt;I have another little Elm program up. This one just animates some circles with
 random sizes and colors. The most interesting thing about it is that it randomly
 chooses among a group of transformations that it applies to a preset list of base colors.&lt;&#x2F;p&gt;

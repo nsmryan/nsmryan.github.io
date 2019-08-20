@@ -2,18 +2,18 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>itscomputersciencetime</title>
-        <link>https%3A//nsmryan.github.com.com/</link>
+        <link>https%3A//nsmryan.github.com/public/</link>
         <description></description>
         <generator>Zola</generator>
         <language>en</language>
-        <atom:link href="https%3A//nsmryan.github.com.com/categories/vxworks/rss.xml" rel="self" type="application/rss+xml"/>
+        <atom:link href="https%3A//nsmryan.github.com/public/categories/vxworks/rss.xml" rel="self" type="application/rss+xml"/>
         <lastBuildDate>Sat, 15 Oct 2016 00:00:00 +0000</lastBuildDate>
         
             <item>
                 <title>VxWorks</title>
                 <pubDate>Sat, 15 Oct 2016 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com.com/vxworks-tricks/</link>
-                <guid>https%3A//nsmryan.github.com.com/vxworks-tricks/</guid>
+                <link>https%3A//nsmryan.github.com/public/vxworks-tricks/</link>
+                <guid>https%3A//nsmryan.github.com/public/vxworks-tricks/</guid>
                 <description>&lt;p&gt;I had never heard of VxWorks before coming to NASA, but now I have been using it for 
 over 5 years. I thought I would write down some things I&#x27;ve learned- some tricks and
 commands, concepts it uses, and larger scale considerations for programs written
