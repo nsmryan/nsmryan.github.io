@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>itscomputersciencetime</title>
+        <link>https%3A//nsmryan.github.com.com/</link>
+        <description></description>
+        <generator>Zola</generator>
+        <language>en</language>
+        <atom:link href="https%3A//nsmryan.github.com.com/categories/art/rss.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate>
+        
+            <item>
+                <title>Bit Pattern Visualization </title>
+                <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
+                <link>https%3A//nsmryan.github.com.com/bit-pattern-visualization/</link>
+                <guid>https%3A//nsmryan.github.com.com/bit-pattern-visualization/</guid>
+                <description>&lt;p&gt;I did a simple little project recently that creates a gif visualizing the bit patterns within a file.&lt;&#x2F;p&gt;
+&lt;p&gt;The &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nsmryan&#x2F;Bit-Patterns&quot;&gt;program&lt;&#x2F;a&gt; takes as input a file name, and outputs a gif consisting
+of colored cells whose brightness is based on how frequently the corresponding bit pattern occurrs. The bit pattern for
+a cell is just that the top left cell is all 0s, the next is 01, then 10, 11, 100, etc.&lt;&#x2F;p&gt;
+&lt;p&gt;The gif moves from showing 2-bit patterns, then 4, then 6, 8, 10, 12, 14, 16. Of course, powers of 2 are the most interesting
+because the data is laid out that way.&lt;&#x2F;p&gt;
+&lt;p&gt;One interesting thing is that the brightness is actually the log of the frequency- small numbers, especially 0, occur so
+often that just using the occurances directly leads to a white pixel for 0, and dark pixels for the rest of the image.&lt;&#x2F;p&gt;
+&lt;p&gt;Anyway, I just wanted to do a simple visual of bit data. Also, now I know how to create gifs with Rust, which is cool.&lt;&#x2F;p&gt;
+&lt;p&gt;There are some examples in the repo from &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nsmryan&#x2F;Bit-Patterns&#x2F;blob&#x2F;master&#x2F;results&#x2F;main.rs.gif&quot;&gt;text data&lt;&#x2F;a&gt;,
+which bunches up in the visual ascii range, and an &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nsmryan&#x2F;Bit-Patterns&#x2F;blob&#x2F;master&#x2F;results&#x2F;git_pattern.gif&quot;&gt;exe&lt;&#x2F;a&gt;
+which is more uniform. I also found that data files, like recorded CCSDS packets, produce nicer images then a corpus of english text, for example.&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+            <item>
+                <title>Processing Particles Art</title>
+                <pubDate>Sun, 30 Dec 2018 00:00:00 +0000</pubDate>
+                <link>https%3A//nsmryan.github.com.com/processing-particles-art/</link>
+                <guid>https%3A//nsmryan.github.com.com/processing-particles-art/</guid>
+                <description>&lt;p&gt;I have been wanting to create some kind of simple computer art for a long time. Recently
+a coworker mentioned Processing to me, and I thought I would try it out. &lt;&#x2F;p&gt;
+&lt;p&gt;The program I ended up writing was an exploration of calculating shapes implicitly by a function which
+takes a point and gives a vector to the surface of the shape. I wanted to do something with this
+concept as I&#x27;ve found it to be interesting for a long time.&lt;&#x2F;p&gt;
+&lt;p&gt;There is a &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nsmryan&#x2F;ProcessingParticles&#x2F;releases&#x2F;tag&#x2F;1.0&quot;&gt;github release&lt;&#x2F;a&gt; of the project
+with a Windows executable that you can download if you want to run the thing yourself.&lt;&#x2F;p&gt;
+&lt;p&gt;The controls are simple- left clicking cycles through shapes, and right clicking changes the mode. The modes are:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;particles move to random locations on the surface, 2) particles move to predetermined places on the surface, creating
+a very different effect, and 3) the same as 2 but cycling through shapes on a timer.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Thats all- its just a little thing to see how I liked Processing. I do like it, even though it is weird programming
+in Java again. I found that just getting things on the screen was very easy, which is my main concern for projects
+like this.&lt;&#x2F;p&gt;
+&lt;p&gt;Thanks for reading!&lt;&#x2F;p&gt;
+</description>
+            </item>
+        
+    </channel>
+</rss>

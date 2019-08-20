@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>itscomputersciencetime - CCSDS Router</title>
+
+      
+
+      
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+          
+      
+
+      
+          <link rel="stylesheet" href="https:&#x2F;&#x2F;nsmryan.github.com.com&#x2F;site.css">
+          
+      
+
+      
+      
+    </head>
+
+    <body>
+        <div class="container">
+
+            <div id="mobile-navbar" class="mobile-navbar">
+              <div class="mobile-header-logo">
+                <a href="/" class="logo">Noah&#x27;s Blog</a>
+              </div>
+              <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+              <ul class="mobile-menu-list">
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;nsmryan.github.com.com&#x2F;">
+                            Home
+                        </a>
+                    </li>
+                
+                    <li class="mobile-menu-item">
+                        <a href="https:&#x2F;&#x2F;nsmryan.github.com.com&#x2F;&#x2F;categories">
+                            Categories
+                        </a>
+                    </li>
+                
+              </ul>
+            </nav>
+
+            <header id="header">
+                <div class="logo"><a href="https:&#x2F;&#x2F;nsmryan.github.com.com&#x2F;">Noah&#x27;s Blog</a></div>
+                <nav class="menu">
+                    <ul>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;nsmryan.github.com.com&#x2F;">
+                                    Home
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a href="https:&#x2F;&#x2F;nsmryan.github.com.com&#x2F;&#x2F;categories">
+                                    Categories
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="content" id="mobile-panel">
+                    
+
+
+
+<article class="post">
+    
+    <header class="post__header">
+        <h1 class="post__title">
+            <a href="https:&#x2F;&#x2F;nsmryan.github.com.com&#x2F;ccsds-router&#x2F;">CCSDS Router</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">2019-01-25</span>
+            
+        </div>
+    </header>
+
+    <div class="post-content">
+      <p>This post is about a <a href="https://github.com/nsmryan/CCSDS-Router">CCSDS packet routing tool</a> I've been writing in Rust. 
+The motivation here is to provides a tool for moving CCSDS packets from one place to another, either from a file/TCP socket/
+UDP socket to a file/TCP socket/UDP socket. I often have CCSDS packets in one of these forms, either stored or streaming,
+and I want them to be in another (recorded to a file or streamed to a destination). When doing this, I sometimes want to
+delay packets, throttle packets, or replay them according to their timestamp, such as when replaying captured data
+during a test.</p>
+<p>The use cases that I had when writing this:</p>
+<ul>
+<li>
+<p>You have stored packets in a file, and you want to replay them according to a timestamp within the packet.
+This can be used for testing, such as to replay sensor data, or to test other tools by sending CCSDS packets to
+them.</p>
+</li>
+<li>
+<p>You want to save CCSDS from a network interface to a file.</p>
+</li>
+<li>
+<p>You want to route CCSDS packets from a TCP or UDP port to another TCP or UDP port.</p>
+</li>
+<li>
+<p>You want to delay packets by a fixed amount. This could be used to simulate a delay that would be experience in operation,
+but not in testing. Introducing this delay can expose issues in timeouts, for example, that would otherwise be seen first
+during operations.</p>
+</li>
+<li>
+<p>You want to throttle packet delivery such that packets are received no faster then a given rate. This might help, for example,
+with ensuring commands are not received faster then the maximum allowed rate.</p>
+</li>
+<li>
+<p>You want to do one of the above, while filtering for a subset of APIDs.</p>
+</li>
+<li>
+<p>You have regular CCSDS packets, or packets with a header and/or a footer of fixed size. The tool also supports packets
+that are not CCSDS, but they must be of fixed length for it to know how to find the next packet.</p>
+</li>
+<li>
+<p>You have a mixture of packets from a source, and you want to forward packets with certain APIDs to certain sinks. For example,
+you might store all packets in a file for logging, forward some packets to a visuzlizer program, and forward all packets to a
+ground system. You might also want to extract packets with a particular APID from a file, so you read from a file to another file,
+filtering for packets with that APID.</p>
+</li>
+</ul>
+<p>One thing to note about using this tool- as of today (02/23/2019) I have tested this tool with real data, but it have not been battle
+tested. I know it has some rough edges, and I expect it will not cover all cases that one might see in production- it needs some
+testing and production use before I would use it as a trusted part of a system. I would certainly use it for testing and development,
+and fix up anything I find, and I hope someone out there might do the same.</p>
+<p>Thanks for reading!</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+            
+            
+                <div class="post-nav">
+                    
+                        <a class="previous" href="https:&#x2F;&#x2F;nsmryan.github.com.com&#x2F;note-on-radiation-tolerance-of-stored-data&#x2F;">‹ Notes On Radiation Tolerance of Stored Data</a>
+                    
+                    
+                        <a class="next" href="https:&#x2F;&#x2F;nsmryan.github.com.com&#x2F;bit-pattern-visualization&#x2F;">Bit Pattern Visualization  ›</a>
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
+                </div>
+            </main>
+
+            
+            
+        </div>
+
+      
+          <script type="text/javascript" src="https:&#x2F;&#x2F;nsmryan.github.com.com&#x2F;even.js" ></script>
+      
+    </body>
+
+</html>
