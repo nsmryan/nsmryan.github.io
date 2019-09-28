@@ -2,18 +2,18 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>itscomputersciencetime</title>
-        <link>https%3A//nsmryan.github.com/public/</link>
+        <link>http%3A//nsmryan.github.com/public/</link>
         <description></description>
         <generator>Zola</generator>
         <language>en</language>
-        <atom:link href="https%3A//nsmryan.github.com/public/categories/functional-programming/rss.xml" rel="self" type="application/rss+xml"/>
+        <atom:link href="http%3A//nsmryan.github.com/public/categories/functional-programming/rss.xml" rel="self" type="application/rss+xml"/>
         <lastBuildDate>Wed, 25 Jan 2017 00:00:00 +0000</lastBuildDate>
         
             <item>
                 <title>Pure Functions in Embedded Systems Programming</title>
                 <pubDate>Wed, 25 Jan 2017 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/pure-functions-in-embedded-systems-programming/</link>
-                <guid>https%3A//nsmryan.github.com/public/pure-functions-in-embedded-systems-programming/</guid>
+                <link>http%3A//nsmryan.github.com/public/pure-functions-in-embedded-systems-programming/</link>
+                <guid>http%3A//nsmryan.github.com/public/pure-functions-in-embedded-systems-programming/</guid>
                 <description>&lt;p&gt;I&#x27;ve had some experiences recently where I&#x27;ve seen code written in C&#x2F;C++ for embedded systems
 that benefited from my experiences with Haskell. In short, I&#x27;ve found that pure functions make code more robust, easier to test,
 easier to document, easier to reason about, and easier to extend to new situations (porting between systems, and wrapping in simulators&#x2F;ground systems)
@@ -91,8 +91,8 @@ flight software systems hat or my functional programming hat, and the latter des
             <item>
                 <title>Algebraic Data Types</title>
                 <pubDate>Mon, 14 Nov 2016 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/algebraic-data-types/</link>
-                <guid>https%3A//nsmryan.github.com/public/algebraic-data-types/</guid>
+                <link>http%3A//nsmryan.github.com/public/algebraic-data-types/</link>
+                <guid>http%3A//nsmryan.github.com/public/algebraic-data-types/</guid>
                 <description>&lt;p&gt;This post starts a description of algebraic data types. For me, these have completely replaced
 my mental machinery for designing and reasoning about programs. They also provide a way to explore
 ideas and guide my programs.&lt;&#x2F;p&gt;
@@ -261,8 +261,8 @@ a way to abstract and combine computations.&lt;&#x2F;p&gt;
             <item>
                 <title>Functional Programming Conference Videos</title>
                 <pubDate>Tue, 25 Oct 2016 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/functional-programming-conference-videos/</link>
-                <guid>https%3A//nsmryan.github.com/public/functional-programming-conference-videos/</guid>
+                <link>http%3A//nsmryan.github.com/public/functional-programming-conference-videos/</link>
+                <guid>http%3A//nsmryan.github.com/public/functional-programming-conference-videos/</guid>
                 <description>&lt;p&gt;This post just lists some links to videos with Haskell content.
 Some of the best presenters are Conal Elliot, Gabriel Gonzalez and Edward Kmett.
 There are a lot of good videos in this list. Its worth looking through them if you
@@ -298,8 +298,8 @@ are interested in Haskell and Functional Programming.&lt;&#x2F;p&gt;
             <item>
                 <title>Fifth Elm Project- Cursor Trail</title>
                 <pubDate>Mon, 17 Oct 2016 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/fifth-elm-project-cursortrail/</link>
-                <guid>https%3A//nsmryan.github.com/public/fifth-elm-project-cursortrail/</guid>
+                <link>http%3A//nsmryan.github.com/public/fifth-elm-project-cursortrail/</link>
+                <guid>http%3A//nsmryan.github.com/public/fifth-elm-project-cursortrail/</guid>
                 <description>&lt;p&gt;This time I wanted to do something with the mouse cursor. This little program just draws a trail
 after the mouse cursor as you move it.&lt;&#x2F;p&gt;
 &lt;p&gt;You can play with it  &lt;a href=&quot;http:&#x2F;&#x2F;itscomputersciencetime.com&#x2F;elm&#x2F;cursortrail.html&quot;&gt;here&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
@@ -311,8 +311,8 @@ after the mouse cursor as you move it.&lt;&#x2F;p&gt;
             <item>
                 <title>Fourth Elm Project- Quad</title>
                 <pubDate>Sun, 16 Oct 2016 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/fourth-elm-project-quad/</link>
-                <guid>https%3A//nsmryan.github.com/public/fourth-elm-project-quad/</guid>
+                <link>http%3A//nsmryan.github.com/public/fourth-elm-project-quad/</link>
+                <guid>http%3A//nsmryan.github.com/public/fourth-elm-project-quad/</guid>
                 <description>&lt;p&gt;Yet another little Elm experiment!&lt;&#x2F;p&gt;
 &lt;p&gt;This time I wanted to visualize quad trees. By far the hardest part of this whole experience
 was figuring out how to draw them. The mouse positions are received with the positive y direction
@@ -328,8 +328,8 @@ trees to expect the origin to be the bottom left (y positive going up)!&lt;&#x2F
             <item>
                 <title>Third Elm Project-Split</title>
                 <pubDate>Sun, 16 Oct 2016 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/third-elm-project-split/</link>
-                <guid>https%3A//nsmryan.github.com/public/third-elm-project-split/</guid>
+                <link>http%3A//nsmryan.github.com/public/third-elm-project-split/</link>
+                <guid>http%3A//nsmryan.github.com/public/third-elm-project-split/</guid>
                 <description>&lt;p&gt;A third elm program!&lt;&#x2F;p&gt;
 &lt;p&gt;Try pressing any key to split the line as it grows.&lt;&#x2F;p&gt;
 &lt;p&gt;The program is &lt;a href=&quot;http:&#x2F;&#x2F;itscomputersciencetime.com&#x2F;elm&#x2F;split.html&quot;&gt;here&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;

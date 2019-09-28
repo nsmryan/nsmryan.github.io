@@ -2,18 +2,18 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>itscomputersciencetime</title>
-        <link>https%3A//nsmryan.github.com/public/</link>
+        <link>http%3A//nsmryan.github.com/public/</link>
         <description></description>
         <generator>Zola</generator>
         <language>en</language>
-        <atom:link href="https%3A//nsmryan.github.com/public/categories/nasa/rss.xml" rel="self" type="application/rss+xml"/>
+        <atom:link href="http%3A//nsmryan.github.com/public/categories/nasa/rss.xml" rel="self" type="application/rss+xml"/>
         <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate>
         
             <item>
                 <title>CCSDS Router</title>
                 <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/ccsds-router/</link>
-                <guid>https%3A//nsmryan.github.com/public/ccsds-router/</guid>
+                <link>http%3A//nsmryan.github.com/public/ccsds-router/</link>
+                <guid>http%3A//nsmryan.github.com/public/ccsds-router/</guid>
                 <description>&lt;p&gt;This post is about a &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nsmryan&#x2F;CCSDS-Router&quot;&gt;CCSDS packet routing tool&lt;&#x2F;a&gt; I&#x27;ve been writing in Rust. 
 The motivation here is to provides a tool for moving CCSDS packets from one place to another, either from a file&#x2F;TCP socket&#x2F;
 UDP socket to a file&#x2F;TCP socket&#x2F;UDP socket. I often have CCSDS packets in one of these forms, either stored or streaming,
@@ -67,8 +67,8 @@ and fix up anything I find, and I hope someone out there might do the same.&lt;&
             <item>
                 <title> Rust In Space- Integrating CFS And Rust</title>
                 <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/rust-in-space-cfs-and-rust/</link>
-                <guid>https%3A//nsmryan.github.com/public/rust-in-space-cfs-and-rust/</guid>
+                <link>http%3A//nsmryan.github.com/public/rust-in-space-cfs-and-rust/</link>
+                <guid>http%3A//nsmryan.github.com/public/rust-in-space-cfs-and-rust/</guid>
                 <description>&lt;p&gt;This post is about the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nsmryan&#x2F;cfs-sys&quot;&gt;cfs-sys&lt;&#x2F;a&gt; Rust crate which generates the
 bindings required to write CFS Apps in Rust. This include all public include files from CFE,
 OSAL, and the PSP.&lt;&#x2F;p&gt;
@@ -161,8 +161,8 @@ forge this project into a full solution for Rust&#x2F;CFS integration.&lt;&#x2F;
             <item>
                 <title>Abstraction in Flight Software 4- Handles</title>
                 <pubDate>Sun, 18 Nov 2018 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/abstraction-in-flight-software-part-4-dispatch/</link>
-                <guid>https%3A//nsmryan.github.com/public/abstraction-in-flight-software-part-4-dispatch/</guid>
+                <link>http%3A//nsmryan.github.com/public/abstraction-in-flight-software-part-4-dispatch/</link>
+                <guid>http%3A//nsmryan.github.com/public/abstraction-in-flight-software-part-4-dispatch/</guid>
                 <description>&lt;p&gt;This post is the fourth in a series talking about abstraction mechanisms that I have seen in flight software systems.&lt;&#x2F;p&gt;
 &lt;p&gt;The topic of this post is a mechanism called a handle. This is the same use of that word as in a file handle, where
 the effect of a function called on that handle depends on what the handle refers to. We will see that while handles
@@ -393,8 +393,8 @@ post. This one is long enough as it is.&lt;&#x2F;p&gt;
             <item>
                 <title>Abstraction in Flight Software 3- Message Bus</title>
                 <pubDate>Wed, 14 Nov 2018 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/abstraction-in-flight-software-part-3-message-bus/</link>
-                <guid>https%3A//nsmryan.github.com/public/abstraction-in-flight-software-part-3-message-bus/</guid>
+                <link>http%3A//nsmryan.github.com/public/abstraction-in-flight-software-part-3-message-bus/</link>
+                <guid>http%3A//nsmryan.github.com/public/abstraction-in-flight-software-part-3-message-bus/</guid>
                 <description>&lt;p&gt;This post is the third in a series talking about abstraction mechanisms that I have seen in flight software systems.
 The topic of this post is the message bus. This is a mechanism through which messages are passed
 between modules through an arbiter. This allows the sender and receiver to be completely decoupled- the sender does not
@@ -509,8 +509,8 @@ OSAL, and then through OSAL to the operating system.&lt;&#x2F;p&gt;
             <item>
                 <title>Abstraction in Flight Software 1- Direct Coupling</title>
                 <pubDate>Tue, 13 Nov 2018 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/abstraction-in-flight-software-part-1-direct-coupling/</link>
-                <guid>https%3A//nsmryan.github.com/public/abstraction-in-flight-software-part-1-direct-coupling/</guid>
+                <link>http%3A//nsmryan.github.com/public/abstraction-in-flight-software-part-1-direct-coupling/</link>
+                <guid>http%3A//nsmryan.github.com/public/abstraction-in-flight-software-part-1-direct-coupling/</guid>
                 <description>&lt;p&gt;This is the first in what I hope is a series of posts on the use of abstraction in that I have seen in 
 flight software systems. I plan to go over each mechanism that I have seen in a post, ending
 with a method that I have been using recently that I have not seen in other flight software systems.&lt;&#x2F;p&gt;
@@ -665,8 +665,8 @@ compared to a tightly coupled system.&lt;&#x2F;p&gt;
             <item>
                 <title>Abstraction in Flight Software 2- Registration</title>
                 <pubDate>Tue, 13 Nov 2018 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/abstraction-in-flight-software-part-2-registration/</link>
-                <guid>https%3A//nsmryan.github.com/public/abstraction-in-flight-software-part-2-registration/</guid>
+                <link>http%3A//nsmryan.github.com/public/abstraction-in-flight-software-part-2-registration/</link>
+                <guid>http%3A//nsmryan.github.com/public/abstraction-in-flight-software-part-2-registration/</guid>
                 <description>&lt;p&gt;This post is the second in a series talking about abstraction mechanisms that I have seen in flight software systems.
 The topic of this post is the first type of abstraction- while the first post was about direct coupling between
 modules with no indirection, this post is about a way to reduce coupling between modules.&lt;&#x2F;p&gt;
@@ -782,8 +782,8 @@ which may propagate to all users, but in general this is pretty hard to avoid re
             <item>
                 <title>CFE&#x2F;CFS Architecture</title>
                 <pubDate>Sun, 16 Sep 2018 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/cfe-cfs-architecture/</link>
-                <guid>https%3A//nsmryan.github.com/public/cfe-cfs-architecture/</guid>
+                <link>http%3A//nsmryan.github.com/public/cfe-cfs-architecture/</link>
+                <guid>http%3A//nsmryan.github.com/public/cfe-cfs-architecture/</guid>
                 <description>&lt;p&gt;This post is a followup to the previous post introducing CFE&#x2F;CFS.
 In this post I want to start talking about the design of CFE&#x2F;CFS and
 what implications its design decisions have when using this software.&lt;&#x2F;p&gt;
@@ -923,8 +923,8 @@ have and don&#x27;t have when you write CFS apps.&lt;&#x2F;p&gt;
             <item>
                 <title>Brief Introduction Flight Software - CFE&#x2F;CFS</title>
                 <pubDate>Sat, 15 Sep 2018 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/introduction-to-flight-software-cfe-cfs/</link>
-                <guid>https%3A//nsmryan.github.com/public/introduction-to-flight-software-cfe-cfs/</guid>
+                <link>http%3A//nsmryan.github.com/public/introduction-to-flight-software-cfe-cfs/</link>
+                <guid>http%3A//nsmryan.github.com/public/introduction-to-flight-software-cfe-cfs/</guid>
                 <description>&lt;p&gt;One of my goals with this blog is to talk about flight software- what it looks
 like, how it is developed, and what it is like to be in the aerospace domain. I
 think it would be nice to see more discussion of this kind of programming,
@@ -1017,8 +1017,8 @@ tradeoffs it makes in future posts.&lt;&#x2F;p&gt;
             <item>
                 <title>Generic C</title>
                 <pubDate>Tue, 13 Feb 2018 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/generic-c/</link>
-                <guid>https%3A//nsmryan.github.com/public/generic-c/</guid>
+                <link>http%3A//nsmryan.github.com/public/generic-c/</link>
+                <guid>http%3A//nsmryan.github.com/public/generic-c/</guid>
                 <description>&lt;p&gt;This post is about how to write generic code in C. This is a problem I often have- I write tools in C which are fairly
 simple, but often would benefit from more advanced techniques as they get larger. I use C because it is the language we use for flight code,
 it is a simple language that I can expect people to know, and it is easier to control the layout of memory then other languages.
@@ -1107,8 +1107,8 @@ higher quality then my other code.&lt;&#x2F;p&gt;
             <item>
                 <title>Flight Software Architecture</title>
                 <pubDate>Mon, 11 Dec 2017 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/flight-software-architecture/</link>
-                <guid>https%3A//nsmryan.github.com/public/flight-software-architecture/</guid>
+                <link>http%3A//nsmryan.github.com/public/flight-software-architecture/</link>
+                <guid>http%3A//nsmryan.github.com/public/flight-software-architecture/</guid>
                 <description>&lt;p&gt;I&#x27;ve found over the last 6 years that flight software is its own programming domain with its own techniques, concerns, tools,
 and mentality. I thought it would be good to go over some things I&#x27;ve learned and share my experiences with this kind of software and
 its design. Its a world in its own, and I&#x27;ve seen only a small slice of this world, but its still hard earned experience worth sharing.&lt;&#x2F;p&gt;
@@ -1346,8 +1346,8 @@ problems with software, to track issues from reviews, and to track and document 
             <item>
                 <title>SAGE III Launch</title>
                 <pubDate>Thu, 23 Feb 2017 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/sageiii-launch/</link>
-                <guid>https%3A//nsmryan.github.com/public/sageiii-launch/</guid>
+                <link>http%3A//nsmryan.github.com/public/sageiii-launch/</link>
+                <guid>http%3A//nsmryan.github.com/public/sageiii-launch/</guid>
                 <description>&lt;p&gt;The SAGE III payload launched on SpaceX CRS-10 last weekend. I worked on the software for the flight computer for this payload, the IAM, and I got to see the launch.o&lt;&#x2F;p&gt;
 &lt;p&gt;Check out the technical webcast from SpaceX (https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=rUDLxFUMC9c) at 25:03.
 You can see the SAGE III Payload inside the Dragon trunk, along with the NVP that the payload mounts to. Its really incredible to see.&lt;&#x2F;p&gt;
@@ -1357,8 +1357,8 @@ You can see the SAGE III Payload inside the Dragon trunk, along with the NVP tha
             <item>
                 <title>VxWorks</title>
                 <pubDate>Sat, 15 Oct 2016 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/vxworks-tricks/</link>
-                <guid>https%3A//nsmryan.github.com/public/vxworks-tricks/</guid>
+                <link>http%3A//nsmryan.github.com/public/vxworks-tricks/</link>
+                <guid>http%3A//nsmryan.github.com/public/vxworks-tricks/</guid>
                 <description>&lt;p&gt;I had never heard of VxWorks before coming to NASA, but now I have been using it for 
 over 5 years. I thought I would write down some things I&#x27;ve learned- some tricks and
 commands, concepts it uses, and larger scale considerations for programs written

@@ -2,18 +2,18 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>itscomputersciencetime</title>
-        <link>https%3A//nsmryan.github.com/public/</link>
+        <link>http%3A//nsmryan.github.com/public/</link>
         <description></description>
         <generator>Zola</generator>
         <language>en</language>
-        <atom:link href="https%3A//nsmryan.github.com/public/categories/vim/rss.xml" rel="self" type="application/rss+xml"/>
+        <atom:link href="http%3A//nsmryan.github.com/public/categories/vim/rss.xml" rel="self" type="application/rss+xml"/>
         <lastBuildDate>Thu, 02 May 2019 00:00:00 +0000</lastBuildDate>
         
             <item>
                 <title>The Many Layers of Movement in Vim</title>
                 <pubDate>Thu, 02 May 2019 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/layers-of-movement-in-vim/</link>
-                <guid>https%3A//nsmryan.github.com/public/layers-of-movement-in-vim/</guid>
+                <link>http%3A//nsmryan.github.com/public/layers-of-movement-in-vim/</link>
+                <guid>http%3A//nsmryan.github.com/public/layers-of-movement-in-vim/</guid>
                 <description>&lt;p&gt;I have been teaching my twin brother Vim recently, which has lead to an insight- the
 kind of insight you get when you are forced to articulate something that you only know implicitly.&lt;&#x2F;p&gt;
 &lt;p&gt;The insight is that when I use Vim, I make use of as many as 4 separate &amp;quot;levels&amp;quot; of movement, each of which makes larger
@@ -190,8 +190,8 @@ and Vim will be productive the whole time you are learning after the initial lea
             <item>
                 <title>My Current Toolset</title>
                 <pubDate>Tue, 11 Jul 2017 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/my-current-tool-set/</link>
-                <guid>https%3A//nsmryan.github.com/public/my-current-tool-set/</guid>
+                <link>http%3A//nsmryan.github.com/public/my-current-tool-set/</link>
+                <guid>http%3A//nsmryan.github.com/public/my-current-tool-set/</guid>
                 <description>&lt;p&gt;I&#x27;ve accumulated a certain set of tools over the years for various aspects of programming and for various programming tasks.
 I like to look at other peoples tools and configurations, so I figured I should talk about my own.&lt;&#x2F;p&gt;
 &lt;h1 id=&quot;vim&quot;&gt;Vim&lt;&#x2F;h1&gt;
@@ -273,8 +273,8 @@ and easier and the vim interoperation has been enough for my needs.&lt;&#x2F;p&g
             <item>
                 <title>Vim Keybinding and Options</title>
                 <pubDate>Sat, 15 Oct 2016 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/vim-keybindings/</link>
-                <guid>https%3A//nsmryan.github.com/public/vim-keybindings/</guid>
+                <link>http%3A//nsmryan.github.com/public/vim-keybindings/</link>
+                <guid>http%3A//nsmryan.github.com/public/vim-keybindings/</guid>
                 <description>&lt;p&gt;If you are interested in improving your productivty with Vim, its worth checking out
 other people&#x27;s .vimrc files. There are many github repositories with personal dot files,
 including my own &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nsmryan&#x2F;ConfigFiles&quot;&gt;config files&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
@@ -384,8 +384,8 @@ you spend the most time doing, and what small tweaks make your editing experienc
             <item>
                 <title>My Vim Plugins</title>
                 <pubDate>Sat, 15 Oct 2016 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/vim-plugins/</link>
-                <guid>https%3A//nsmryan.github.com/public/vim-plugins/</guid>
+                <link>http%3A//nsmryan.github.com/public/vim-plugins/</link>
+                <guid>http%3A//nsmryan.github.com/public/vim-plugins/</guid>
                 <description>&lt;p&gt;I&#x27;ve been using vim&#x2F;gvim for about 8 or 9 years now, but I stopped improving my
 vim experience after I reached a certain level of proficiency.
 Recently I&#x27;ve made some huge improvements to my vim workflow that has rekindled my interest

@@ -2,18 +2,18 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>itscomputersciencetime</title>
-        <link>https%3A//nsmryan.github.com/public/</link>
+        <link>http%3A//nsmryan.github.com/public/</link>
         <description></description>
         <generator>Zola</generator>
         <language>en</language>
-        <atom:link href="https%3A//nsmryan.github.com/public/categories/embedded/rss.xml" rel="self" type="application/rss+xml"/>
+        <atom:link href="http%3A//nsmryan.github.com/public/categories/embedded/rss.xml" rel="self" type="application/rss+xml"/>
         <lastBuildDate>Sat, 23 Feb 2019 00:00:00 +0000</lastBuildDate>
         
             <item>
                 <title>Decoding with Session Types</title>
                 <pubDate>Sat, 23 Feb 2019 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/decoding-with-session-types/</link>
-                <guid>https%3A//nsmryan.github.com/public/decoding-with-session-types/</guid>
+                <link>http%3A//nsmryan.github.com/public/decoding-with-session-types/</link>
+                <guid>http%3A//nsmryan.github.com/public/decoding-with-session-types/</guid>
                 <description>&lt;p&gt;This post is a thought I had a while back about data decoding, but which I will likely not pursue. I just wanted to 
 record it somewhere in the open. I&#x27;m no expert in type theory, so the concept of session types might be 1) wrong, 
 or 2) trivial, but might none-the-less be interesting.&lt;&#x2F;p&gt;
@@ -51,8 +51,8 @@ and sometimes we depend on the data to tell use what happens next.&lt;&#x2F;p&gt
             <item>
                 <title>Generic C</title>
                 <pubDate>Tue, 13 Feb 2018 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/generic-c/</link>
-                <guid>https%3A//nsmryan.github.com/public/generic-c/</guid>
+                <link>http%3A//nsmryan.github.com/public/generic-c/</link>
+                <guid>http%3A//nsmryan.github.com/public/generic-c/</guid>
                 <description>&lt;p&gt;This post is about how to write generic code in C. This is a problem I often have- I write tools in C which are fairly
 simple, but often would benefit from more advanced techniques as they get larger. I use C because it is the language we use for flight code,
 it is a simple language that I can expect people to know, and it is easier to control the layout of memory then other languages.
@@ -141,8 +141,8 @@ higher quality then my other code.&lt;&#x2F;p&gt;
             <item>
                 <title>SAGE III Launch</title>
                 <pubDate>Thu, 23 Feb 2017 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/sageiii-launch/</link>
-                <guid>https%3A//nsmryan.github.com/public/sageiii-launch/</guid>
+                <link>http%3A//nsmryan.github.com/public/sageiii-launch/</link>
+                <guid>http%3A//nsmryan.github.com/public/sageiii-launch/</guid>
                 <description>&lt;p&gt;The SAGE III payload launched on SpaceX CRS-10 last weekend. I worked on the software for the flight computer for this payload, the IAM, and I got to see the launch.o&lt;&#x2F;p&gt;
 &lt;p&gt;Check out the technical webcast from SpaceX (https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=rUDLxFUMC9c) at 25:03.
 You can see the SAGE III Payload inside the Dragon trunk, along with the NVP that the payload mounts to. Its really incredible to see.&lt;&#x2F;p&gt;
@@ -152,8 +152,8 @@ You can see the SAGE III Payload inside the Dragon trunk, along with the NVP tha
             <item>
                 <title>Pure Functions in Embedded Systems Programming</title>
                 <pubDate>Wed, 25 Jan 2017 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/pure-functions-in-embedded-systems-programming/</link>
-                <guid>https%3A//nsmryan.github.com/public/pure-functions-in-embedded-systems-programming/</guid>
+                <link>http%3A//nsmryan.github.com/public/pure-functions-in-embedded-systems-programming/</link>
+                <guid>http%3A//nsmryan.github.com/public/pure-functions-in-embedded-systems-programming/</guid>
                 <description>&lt;p&gt;I&#x27;ve had some experiences recently where I&#x27;ve seen code written in C&#x2F;C++ for embedded systems
 that benefited from my experiences with Haskell. In short, I&#x27;ve found that pure functions make code more robust, easier to test,
 easier to document, easier to reason about, and easier to extend to new situations (porting between systems, and wrapping in simulators&#x2F;ground systems)
@@ -231,8 +231,8 @@ flight software systems hat or my functional programming hat, and the latter des
             <item>
                 <title>VxWorks</title>
                 <pubDate>Sat, 15 Oct 2016 00:00:00 +0000</pubDate>
-                <link>https%3A//nsmryan.github.com/public/vxworks-tricks/</link>
-                <guid>https%3A//nsmryan.github.com/public/vxworks-tricks/</guid>
+                <link>http%3A//nsmryan.github.com/public/vxworks-tricks/</link>
+                <guid>http%3A//nsmryan.github.com/public/vxworks-tricks/</guid>
                 <description>&lt;p&gt;I had never heard of VxWorks before coming to NASA, but now I have been using it for 
 over 5 years. I thought I would write down some things I&#x27;ve learned- some tricks and
 commands, concepts it uses, and larger scale considerations for programs written
