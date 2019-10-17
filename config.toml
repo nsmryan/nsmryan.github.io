@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "http://nsmryan.github.com/public/"
+base_url = "https://nsmryan.github.com/public/"
 
 title = "itscomputersciencetime"
 
